@@ -1,0 +1,95 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  EMPLOYEE
+  ADMIN
+}
+
+model User {
+  id       Int     @id @default(autoincrement())
+  username String  @unique
+  password String
+  name     String
+  role     Role    @default(EMPLOYEE)
+  enrollId String? @unique
+  dept     String?
+
+  attendanceLogs AttendanceLog[]
+  wfhLogs        WFHLog[]
+  leaveBalances  LeaveBalance[]
+  leaveRecords   LeaveRecord[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model AttendanceLog {
+  id            Int     @id @default(autoincrement())
+  dept          String?
+  scannerUserId String?
+  name          String?
+  enrollId      String?
+  deviceId      String?
+  place         String?
+  date          String
+  time          String
+  attType       String?
+  verifyMoc     String?
+  remark        String?
+
+  user User? @relation(fields: [enrollId], references: [enrollId])
+
+  createdAt DateTime @default(now())
+}
+
+model WFHLog {
+  id        Int     @id @default(autoincrement())
+  userId    Int
+  user      User    @relation(fields: [userId], references: [id])
+  date      String
+  startTime String?
+  endTime   String?
+  hours     Float
+  remarks   String?
+
+  createdAt DateTime @default(now())
+}
+
+model Holiday {
+  id        Int      @id @default(autoincrement())
+  date      String   @unique
+  name      String
+  createdAt DateTime @default(now())
+}
+
+model LeaveBalance {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  year      Int
+  planned   Float    @default(0)
+  emergency Float    @default(0)
+  lop       Float    @default(0)
+  pending   Float    @default(0)
+  total     Float    @default(0)
+
+  @@unique([userId, year])
+}
+
+model LeaveRecord {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id])
+  date      String   // YYYY-MM-DD
+  type      String   // 'PL', 'EL', 'LOP', 'Pending'
+  createdAt DateTime @default(now())
+
+  @@unique([userId, date])
+}

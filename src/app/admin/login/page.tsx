@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-export default function Home() {
+export default function AdminLogin() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -17,14 +18,14 @@ export default function Home() {
       const res = await fetch('/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password, loginType: 'EMPLOYEE' })
+        body: JSON.stringify({ username, password, loginType: 'ADMIN' })
       });
       
       const data = await res.json();
       if (!res.ok) {
         setError(data.error || 'Login failed');
       } else {
-        router.push('/employee');
+        router.push('/admin');
       }
     } catch (err) {
       setError('An error occurred. Please try again.');
@@ -35,8 +36,8 @@ export default function Home() {
     <div className="page-container" style={{ display: 'flex', minHeight: '80vh', alignItems: 'center', justifyContent: 'center' }}>
       <div className="glass-panel animate-fade-in-up" style={{ maxWidth: '400px', width: '100%' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--secondary)' }}>Attendance Pro</h2>
-          <p style={{ color: 'var(--text-muted)' }}>Sign in to view logs & mark WFH</p>
+          <h2 style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--primary)' }}>Admin Console</h2>
+          <p style={{ color: 'var(--text-muted)' }}>Sign in to manage employees</p>
         </div>
         
         {error && <div className="badge badge-error" style={{ marginBottom: '1rem', width: '100%', justifyContent: 'center', padding: '0.75rem' }}>{error}</div>}
@@ -62,10 +63,14 @@ export default function Home() {
               required
             />
           </div>
-          <button type="submit" className="btn btn-secondary" style={{ marginTop: '0.5rem', width: '100%' }}>
-            Sign In
+          <button type="submit" className="btn btn-primary" style={{ marginTop: '0.5rem', width: '100%' }}>
+            Sign In as Admin
           </button>
         </form>
+        
+        <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.875rem' }}>
+          <Link href="/" style={{ color: 'var(--text-muted)' }}>&larr; Back to Home</Link>
+        </div>
       </div>
     </div>
   );

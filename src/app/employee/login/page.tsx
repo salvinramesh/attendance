@@ -2,8 +2,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
-export default function Home() {
+export default function EmployeeLogin() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -35,7 +36,7 @@ export default function Home() {
     <div className="page-container" style={{ display: 'flex', minHeight: '80vh', alignItems: 'center', justifyContent: 'center' }}>
       <div className="glass-panel animate-fade-in-up" style={{ maxWidth: '400px', width: '100%' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
-          <h2 style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--secondary)' }}>Attendance Pro</h2>
+          <h2 style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--secondary)' }}>Employee Portal</h2>
           <p style={{ color: 'var(--text-muted)' }}>Sign in to view logs & mark WFH</p>
         </div>
         
@@ -63,9 +64,13 @@ export default function Home() {
             />
           </div>
           <button type="submit" className="btn btn-secondary" style={{ marginTop: '0.5rem', width: '100%' }}>
-            Sign In
+            Sign In as Employee
           </button>
         </form>
+        
+        <div style={{ textAlign: 'center', marginTop: '1.5rem', fontSize: '0.875rem' }}>
+          <Link href="/" style={{ color: 'var(--text-muted)' }}>&larr; Back to Home</Link>
+        </div>
       </div>
     </div>
   );
