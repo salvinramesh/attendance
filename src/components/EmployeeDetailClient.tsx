@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { format, parseISO, getDaysInMonth, isWeekend } from 'date-fns';
 
 function formatHours(decimalHours: number | string) {
@@ -14,6 +14,44 @@ function formatHours(decimalHours: number | string) {
 export default function EmployeeDetailClient({ user, allDays, holidays = [], initialLeaveBalances = [] }: { user: any, allDays: any[], holidays?: string[], initialLeaveBalances?: any[] }) {
   const [leaveBalances, setLeaveBalances] = useState(initialLeaveBalances);
   
+  // Shift configurations
+  const [shiftStart, setShiftStart] = useState('09:00');
+  const [shiftEnd, setShiftEnd] = useState('18:00');
+  const [graceMins, setGraceMins] = useState(15);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const storedStart = localStorage.getItem('shiftStart');
+      const storedEnd = localStorage.getItem('shiftEnd');
+      const storedGrace = localStorage.getItem('graceMins');
+      if (storedStart) setShiftStart(storedStart);
+      if (storedEnd) setShiftEnd(storedEnd);
+      if (storedGrace) setGraceMins(parseInt(storedGrace, 10));
+    }
+  }, []);
+
+  const getLateMinutes = (inTime: string, start: string, grace: number) => {
+    if (!inTime || inTime.includes('WFH') || !inTime.includes(':')) return 0;
+    const [inH, inM] = inTime.split(':').map(Number);
+    const [shH, shM] = start.split(':').map(Number);
+    if (isNaN(inH) || isNaN(shH)) return 0;
+    const inMins = inH * 60 + inM;
+    const shMins = shH * 60 + shM;
+    const diff = inMins - shMins;
+    return diff > grace ? diff : 0;
+  };
+
+  const getOvertimeMinutes = (inTime: string, outTime: string, end: string) => {
+    if (!outTime || outTime.includes('WFH') || !outTime.includes(':') || inTime === outTime) return 0;
+    const [outH, outM] = outTime.split(':').map(Number);
+    const [seH, seM] = end.split(':').map(Number);
+    if (isNaN(outH) || isNaN(seH)) return 0;
+    const outMins = outH * 60 + outM;
+    const seMins = seH * 60 + seM;
+    const diff = outMins - seMins;
+    return diff > 0 ? diff : 0;
+  };
+
   const availableYears = useMemo(() => {
     const years = Array.from(new Set(leaveBalances.map(l => l.year))).sort((a, b) => b - a);
     if (years.length === 0) return [new Date().getFullYear()];
@@ -130,6 +168,21 @@ export default function EmployeeDetailClient({ user, allDays, holidays = [], ini
   const extraHours = totalHours - expectedHours;
   const avgHours = workingDaysInPeriod > 0 ? (totalHours / workingDaysInPeriod).toFixed(2) : '0.00';
 
+  // Period stats calculation for Late and Overtime
+  const periodStats = useMemo(() => {
+    let lateDays = 0;
+    let otMins = 0;
+
+    filteredDays.forEach(([_, data]) => {
+      const lm = getLateMinutes(data.in, shiftStart, graceMins);
+      const om = getOvertimeMinutes(data.in, data.out, shiftEnd);
+      if (lm > 0) lateDays++;
+      otMins += om;
+    });
+
+    return { lateDays, otMins };
+  }, [filteredDays, shiftStart, shiftEnd, graceMins]);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
       <div className="glass-panel" style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -198,24 +251,36 @@ export default function EmployeeDetailClient({ user, allDays, holidays = [], ini
         </div>
       </div>
 
-      <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
+      <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1.5rem', marginBottom: '1.5rem' }}>
          <div className="glass-panel animate-fade-in-up" style={{ textAlign: 'center', padding: '1.5rem' }}>
             <h3 className="label">Total Worked</h3>
             <p style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--primary)' }}>
               {formatHours(totalHours)}
             </p>
          </div>
-         <div className="glass-panel animate-fade-in-up" style={{ textAlign: 'center', padding: '1.5rem', animationDelay: '0.1s' }}>
+         <div className="glass-panel animate-fade-in-up" style={{ textAlign: 'center', padding: '1.5rem', animationDelay: '0.05s' }}>
             <h3 className="label">Expected Hours</h3>
-            <p style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--text)' }}>
+            <p style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--text-main)' }}>
               {formatHours(expectedHours)}
             </p>
-            <small style={{ color: 'var(--text-muted)' }}>{workingDaysInPeriod} working days (9.5h/day)</small>
+            <small style={{ color: 'var(--text-muted)' }}>{workingDaysInPeriod} working days</small>
          </div>
-         <div className="glass-panel animate-fade-in-up" style={{ textAlign: 'center', padding: '1.5rem', animationDelay: '0.2s' }}>
+         <div className="glass-panel animate-fade-in-up" style={{ textAlign: 'center', padding: '1.5rem', animationDelay: '0.1s' }}>
             <h3 className="label">{extraHours >= 0 ? 'Extra Hours' : 'Shortage'}</h3>
             <p style={{ fontSize: '2rem', fontWeight: 700, color: extraHours >= 0 ? '#10b981' : '#ef4444' }}>
               {extraHours >= 0 ? '+' : '-'}{formatHours(Math.abs(extraHours))}
+            </p>
+         </div>
+         <div className="glass-panel animate-fade-in-up" style={{ textAlign: 'center', padding: '1.5rem', animationDelay: '0.15s' }}>
+            <h3 className="label">Late Arrivals</h3>
+            <p style={{ fontSize: '2rem', fontWeight: 700, color: periodStats.lateDays > 0 ? '#ef4444' : 'var(--text-main)' }}>
+              {periodStats.lateDays} days
+            </p>
+         </div>
+         <div className="glass-panel animate-fade-in-up" style={{ textAlign: 'center', padding: '1.5rem', animationDelay: '0.2s' }}>
+            <h3 className="label">OT Accumulated</h3>
+            <p style={{ fontSize: '2rem', fontWeight: 700, color: periodStats.otMins > 0 ? '#10b981' : 'var(--text-main)' }}>
+              {formatHours(periodStats.otMins / 60)}
             </p>
          </div>
       </div>
@@ -265,14 +330,44 @@ export default function EmployeeDetailClient({ user, allDays, holidays = [], ini
             </tr>
           </thead>
           <tbody>
-            {filteredDays.map(([date, data]) => (
-              <tr key={date}>
-                <td>{date}</td>
-                <td>{data.in === 'WFH' ? <span className="badge badge-warning">WFH</span> : data.in}</td>
-                <td>{data.out === 'WFH' ? <span className="badge badge-warning">WFH</span> : data.out}</td>
-                <td style={{ fontWeight: 600 }}>{formatHours(data.hours)}</td>
-              </tr>
-            ))}
+            {filteredDays.map(([date, data]) => {
+              const lm = getLateMinutes(data.in, shiftStart, graceMins);
+              const om = getOvertimeMinutes(data.in, data.out, shiftEnd);
+              return (
+                <tr key={date}>
+                  <td>{date}</td>
+                  <td>
+                    {data.in === 'WFH' || data.in === 'WFH IN' ? (
+                      <span className="badge badge-warning">WFH</span>
+                    ) : (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <span>{data.in}</span>
+                        {lm > 0 && (
+                          <span className="badge badge-error" style={{ fontSize: '0.7rem', padding: '0.15rem 0.4rem', borderRadius: '4px' }}>
+                            Late {lm}m
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </td>
+                  <td>
+                    {data.out === 'WFH' || data.out === 'WFH OUT' ? (
+                      <span className="badge badge-warning">WFH</span>
+                    ) : (
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <span>{data.out}</span>
+                        {om > 0 && (
+                          <span className="badge badge-success" style={{ fontSize: '0.7rem', padding: '0.15rem 0.4rem', borderRadius: '4px' }}>
+                            OT {formatHours(om / 60)}
+                          </span>
+                        )}
+                      </div>
+                    )}
+                  </td>
+                  <td style={{ fontWeight: 600 }}>{formatHours(data.hours)}</td>
+                </tr>
+              );
+            })}
             {filteredDays.length === 0 && (
               <tr>
                 <td colSpan={4} style={{ textAlign: 'center', padding: '3rem', color: 'var(--text-muted)' }}>

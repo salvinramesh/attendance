@@ -275,6 +275,66 @@ a:hover {
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(50px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
 .animate-fade-in-up {
   animation: fadeInUp 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* Metrics grid layout for dashboard metrics cards */
+.metrics-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 640px) {
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .metrics-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.clickable-metric-card {
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s, border-color 0.2s;
+  user-select: none;
+}
+
+.clickable-metric-card:hover {
+  transform: translateY(-3px) scale(1.01);
+  box-shadow: var(--shadow-glow);
+}
+
+.clickable-metric-card.active-indigo {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 15px rgba(99, 102, 241, 0.35) !important;
+  background: rgba(99, 102, 241, 0.04) !important;
+}
+
+.clickable-metric-card.active-emerald {
+  border-color: var(--secondary) !important;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.35) !important;
+  background: rgba(16, 185, 129, 0.04) !important;
+}
+
+.clickable-metric-card.active-amber {
+  border-color: #f59e0b !important;
+  box-shadow: 0 0 15px rgba(245, 158, 11, 0.35) !important;
+  background: rgba(245, 158, 11, 0.04) !important;
+}
+
+.clickable-metric-card.active-red {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 15px rgba(239, 68, 68, 0.35) !important;
+  background: rgba(239, 68, 68, 0.04) !important;
+}
+
