@@ -1,0 +1,3123 @@
+Access Control & Time Attendance Management System
+User Manual
+Rev: E1.0.3
+
+Contents
+
+Software Installation Wizard _______________________________________________ 5
+Chapter One System Functional Properties ____________________________________ 6
+Chapter Two System Requirements __________________________________________ 7
+2.1
+
+Hardware Requirements ___________________________________________________ 7
+
+2.2
+
+Operation Environments ___________________________________________________ 7
+
+Chapter Three Software Installation _________________________________________ 8
+3.1
+
+Software installation ______________________________________________________ 8
+
+3.2
+
+Software Primary Service __________________________________________________ 9
+
+Chapter Four Instruction of the Software Performance _________________________ 14
+4.1
+
+User Management _____________________________________________________ 14
+
+4.1.1
+
+Department Management ______________________________________________ 14
+
+4.1.2
+
+User Management ____________________________________________________ 15
+
+4.1.2.1
+
+Personnel Registration _____________________________________________ 15
+
+4.1.2.2
+
+User Management ________________________________________________ 18
+
+4.1.2.3
+
+Device Connection ________________________________________________ 20
+
+4.1.2.4
+
+View ___________________________________________________________ 21
+
+4.1.2.5
+
+Refresh _________________________________________________________ 21
+
+4.1.2.6
+
+Batch Edit _______________________________________________________ 22
+
+4.1.2.7
+
+Import __________________________________________________________ 22
+
+4.1.2.8
+
+Export __________________________________________________________ 26
+
+4.1.2.9
+
+Query __________________________________________________________ 27
+
+4.1.2.10
+
+Advanced for selecting person ______________________________________ 29
+
+4.2
+
+Attendance Management _______________________________________________ 32
+
+4.2.1
+
+Manual IN/OUT _______________________________________________________ 33
+
+4.2.2
+
+Leave Registration _____________________________________________________ 36
+
+4.2.3
+
+Attendance Rule Management ___________________________________________ 39
+
+4.2.3.1
+
+Rule Options _____________________________________________________ 39
+
+4.2.3.2
+
+Holiday _________________________________________________________ 42
+
+4.2.3.3
+
+Weekend Settings _________________________________________________ 43
+
+4.2.3.4
+
+Duty Time _______________________________________________________ 45
+
+4.2.3.5
+
+Shift ____________________________________________________________ 46
+
+4.2.3.6
+
+S-Group _________________________________________________________ 48
+
+4.2.4
+
+Attendance Report ____________________________________________________ 48
+
+4.2.4.1
+
+Clock-in/out Log __________________________________________________ 49
+
+4.2.4.2
+
+Access Control Log ________________________________________________ 53
+
+4.2.4.3
+
+Leave Registration Log _____________________________________________ 54
+
+4.2.4.4
+
+Daily Log Report __________________________________________________ 55
+
+4.2.4.5
+
+Daily Attendance Report ___________________________________________ 55
+
+4.2.4.6
+
+Statistical Analysis ________________________________________________ 57
+
+4.2.4.7
+
+Monthly Attendance Report ________________________________________ 59
+
+4.2.4.8
+
+Import attendance record __________________________________________ 60
+
+4.2.4.9
+
+Import Leave Log _________________________________________________ 62
+
+4.2.4.10
+
+Export and Print of Report __________________________________________ 65
+
+4.2.5
+
+Shift Scheduling _______________________________________________________ 65
+
+4.2.5.1
+
+Query for the scheduling information _________________________________ 66
+
+4.2.5.2
+
+Query for all the scheduling information_______________________________ 67
+
+4.2.5.3
+
+Edit the scheduling information ______________________________________ 67
+
+4.2.5.4
+
+Template Scheduling ______________________________________________ 68
+
+4.2.5.5
+
+Import scheduling information ______________________________________ 70
+
+4.3
+
+Device Management ___________________________________________________ 72
+
+4.3.1
+
+Device Connection ____________________________________________________ 72
+
+4.3.1.1
+
+Device Added ____________________________________________________ 72
+
+4.3.1.2
+
+Edit Device Property _______________________________________________ 75
+
+4.3.1.3
+
+Delete Device ____________________________________________________ 75
+
+4.3.1.4
+
+Refresh Device ___________________________________________________ 75
+
+4.3.1.5
+
+Device Property - Normal ___________________________________________ 75
+
+4.3.1.6
+
+Device Property- Advanced _________________________________________ 77
+
+4.3.1.7
+
+Device Property- Bell ______________________________________________ 79
+
+4.3.1.8
+
+Device Log- Scheduler _____________________________________________ 79
+
+4.3.1.9
+
+Device Property- Monitoring ________________________________________ 80
+
+4.3.1.10
+
+Access Control Operation __________________________________________ 80
+
+4.3.2
+
+Device and Data Download______________________________________________ 88
+
+4.3.2.1
+4.4
+
+U-Disk / SD Card Data Import________________________________________ 89
+
+System Maintenance ___________________________________________________ 90
+
+4.4.1
+
+Backup DB ___________________________________________________________ 90
+
+4.4.2
+
+Restore DB ___________________________________________________________ 92
+
+4.4.3
+
+Detailed settings for Maintenance ________________________________________ 93
+
+4.4.3.1
+
+Normal: _________________________________________________________ 93
+
+4.4.3.2
+
+Company’s Information ____________________________________________ 94
+
+4.4.3.3
+
+Administrator ____________________________________________________ 95
+
+4.4.3.4
+
+Data Maintenance ________________________________________________ 97
+
+4.4.3.5
+
+Image Management (Optional) _____________________________________ 106
+
+Chapter Five Operation of the SQL version __________________________________ 107
+
+Chapter Six QA ________________________________________________________ 108
+
+RIMS
+
+Software Installation Wizard
+1)
+
+If your computer’s system is the Windows XP system, then it must be installed
+the Microsoft .NET Framework 2.0. The Check.exe, below the Framework
+Folder in the Operation and Installation Disk, can automatically check the
+installation of the Framework.
+
+2)
+
+If there is no Microsoft Windows Installer 3.1 version suggested in the
+process of the install， Please find the upgrading patch corresponding to the
+system in the Folder of “Windows Installer”, install it and try again.
+
+3)
+
+Directly delete the RIMS folder after installation if it needs to unload the RIMS.
+
+4)
+
+The installation folder of the RIMS System is the Folder Setup.exe that below
+the RIMS directory in the Installation Disk.
+
+-5-
+
+Software Installation Wizard
+
+RIMS
+
+Chapter One System Functional Properties
+The RIMS Access Control & Time Attendance Management System, with the
+comprehensive performances such as the User Management, device management,
+attendance management access-control management and others, have been being
+continuously improved and updated.
+System Functional Properties
+1） The personnel and device management possess intelligent interaction.
+2） The device management possesses asynchronously operational processing
+capacities.
+3） The access control management possesses the intelligently real-time operating
+capacities.
+4） The attendance management can assess, suggest and feedback intelligently.
+5） The system maintenance possesses the functions of abnormal catch-up,
+break-down protection and intelligent backup DB.
+The RIMS system contains five sub-systems, which are User Management,
+attendance management, access control management, device management
+and system maintenance.
+
+-6-
+
+Chapter One System Functional Properties
+
+RIMS
+
+Chapter Two System Requirements
+2.1 Hardware Requirements
+ CPU: above 1 GHz
+ Memory: above 256MB
+ Hard disk: The available data space of the hard disk must above 2 GB (require
+larger storage space as the increase in the attendance recorded data)
+ Communication Port:
+A.
+
+RS232/485: one COM port (if there is no COM port, it needs USB/COM
+converter cable)
+
+B.
+
+TCP/IP: the port that connect the Local network and the ether-net one.
+
+C.
+
+USB: Support the computer with USB port.
+
+2.2 Operation Environments
+Operation system: Windows XP, Windows Vista, Windows Server 2003/2008,
+Windows 7. The RIMS software only works under the 32bit Operating System by
+now.
+Attention:
+The Microsoft .NET Framework 2.0 needs the support of the Windows XP, Windows
+2003 (it is contained in the software installation Disk)
+
+-7-
+
+Chapter Two System Requirements
+
+RIMS
+
+Chapter Three Software Installation
+3.1 Software installation
+1.
+
+Get the installation process in the Folder Setup.exe of the RIMS directory in the
+Operation and Installation Disk. Click Browse in the popup installation wizard,
+and select the installation path. It is advised to select the non-system disk
+(default C Disc) to install, whose default installation directory is D:\RIMS. Click
+Install and start the installation system.
+
+3.1-1
+2.
+
+The installation process automatically inspects the system configuration and
+conducts the installation.
+
+3.1-2
+-8-
+
+Chapter Three Software Installation
+
+RIMS
+3.
+
+In the process of installation, sometimes the system automatically inspects
+Microsoft.NET Framework. If this program has not been installed, the system
+will automatically install it. The span time of this installation may be a little longer,
+please wait patiently.
+
+4.
+
+Installation completed. The desktop and the start menu will set up the “RIMS”
+shortcut automatically after the installation.
+
+3.2 Software Primary Service
+The users, first register the personnel’s fingerprints and record the registered number
+on the fingerprint attendance machine, and conduct soft-ware operation.
+
+
+Double click the RIMS shortcut icon on the desktop. Enter the welcome
+interface.
+
+3.2-1
+
+
+According to the TIP, click Next and set the administrator password. Actually,
+this step can be skipped. Please set the password if it is necessary, and
+re-enter and confirm it.
+
+-9-
+
+Chapter Three Software Installation
+
+RIMS
+
+The Skip will skip this step.
+
+3.2-2
+
+
+According to the TIP, Click Next, set up company’s information, including the
+short & full for it as well as its LOGO representing its image.
+
+3.2-3
+
+
+Click Next to enter Set the Rule of Attendance that can be established
+according to company’s appraisal system. In the BOX, before the
+corresponding item, make the 【√】to set the rules of attendance, then click
+Next. If click Next directly without settings, the system will conduct attendance
+according to the default attendance rules
+
+- 10 -
+
+Chapter Three Software Installation
+
+RIMS
+
+3.2-4
+
+
+Click Next to enter Set the Public Holidays that can be added, edited and
+deleted. This default the New Year’s Day, Labor Day and China’s National Day
+as public holidays. Click Add for new holidays, click Edit to edit the current
+holidays, and click Delete to remove the current one selected.
+
+Add
+dd
+
+Edit
+
+Delet
+e
+
+Save
+
+dit
+
+Cancel
+ceceec
+c
+eelel
+
+3.2-5
+
+
+Click Next to enter Set Weekend, where you can add, edit and delete
+Weekend item. The system has defaulted the Saturday and
+
+
+
+Sunday and Sunday as weekend break.
+
+- 11 -
+
+Chapter Three Software Installation
+
+RIMS
+
+3.2-6
+
+
+Click Next to enter Set Company’s Duty Time, and set up duty time
+according to company’s working system.
+
+3.2-7
+
+
+Click Next to enter the Create Company’s Department to set up the
+company’s departments according to the departmental composition of the
+company.
+
+- 12 -
+
+Chapter Three Software Installation
+
+RIMS
+
+3.2-8
+
+
+Click Next to connect to User Management window for the import of
+personnel information, or to the Device Management window for operation
+setup, such as device link, or directly click Finish to skip to the software main
+interface
+
+3.2-9
+
+- 13 -
+
+Chapter Three Software Installation
+
+RIMS
+
+Chapter Four Instruction of the Software Performance
+4.1 User Management
+The User Management possesses the functions of Department Management, User
+Management, device connection and others.
+
+4.1.1 Department Management
+On the main menu, please click User Management → Department Management to
+add and edit departments in accordance with the structure of property and
+performance of the company. It is advised to arrange the departmental structure of
+the company before applying this operation. Before adding a department, click the
+above one first, then click Add to import the name of the department, finally click
+Save.
+Click Add for adding more departments. As to adding the sub-department, click the
+department selected, re-click Add and choose it as the super department, then
+import the name of the sub-department and click Save. This method is also available
+to add multi-level ones.
+
+4.1-1
+Attentions:
+
+- 14 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+It is not allowed to delete the department with sub-department or personnel
+information. But it is allowed to do so by deleting the sub-department first or
+move the personnel information to other departments.
+
+4.1.2 User Management
+The User Management aims to import & modify the basic information of the staff,
+including his department, enroll ID, user ID, name, gender, password, certificate
+number, date of entry, attendance rules and so on.
+
+4.1.2.1 Personnel Registration
+Click User Management on the main menu or User Management in next menu to
+enter the User Management window, and then click New for the establishment of the
+window of Personnel Information
+Please prepare the personnel information including their departments, user ID, enroll
+ID that in accordance with the number of the attendance machine, name, gender,
+time of entry, shift, weekend and others.
+First of all, import personnel basic information into the optional card of Basic
+Information. Select current department enrolling personnel on the left column,
+successively import the enroll ID (1≤x≤65535), name, user ID such as NO.001, finally
+select the option of Default Attendance.
+
+4.1-2
+Default attendance instruction:
+1.
+
+Duty Time
+- 15 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+This is only available to the company with simple off-on-duty working time (two time points).
+For example: on-duty time at 9:00, off-duty time at 18:00，then we only need to set one duty
+time simply.
+2.
+
+Shift
+
+This is available to various-duty-time attendance. Its shift is consisted of non-overlapping
+duty times. For example: one company’s on-duty time is 9:00-12:00 (set as Forenoon
+working time) and 13:00-18:00 (set as Afternoon working time), which can be combined into
+one shift for attendance.
+3.
+
+S-Group
+
+It is available to the attendance of various and unfixed shifts or rotating shifts. The group is
+consisted of different shifts. For the group attendance, the system will automatically select
+the best shift for attendance statistic according to clock-in records. For example: one
+company’s duty time are: morning class (6:00-10:00), forenoon class (10:30-13:30),
+afternoon class(14:00-18:00) 、 evening class(19:00-22:00).Then we can combine the
+morning class and the forenoon one into Shift 1, forenoon class and afternoon one into Shift
+2, afternoon class and evening one into Shift3. Employees can clock-in by the Shift 1, Shift 2
+and shift 3 consisted of them. What we only need to do is to set group for attendance instead
+of tedious re-schedule, because the system will automatically collate the Shift 1 and Shift 2
+for attendance statistics according to the actual attendance record.
+Second, click Extend Info optional card, import personnel’s entry date, position, date of
+birth, ID number, or leave blank space if un-necessary. Then click Rule Options and select
+the default weekend and others in optional card.
+
+4.1-3
+
+- 16 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.1-4
+After the import, click Save to preserve personnel’s information.
+
+4.1-5
+Click Add for adding more information on the Personnel Information, Edit for
+modifying current personnel’s information, Delete for removing current personnel’s
+registration and attendance record.
+
+4.1-6
+
+- 17 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+Attentions:
+While registering Personnel Information, the Enroll ID in the Basic Information
+must remain the same with the one in the terminal. Otherwise, that will be
+different between the fingerprint & password and Personnel Information,
+leading to mistakes or failure on attendance.
+
+4.1.2.2 User Management
+After adding the Personnel Information, the User Management window will
+automatically add a little information card for the registration personnel. Click Edit on
+this card or right-click it, then we can conduct the operation of New, Edit, Delete, Get
+Enroll, Upload Username, Get Newly Log, Upload Enroll, Delete Enroll, Demission
+and others.
+
+4.1-7
+1)
+
+New
+
+Click New to set new personnel information. Please refer to 4.1.2.1 Personnel
+Registration for more details.
+2)
+
+Edit
+
+Click Edit to re-edit, set the personnel information registered. Then Click Save to
+preserve re-edited information.
+3)
+
+delete
+
+Click Delete to delete the registered information of the current person. (This function
+works only under the Demission. It should first make the person to Demission
+- 18 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+User, and then it can delete the person under the Demission condition.)
+4)
+
+Get Enroll
+
+Click Get Enroll to get the current personnel information of fingerprint data, password
+and card number preserved. And preserve this information in the data base. If there
+are fingerprint, password and card number of the current personnel on the Fingerprint
+terminal, there will display the icon of fingerprint【
+number 【
+
+】, password 【
+
+】、and card
+
+】on the top right corner. One icon displayed demonstrates only one
+
+identification mode that the current personnel has registered, while no icon suggests
+no registration on the fingerprint terminal or the Enroll ID is different from the one
+preserved on the terminal. The latter situation requires modifying the personnel’s
+Enroll ID and re-obtains registered information.
+5)
+
+Upload Username
+
+Click the Upload Username to input current personnel’s name on the fingerprint
+terminal. This information will be displayed on the screen of the terminal during the
+attendance.
+6)
+
+Get Newly Log
+
+Click Get Newly Log to get newly attendance record on the terminal.
+7)
+
+Upload Enroll
+
+Click Upload Enroll, and upload the fingerprint data, password, and card number of
+the personnel into the fingerprint terminal. （PLEASE CONFIRM THAT THERE IS
+NO DIFFERENCE BETWEEN CURRENT PERSONNEL’S ENROLL ID ON THE
+RIMS AND THE USER ID ON THE TERMINAL. That’s to say Amaris Song’s
+enroll id on the RIMS software is 0001, then her user id on the terminal should
+be 0001 too.）.
+8)
+
+Delete Enroll
+
+Click Delete Enroll to remove all report of the personnel in terminal, including
+fingerprint data, attendance records and so on.
+9)
+
+Demission
+
+Click Demission to remove the person to the Demission User. The information of
+the very person still exists. The information can be viewed under the Demission User
+view, and it also allows doing more operation under this view.
+
+- 19 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.1.2.3 Device Connection
+Click the Device icon on the menu to connect and operate the devices (refer to the
+Device Connection for details) Right click the light blue blank area to get all enroll, get
+newly log, and upload enroll and others.
+
+4.1-8
+1)
+
+New
+
+Please refer to 4.1.2.1 Personnel Registration for more details.
+2)
+
+Get all Enroll
+
+Click Get all Enroll to get all information of fingerprint data, password, and card
+number on the fingerprint terminal and preserve this data into the database.
+3)
+
+Get Newly Log
+
+Get the new and un-collected attendance records on the device.
+4)
+
+Upload All Usernames
+
+Click Upload All Usernames to import the names of the personnel information in the
+RIMS software into the terminal, which will be displayed on the screen of terminal.
+5)
+
+Upload All Enroll
+
+Click Upload All Enroll to input all fingerprint data preserved in the database into the
+terminal.
+- 20 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+Attentions:
+1)
+
+The weekend break is designed for the fixed weekend for the staff every
+week. Manipulate weekend registration while the weekend is unavailable
+nor unfixed
+
+2)
+
+The personnel information requires the exact entry date because the
+attendance begins from the day of entry. If the inputting date is later than
+the entry date, it will display nothing, while the earlier one displays the
+redundant attendance record.
+
+4.1.2.4 View
+The appearance form of personnel information can be switched among three views;
+they are User Cards, User List and Demission Users according to the user’s
+requirements. The User Cards, User List view display the in-service persons’
+information. The Demission Users view displays the demission users’ information.
+The User Card is optional to show & hide attendance report and shifts
+
+4.1-9
+4.1.2.5 Refresh
+The Refresh can reload personnel information.
+
+- 21 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.1.2.6 Batch Edit
+The Batch Edit can modify personnel information to a large extent, such as
+department, entry date, attendance system, default attendance, default weekend and
+others.
+First: select the item of personnel on the left column that needs to be modified.
+
+4.1-10
+Second: select the item that needs modification, such as entry date, and then click
+Apply.
+
+4.1-11
+4.1.2.7 Import
+The import can add batch personnel information through the self-defined column
+Excel file or the following path: first establish one personnel item on the User
+- 22 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+Management window, then export this personnel’s information, and then add others’
+information according to the export format. The save format of the Excel file must be
+the compatible version of 97-2003, whose postfix is.xls
+
+4.1-12
+First: select the designed Microsoft Excel file.
+
+4.1-13
+Second: Click Next, and select the matched column and field. (This step is generally
+automatic and you don’t need to choose the field yourself, click Next directly.)
+
+- 23 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.1-14
+Third: Data Check, check the imported data. If there is something wrong with this data,
+double click to edit the very data. Or open the file directly to edit the data and then
+re-import it.
+There are two colors prompt:
+Red: it means that there already exists the info. of the very enroll id in the RIMS
+software. If you don’t edit the importing data, it would fail to import the info. of that
+enroll id. For example: because my RIMS software has already had the id (1-8) enroll
+info. So when I import another id (1-8), then it shows red as the following.
+Green: It means that the AttRule, Default AttType or Default Weekend of the enroll id
+do not exist in the RIMS database. The software will match it to a default one or make
+it nothing. If you don’t need to set a Default AttType to it, so you can leave it null. If
+you want to edit it, please right click the very cell and select the item. For example:
+the id=8’s Default AttType is HR-Shift, but there’s no HR-Shift on my RIMS software,
+so the software make it null, that’s to say there’s no Default AttType for id=8 now.
+
+- 24 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.1-15
+After editing the data, there’s no Red Prompt, then click NEXT to import the user info.
+
+4.1-16
+Fourth: Click Next to import data if there is nothing wrong with the data.
+
+- 25 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.1-17
+Fifth: Click Cancel and reverse back User Management interface after finishing the
+data import.
+
+4.1.2.8 Export
+Export personnel information from the Excel file for preservation or query
+First: Select the Save Path.
+
+4.1-18
+Second: click Save to conduct information export that will show a success, then click
+OK to open the current export data.
+
+- 26 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.1-19
+4.1.2.9 Query
+If there is too much personnel information and you need someone’s information now,
+please input his name; enroll ID, user ID to query his information quickly.
+
+4.1-20
+As the following:
+
+4.1-21
+Complete spelling query: input the complete spelling of the user’s name, and then
+search for his/her information. Let’s take “Miko” as an example:
+click the query
+
+input “Miko”, then
+
+icon, then Miko’s information will come to the result.
+- 27 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.1-22
+Initial query: input the first letter of the name then search. For example: we want to
+search “Edmond”, then we input “E”, all the person those name start with “E” will
+come to the result.
+Example: let’s query “Edmond”, input “E” and click the query
+
+icon, then it comes
+
+out:- Edmond, Edward.
+
+4.1-23
+Search the whole department: it allows searching the information of the whole
+department. It supports “complete spelling query” and “initial query” with the wildcard.
+Please first input the query condition, wildcard “@” stands for querying the whole
+department.
+As the following:
+
+- 28 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.1-24
+Query user information according to gender: query the female or male information
+in the company. We can count the gender ratio of the company easily. We can input
+“#m” or “#M” to query the entire male’s information, and “#f” or “#F” for all the female’s
+information.
+As the following:
+
+4.1-25
+4.1.2.10 Advanced for selecting person
+On the Report window, there’s an “Advanced” option for selecting person. As the following:
+
+- 29 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.1-26
+Click the user selection to a pull-down menu, and select the “Advance” to pop-up the
+Advanced window.
+
+4.1-27
+
+Advanced Instruction:
+Candidate department is the department list that can be selected.
+Selected department is the departments selected from the Candidate departments list.
+Candidate Users is the users from the Selected department. They can be selected to the
+Selected Users list.
+Selected Users is the users selected from the Candidate Users list.
+When you select the department from the Candidate department list to the Selected
+department list, the users from the Selected department will show on the Candidate Users
+list.
+If you want to select someone to the Selected Users, let’s say Amy (from Hardware dept.).
+You should first select the “Hardware dept” from the Candidate department list to the
+Selected department. Then “Amy” will show on the Candidate Users list. You could select
+“Amy” from the Candidate Users list to the Selected Users list then.
+Icon instruction:
+- 30 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+It means Super department of the Selected department.
+ It means department selected from the Candidate department list.
+It means the super department of the very department has been selected. So it’s
+the selected department too.
+Operation instruction: Search, Double-click, button, drag.
+ Search: please refer to the 4.1.2.9. Each column has its own search scope. For example:
+from the Selected department list, you can select the persons whose department is on
+the Selected deparement list. As pic 4.1-25, we can search the person that from the
+Development dept, Hardware dept, Software dept, HR dept, or After-sales dervice dept.
+If you want to select the person whose enroll id is 013, please first search 013 on the
+Candidate department list, then it comes out a department “Hardware Dept.”, select it
+to the Selected department. Then you could select 013 from the Candidate Users to the
+Selected Users.
+ Double-click: double-click the item, it would be selected from the left column to the
+right column automatically. For example: double-click the “Hardware dept” on the
+Candidate department list, then it would be selected to the Selected department .
+ Button:
+make the selected department or person from one side to the
+other side.
+Select all the department or persons from one side to the other
+side.
+ Drag: select the Candidate user or Selected User and drag it directly from one side to
+the other side.
+
+4.1-28
+According the pic above, you could search through “search the whole department”,
+“Complete spelling query”, “Initial query” or “Enroll ID”.
+
+- 31 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.1-30
+On the Candidate or Selected department list, it shows only the department no matter you
+search the department name or the user name. When you search someon, let’s say Amaris
+in the Selected department, it shows her department – E-commerce Dept. More details for
+the query function, please refer to the 4.1.2.9.
+Click
+or clear the query box to turn back.
+
+4.2 Attendance Management
+On the main menu, focus the mouse on the icon of Att. Manage icon, where will
+display four sub-menus: Append User’s Forgotten Clock-in/out, Leave Registration,
+Attendance Rule Management, Report Query and Scheduling.
+
+- 32 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-1
+
+4.2.1 Manual IN/OUT
+This item is mainly designed for those staff who had forgotten clock-in/out for the
+re-attendance.
+Please click Att. Manage →Manual IN/OUT, and enter the Append User’s Forgotten
+Clock-in/out window.
+
+4.2-2
+
+- 33 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-3
+Operating Steps:
+1) Select the personnel who needs re-clock-in in this way: click the name of the
+personnel and select the little icon
+
+, or right-click personnel information
+
+window on the left column to popup the right-click menu; or input the personnel’s
+user ID, name, enroll ID for query and adding.
+As the following:
+
+4.2-4
+
+- 34 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-5
+
+4.2-6
+2) Click the icon
+
+Add, and select the corresponding attendance type for
+
+re-clock-in. There’s the same option type on the terminal: Duty On, Duty Off,
+Overtime On, Overtime Off, Go out on and Go Out Off.
+
+4.2-7
+3) Set the clock-in date and time for the personnel in the item of Date and Time.
+
+- 35 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-8
+4) It is also available to re-attend by Duty time, shift and S-Group. If you manual
+IN/OUT as 09:00am-12:00pm, then it will conduct two records: clock in at
+09:00am and clock out at 12:00pm. And it will match the Duty on and Duty off
+type automatically.
+
+4.2-9
+5)
+
+Click Save to preserve the Manual Clock-in settings.
+
+4.2.2 Leave Registration
+The leave registration is available to record personnel’s overtime, leave, weekend,
+outgoing, business trip and others. Click Att. Manage →For Leave, and enter the
+Leave Registration (Ask for Leave/Over/Out/Travel) window.
+
+- 36 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-10
+Operating Steps:
+1)
+
+Select the personnel. Refer to personnel option on the Manual IN/OUT for
+detailed operating steps.
+
+2)
+
+Click Add to select attendance type in the Att. Type item. There’re 13 kinds of
+types now: Normal Overtime, Weekend Overtime, Holiday Overtime, Weekend,
+Leave, Sick Leave, Annual Leave, Wedding Leave, Maternity Leaving, Injury
+Leave, Funeral Leave, On Business, and Outgoing.
+
+4.2-11
+3)
+
+Set the date and time range for the Leave Registration.
+
+- 37 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+Select the Date and Time
+
+4.2-12
+4)
+
+It is also available to register according to Duty Time, Shift and S-Group.
+
+Register according to Shift.
+
+4.2-13
+5)
+
+Click Save to preserve current leave registration.
+Attentions:
+
+1)
+
+Select the Uninterrupted there is only one attendance record even if the span
+time excesses 24 hours. Cancel the Uninterrupted, there will be one
+attendance record daily.
+
+2)
+
+Time Range The system usually defaults the current time of the system as the
+time range. It is necessary to input other time and date range in reality. The
+- 38 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+beginning date cannot be later than the ending date. When Un-interrupted is
+selected, and the date range within the same day, the beginning time can not be
+later than the ending time. If the time span excesses 24 hours, the beginning
+time can be later than the ending time. But the beginning time can be later than
+the ending time regardless of 24-hour excess or not if the Un-interrupted is
+cancelled.
+
+4.2.3 Attendance Rule Management
+The attendance rule management is designed to manage the company and
+standardize its attendance rule & regulation system.
+Click the Att. Manage →Att. Rule and enter the Attendance Rule Management
+window.
+
+4.2-14
+4.2.3.1 Rule Options
+
+
+Add New Attendance Rule
+1)
+
+Normal settings
+
+- 39 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-15
+
+4.2-16
+Specification:
+A: For the setting: one work day defaults 8 hours as work time, which means 8-hours
+or more work time is regarded as one work day.
+B: For the Setting: the recorded at interval of no less than 5 minutes count as
+effective attendance. In 5 minutes after the attendance, it is ineffective for other
+attendance of the same person.
+C: the record of the access control terminal is connected with the attendance stat.
+(it’s available to the access control terminal.)
+D: Strict Attendance: the attendance record will be only these two statuses: Duty on
+and Duty off.
+2)
+
+Late/ Early /Absence settings
+- 40 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-17
+Specification:
+a)
+
+Clock-in over 10minutes Count as Late This rule can be just taken as a
+standard to who is late or not.
+
+b)
+
+Late Exceed 30 Minutes Count as Absent. For example, if it is regulated 9:00
+am as clock-in time, the personnel who clock-ins later than 9:30 am can be
+recorded as absent.
+
+c)
+
+Clock-out over 10 Minutes Count as Early. For example: the normal
+clock-out time is set as 17:00, anybody who leaves before 16:50 can be
+regarded as early.
+
+d)
+
+Clock –out over 30 minutes count as absent. For example, if it is regulated
+17:00 as the clock-out time, the personnel who clock-outs before 16:30 can be
+recorded absent.
+
+e)
+
+If no clock-in, count as late/absent. For example, one personnel who forgets
+to clock-in, can be regarded as late and set the lagged time, or as one-day
+absent.
+
+f)
+
+If no clock-out, count as early/absent. For example, one personnel who
+forgets to clock-out, which can be regarded as early and set the early minutes,
+or as one-day absent.
+3)
+
+Overtime Rule Settings
+
+- 41 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-18
+Specification:
+It is available to set the overtime that which is more than certain minutes to an
+effective one.
+
+4.2.3.2 Holiday
+Usually, the holiday is nationally official holidays, such as New Year’s Day, Labor Day
+and China’s National Day. The holiday can also be flexibly set according to the
+company’s requirements.
+Click Holiday on the left column of Attendance Rule Management to add/edit holiday
+
+4.2-19
+1)
+
+Click Add; input the name of holiday and its Starting and Ending date. As
+followings:
+- 42 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-20
+
+
+
+2)
+
+Click
+
+Save icon to complete the setting.
+
+3)
+
+Edit Holiday
+
+Select the name of holiday that needs modification on the column of Holiday’s
+Names, then click
+
+
+
+Edit.
+
+Modify holiday’s name within the Holiday’s Name box
+
+corresponding and
+
+modify its beginning and ending time holiday.
+
+
+After clicking
+
+Save icon, the information of the holiday will be updated
+
+automatically.
+
+4.2.3.3 Weekend Settings
+The weekend can be set according to the company’s requirement.
+
+- 43 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-21
+1)
+
+Click
+
+on the left column of Attendance Rule Management, and turn to
+
+the Weekend window. Click
+
+Add; input the name of the weekend and its
+
+time that can be differently set according to company’s actual rules and shifts,
+as the following:
+
+4.2-22
+2)
+
+Click
+
+3)
+
+Modify Weekend settings
+
+
+Save after setting.
+
+Select the name of the weekend on the pull-down menu below the
+Weekend, and click
+
+
+
+Edit
+
+Modify the name of the weekend within the box Weekend and input the
+weekend time before the corresponding weekend time.
+
+
+
+Click
+
+Save to finish.
+- 44 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+Attentions:
+
+
+The Weekend that has been applied to the personnel cannot be deleted.
+
+
+
+It is not allowed to repeat name and time of the fixed weekend.
+
+4.2.3.4 Duty Time
+This is only suitable to the simple on-off-duty company that needs two simple time points.
+For example: on-duty time at 9:00, off-duty time at 18:00. The various on-off-time
+companies require setting up several time and shifts. Please refer to 4.2.3.5. Shift for details.
+Setting steps of on-duty time following:
+Click
+
+Duty Time on the left column of the Attendance Rule Management;
+
+enter the setting window of Duty Time.
+
+4.2-23
+1)
+
+Click
+
+Add, set the name of the shift within the box of Duty Time, and set Att.
+
+Type and On/off-Duty Time. Such as:
+
+- 45 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-24
+2)
+
+Click Save after finish. The pull-down menu of Duty Time will display Normal
+duty time.
+
+3)
+
+Click Edit to modify and set the optional shifts.
+Attentions:
+
+The attendance type of Actual in, Normal Overtime, Holiday Overtime, and
+Weekend Holiday will be shown as the Must Clock-in or Must clock-out in the stat.
+report.
+
+4.2.3.5 Shift
+This is available to the company of various on-off-duty-time attendances. The shift is
+consisted of non-overlapping duty time. For example: a company’s on-duty time is
+9:00-12:00 and 13:00-18:00, which can be set as Morning Class duty time and Evening Class
+one respectively. The morning-class and the evening-class can be combined into one shift for
+attendance. The un-regular/rotating shift can be set as shifts and S-groups. Please refer to
+4.2.3.6 S-Group for details.
+
+- 46 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-25
+Attentions:
+
+
+
+When creating a new Shift including two or three duty time, the End att. Time of the
+previous duty time can not be latter than the Begin att. Time of the latter one. For
+example: i am creating a new shift now, including two duty time: morning:
+08:30-12:00, and afternoon: 14:00-18:00. When i creat these two new duty time, i
+should make sure that the End att. Time of the duty time “Morning” cannot be latter
+the Begin att. Time of the duty time “Afternoon”. Let’s say when the Begin att. Time of
+the “Afternoon” is set to 13:00, then the End att. Time of “Morning” could not latter
+than 13:00. We could set it to 12:30, 12:50,or 12:59 etc.
+
+4.2-26
+
+
+
+4.2-27
+According to the two duty time and shift above, when someone let’s say Peter clocks
+out at 13:10 for lunch, then it will be recorded as Peter’s clock-in time for the duty time
+Afternoon, and no clock-out record for the duty time Morning, and it count as
+“Forgotten clock-out” for the duty time Morning.
+- 47 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2.3.6 S-Group
+This is available to the company with un-regular shifts. The group is consisted of shifts. As to
+the group attendance, the system will automatically select the best shift for attendance
+statistics according to the records. For example: a company: morning class is 6:00-10:00,
+noon class 10:30-13:30, afternoon class 14:00-18:00 and evening class 19:00-22:00, then we
+can combine the morning+noon classes into Shift 1 and noon+afternoon ones into Shift 2
+respectively, which can be combined in a group. Then we only need to set up the S-group for
+the attendance instead of tedious shifts, the system will automatically select Shift 1 or Shift 2
+for attendance according to actual attendance records.
+
+4.2-28
+Attentions:
+
+
+
+S-Group is for the regular attendance. When one company doesn’t have a regular
+working time, such as for Monday, Wednesday, Friday in one working time, and
+Tuesday, Thursday, and Saturday in another working time, please schedule their
+working time in the “Scheduling” window. Please refer to the 4.2.5 Shift Scheduling for
+more details.
+
+4.2.4 Attendance Report
+The attendance report offers query and print of the personnel attendance.
+
+Click
+
+Att. Management →Report to enter the Report window, as following.
+
+- 48 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-29
+4.2.4.1 Clock-in/out Log
+Select the optional card of Clock-in/out Log for the personnel information (please
+refer to personnel option).Input the beginning and ending time then click Query for
+one’s detailed clock-in/out attendance records.
+
+4.2-30
+
+
+Edit the selected record that displays blue, right click or double-click the very
+record and edit the attendance type and clock-in time.
+
+- 49 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-31
+If the terminal is with the camera function, it will display this interface with the Enroll
+photo and the immediate photo, as the following:
+
+4.2-32
+
+
+Delete the selected record. Select this record; right click the
+
+delete below
+
+to delete it. And it’s available to delete several records at one time. It’s
+unavailable to cancel the records downloaded from the terminal that haven’t
+been edited yet.
+For Example:
+
+(HOW TO DELETE A NEW RECORD?)
+
+- 50 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-33
+I haven’t edited the new logs downloaded from the terminal, as the Pic_4.2-31, I
+cannot delete these records. When I edit one record, as the following:
+I edit one of Amaris Song’s record, such as the Time, change 10:17 to 10:30, and
+click update. Then the background color of the very record turns from white to this
+one
+
+.
+
+4.2-34
+
+- 51 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-35
+Then click to select the edited record, and it can be delete it now! as the following:
+
+4.2-36
+
+
+Show/hide the column wanted, click
+
+Button, select the Show/Hide
+
+Column wanted to be shown or hidden, and click to save it.
+
+- 52 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-37
+4.2.4.2 Access Control Log
+Select Access Control Log, input the date and click Query for all the detailed
+clock-in/out information on these days. The detailed and selected record of
+clock-in/out information will show its owner’s name.
+
+If the name is null, it will show
+
+the record without name. It is also available to set the show/hide column. (Please
+refer to Show/Hide Column for details)
+
+- 53 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-38
+4.2.4.3 Leave Registration Log
+Click Leave Registration, select the department and personnel item that you want to
+query, input the beginning and ending date, then click Query for their leave records.
+
+4.2-39
+It is allowed to delete, edit and append clock-in and register leave and so on for the
+leave Registration. Please refer to (Delete, Edit, Manual IN/OUT, leave registration,
+show /hide column) for more details.
+
+- 54 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2.4.4 Daily Log Report
+Select Daily Log Report and the personnel item that you want to queried (please
+refer to personnel option), set the querying date, and click Query to query personnel’s
+daily logs. It will show his detailed daily attendance information after statistics.
+From the Daily Log Report, we can have a very clear known about personnel’s
+attendance record.
+Let’s take Edward as an example: all of his logs on 109-08-2010 are in one record.
+
+4.2-40
+4.2.4.5 Daily Attendance Report
+Select Daily Attendance Report and the personnel item that you want to queried
+(please refer to personnel option), set the querying date, and click Query to query
+personnel’s daily attendance. It will show his detailed daily attendance information
+after statistics.
+
+- 55 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-41
+Attentions:
+Colors in the Report mean different situations.
+: It means that the record is normal.
+
+: It means Late Arrival, and it counts the Late Arrival frequency of the
+person.
+: It means that there’s no attendance record, append clock-in nor leave
+registration, or the Absence.
+
+: It means Saturday.
+
+: It means Sunday.
+Specification of Daily Attendance Report:
+Actual Attendance (hours): the actual attendance hours is the total time difference of
+- 56 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+clock-in and clock-out. For example, the clock-in/out time of a day is, respectively,
+time1:- 9:00, time2:- 12:00, then the actually attendance hours is 3 hours.
+Actual attendance days: it can be reckoned as one day if there is actual attendance
+minute or second.
+Late Clock-in (times): It can be regarded as one time if there is late clock-in on the
+very day.
+Early Clock-out (times): It can be taken as one time if there is early clock-out on the
+very day.
+
+4.2.4.6 Statistical Analysis
+Double click the stat. record in the Daily Att. Report. It will pop up a Statistical
+Analysis interface, as the following:
+
+4.2-42
+Statistical Analysis for the Daily Att. Can realize the following functions:
+a. Check or modify the Att. Rule of the selected record, as following:
+
+- 57 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-43
+The picture above displays the Default Att Rule. It takes effect when it is selected.
+When it needs to modify the setting or modify other attendance rule, click icon
+
+to
+
+enter the Attendance Rule Management window. Attention: Once you modify the
+attendance rule, it would re-statistics the attendance data during the very duty time.
+check or modify the Attendance records and Leave Registration for the very day. (As
+the following)
+
+4.2-44
+As the pic_4.2-43 above, it could query the attendance rule and att. Shift for the user
+on the very day.
+It can also check the planned time and actual time and other detail information of the
+users.
+It allows double clicking to edit the record. It allows right clicking to add or delete the
+record and append the record.
+It allows right clicking the blank area for a popup menu to Append clock-in/out or ask
+for leave/overtime/out/travel. And it allows clicking the icon
+
+to append click
+
+IN/OUT or leave registration.
+b. Check or modify the Att. Shift or the User. (Defaulted Shift & Scheduling)
+- 58 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+Right click the selected
+duty time to a popup
+menu.
+
+4.2-45
+It allows checking the attendance rule of the very user. Right click the selected duty
+time to a popup menu. It allows to modify the attendance rule of the very day. if you
+want to modify the attendance rule of the users, please click the icon
+attendance rule management window, and do the operation.
+
+to enter the
+
+Attentions: (what causes statistics exception?)
+1)
+
+Lack of clock-in/out record.
+
+2)
+
+The clock-in/out time is not during the begin att. Time and end att. Time.
+
+3)
+
+The clock-in/out are not corresponding.
+
+4)
+
+The Late Arrival or Leave early time exceeds the setting time.
+
+4.2.4.7 Monthly Attendance Report
+Select Monthly Attendance Report, add new personnel item through the import of
+name, enroll ID and user ID or click Optional Personnel and right click optional
+personnel on user list to add personnel item needs to be queried. Set up the query
+date, and click Query for monthly attendance report, click Statistics for monthly
+attendance statistics if there is no data. There will be detailed information of the
+- 59 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+monthly attendance after the statistics.
+Attentions:
+On Monthly Attendance Report, the colors must be in accordance with the ones in
+the daily attendance report, please refer to Attention in daily attendance for details.
+
+4.2.4.8 Import attendance record
+The import can add batch attendance information through the self-defined column
+Excel file or the following path: first establish attendance item on the Raw
+Clock-In/Out Log, then export this information, and add other’s information according
+to the export format. The save path of the Excel file must be the compatible version of
+97-2003, whose postfix is.xls
+Sample for Manual Clock-in/out:
+
+4.2-46
+First: select the designed Microsoft Excel file.
+
+- 60 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-47
+Second: Click Next, and select the matched column and field. (This step is generally
+automatic and you don’t need to choose the field yourself, click Next directly.)
+
+4.2-48
+Third: Data Check, check the imported data. If there is something wrong with this data,
+click Previous to justify or Cancel to cancel the current import. (if there’s red or green
+color cells in the importing data, please modify the red data. It would fail to import the
+file when there’s red data.)
+
+- 61 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-49
+Fourth: Click Next to import data if there is nothing wrong with the data.
+
+4.2-50
+Fifth: Click Cancel and reverse back Raw Clock-In/Out Log interface after the finish
+of data import.
+
+4.2.4.9 Import Leave Log
+The import can add batch attendance information through the self-defined column
+Excel file or the following path: first establish a leave item on the Leave Registration,
+
+- 62 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+then export this information, and add other’s information according to the export
+format. The save path of the Excel file must be the compatible version of 97-2003,
+whose postfix is.xls
+
+4.2-51
+First: select the designed Microsoft Excel
+
+4.2-52
+Second: Click Next, and select the matched column and words.
+
+4.2-53
+- 63 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+Third: Watch Field, check the imported data. If there is something wrong with this
+data, click Previous to justify or Cancel to cancel the current import.
+
+4.2-54
+Fourth: Click Next to import data if there is nothing wrong with the data.
+
+4.2-55
+Fifth: Click Cancel and reverse back Leave Registration interface after finishing the
+data import.
+
+- 64 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2.4.10 Export and Print of Report
+1)
+
+Click Print to enter related settings. Select the print item or import the titles into
+the input box of the box, for example name of the company. Click Page
+Settings and Printer Settings for the settings of page and printer. Click Begin
+Print to popup printing preview window that can be closed for re-settings, or
+click Printer directly for printing.
+
+Attentions: The printer only print the contains of the current displaying page.
+
+4.2-56
+2)
+
+Click Export to popup the dialog box of save and select the save path, then click Save.
+Then there will be a Prompt Box suggesting to open it or not if it is a successsful save. If
+you want to check the exported report, please click OK otherwise Cancel.
+
+4.2-57
+
+4.2.5 Shift Scheduling
+Shift Scheduling provides the function of setting particular working time for particular
+employees, and the function of querying and printing.
+
+- 65 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+Pressing menu Att Manage - > Scheduling
+
+or entering into Report and choose
+
+Scheduling. Following is the description of the chart in different color,
+: it means that
+
+the time isn’t in the choosing time.
+
+： Light blue: it means Duty Time Information.
+
+： Light yellow: it means Shift Information.
+
+： Light pink: it means S-Group Information.
+
+： Light sky blue: it means the default scheduling.
+
+： Green: it means the weekend day or the holiday.
+
+： White: It doesn’t contain default or manual scheduling, so it won’t
+affect the scheduling information when you save the scheduling.
+： Yellow green: it means that the user deleted the manual scheduling
+information. (Click “Save” to affect it.)
+
+4.2.5.1 Query for the scheduling information
+Select the personnel item that needs to be queried. (Please refer to personnel option
+for details).Input the beginning and ending date, then click Query for the scheduling
+record of the first personnel of these selected ones. It displays various modes of
+arrangement on the optional column, such as: week show mode, month show mode,
+Name shift mode, ID shift mode, display all the attendance information, display
+scheduling shift information, as following.
+
+- 66 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-58
+The chart above is the week show mode, displaying the name of shift; the querying
+result is single shift information. It’s available to click the button before the listing or
+select different options on the pull-down menu to present different show modes.
+
+4.2.5.2 Query for all the scheduling information
+Select the personnel item that needs to be queried under the Month show mode.
+(Please refer to personnel option for details). Input the beginning and ending date,
+then click Query for the personnel scheduling record, as following.
+
+4.2-59
+Each row stands for a month, displaying the selected personnel’s scheduling
+information in the time respectively. It’s unavailable to neither edit nor preserve when
+checking all the scheduling information.
+
+4.2.5.3 Edit the scheduling information
+
+
+Edit the selected record. The background-color of the selected scheduling information
+turns to deep blue. (Right-click or) Double-click the very record to edit it. There’re two
+edit types, one is modifying one cell at one time, and the other one is dragging to edit
+various cells. It’s available to select the pull-down menu via the edit icon at the top of the
+window, or click the edit mode icon to switch.
+
+- 67 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-60
+The popup menu is as the picture above. Each time the operation of selecting the
+menu only works for the selected cells when double-clicking the edit mode. The
+selected shift information at one time can be dragged to set up various cells or click to
+set up various sheets when dragging edit mode. Click the blank area out of the sheet
+to release the selected shift information.
+
+
+Delete the scheduling of selected date. Select the cell and double-click or right-click to
+select delete on the popup menu. Select the corresponding edit mode to single-delete or
+multi-delete.
+
+4.2-61
+It’s available to click the save button below the status bar
+current scheduling result when completing the edit..
+
+to save the
+
+Attention: save operation is to save the scheduling setting-up in a selected time of the
+selected personnel on the left.
+
+4.2.5.4 Template Scheduling
+Click the button
+below the View, or right-click to select the Template, then enter
+template setting interface, as the follow picture:
+
+- 68 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-62
+Select the corresponding scheduling setting template, which supports dragging to set
+various sheets.
+
+
+Week template: set up the scheduling in pattern of the week in a selected time.
+
+
+
+Month template: set up the scheduling in pattern of the month in a selected time.
+
+
+
+Day template: set up the scheduling by taking time interval as template in a selected time.
+Such as the following picture.
+
+4.2-63
+It means that it counts from the first day in a selected time, noon class for the first day,
+and evening class for the second day, day off for the third day; repeat the noon class
+of the first day for the fourth day, etc.
+If the existing shift information cannot meet your request, it’s available to click the
+icon on the menu bar to set up new shift information. (Please refer to Attendance
+Rule setting for details)
+Click the icon
+
+after completing the template. It makes the template set up to the
+
+corresponding time and cell, and set up the scheduling of the personnel selected from
+the personnel option on the left of the scheduling report according to the template.
+
+- 69 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2.5.5 Import scheduling information
+The import can first query the scheduling information from the personnel scheduling
+report on the attendance management then export the information. And add others’
+information according to the export format. The save format of the Excel file must be
+the compatible version of 97-2003, whose postfix is .xls.
+
+4.2-64
+The imported data and shift information can be automatically identified the name or
+ID num.
+If the name or ID num is personal one, the imported scheduling information is the
+corresponding personal one.
+If the name of ID num is departmental, then the imported scheduling information is
+the departmental personnel ones.
+First: select the designed Microsoft Excel
+
+4.2-65
+Second: [Data Check], check the imported data. If there’s something wrong with this
+data, it’s available to modify it directly, or add new record in this very step or it won’t
+be edited succeed. Click Previous to justify or Cannel to cancel the current import.
+
+- 70 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.2-66
+Fourth: click Next to import data if there’s nothing wrong with the data.
+
+4.2-67
+Fifth: click Cancel and reverse back to the user management interface after the finish
+of data import.
+Attention:
+Exported data after modification needs to be copied to a new file and saved as the
+version of Excel 97-2003, and then the file can be imported successfully.
+
+- 71 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.3 Device Management
+The device management possesses performance of data connection and download
+and others.
+
+4.3-1
+
+4.3.1
+
+Device Connection
+
+4.3.1.1 Device Added
+Connect the device to the computer (select the suitable communications:
+RS232/RS485, TCP/IP or USB) If there are several networking-apply devices, these
+devices must be set to different numbers to avoid repeating, for example: 001,002
+1)
+
+RS232/RS485 Communication
+
+Click Device Management on the menu →Connect→ click
+
+or Add Device on the
+
+left column to popup Connect to the Device window.
+Select RS232/RS485 communication, the settings of Device ID and date remain the
+same with the ones on the terminal, select the COM Port. Then click Search, as the
+following.
+
+- 72 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.3-2
+It will display Successful Connect Prompt Box, corresponding to the data searched.
+Click OK and there will be the icon of Add Device on the left of the window, as the
+following.
+
+4.3-3
+Click Add Device for more devices.
+2)
+
+TCP/IP Communication
+
+Click Device Management on the menu →Connect → click
+
+or Add Device on the
+
+left column to popup Connect to Device window.
+Select TCP/IP communication, the Device ID, IP Address and Password must remain
+- 73 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+the same with the ones on the terminal. No communication password defaults as 0.
+
+4.3-4
+3)
+
+USB Communication
+
+Click Device Management on the menu →Connect→ click
+
+or Add Device on the
+
+left column to popup Connect to the Device window.
+Select USB communication, the Device ID must remain the same with the ones on
+the terminal. Device ID defaults as 1.
+
+4.3-5
+
+- 74 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.3.1.2 Edit Device Property
+Select the device connected, such as Device #1, and click Edit on the menu or
+right-click Device #1→ connect to option, and there will be a corresponding window of
+device property. Then you can set the device’s communication, device ID, IP address
+and others.
+
+4.3.1.3 Delete Device
+Click Delete on the menu or right click the connected device → delete. That will
+delete current selected devices. You need to re-add device if you want to re-connect
+this device.
+
+4.3.1.4 Refresh Device
+Click Refresh on the menu or right click the selected device →refresh. That will
+refresh the current device.
+
+4.3.1.5 Device Property - Normal
+Device Property →Normal, Advanced or right click the connected device→ Operate，
+in this way, you can read or delete the data on the terminal.
+
+4.3-6
+1) Get Newly Log
+
+- 75 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+Get the new and un-collected attendance records on the device.
+2) Get All Log
+Get all data on the terminal, including the downloaded and uncollected one.
+3) Empty All Log
+Empty the attendance data after collection if there is too much data on the device.
+4) Get All Enroll
+Get all enroll on the device, including fingerprints, password, inductive card and
+others.
+5) Empty All Enroll
+Empty all enroll on the device for re-enrolling all information.
+6) Upload All Enroll
+Upload all enroll data on the software onto the device, such as name, fingerprint data.
+7) Cancel Privilege
+Delete the administrator’s privilege of device through RIMS software.
+8) Synchronous Time Device
+Synchronize device time with the one on the computer.
+9) Close device
+Close device through software.
+
+- 76 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.3.1.6 Device Property- Advanced
+
+4.3-7
+
+4.3-8
+1)
+
+Empty Device Data
+
+Empty all enroll and clock-IN/OUT records and attendance report simultaneously.
+(Attentions: this operation cannot resume)
+2)
+
+Adjust Device’s Screen Brightness
+
+Draw the scrollbar and set up the brightness value of the screen, click Apply to apply
+the brightness value to the device.
+3)
+
+Set the Text or Message of the Device’s Screen
+
+Click Get to get the current text of the device’s screen and import the words onto the
+device by clicking Set.
+- 77 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+If I set the message1: Institute training on the job.
+
+And message2: Pure attitude,
+
+pure power. And upload them to the device, and then they will be rolling on the
+screen of the color screen terminal dynamically. It can be set to someone, such as
+Amaris Song, or everyone. As the following:
+
+4.3-9
+
+4.3-10
+4)
+
+Reboot the Device
+
+Click Reboot the Device to restart current connected device.
+
+- 78 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.3.1.7 Device Property- Bell
+
+4.3-11
+Click Get to obtain the Bell Ring Times and Time established on the device. Click Set
+to upload the newly edited bell onto the device after the settings of Bell Ring Time
+and times. The color screen terminal can set at most 10 groups of bell.
+
+4.3.1.8 Device Log- Scheduler
+Select Enabled LOG Scheduler then set the timing, and then click Apply to get it work,
+or Sync Time when get log.
+Let’s take an example:
+
+4.3-12
+
+- 79 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.3.1.9 Device Property- Monitoring
+
+4.3-13
+Click Real-time Monitoring. If select the Show User Picture in the options item, then in
+the process of monitoring, the screen will show the user’s picture in real-time. If select
+the Automatic Monitoring after Running the Program, he system will upload
+attendance data in real-time in the process of monitoring.
+
+4.3.1.10 Access Control Operation
+If the device supports the access control property, the contents of the access control
+operation options can be edited. Otherwise, it cannot.
+1)
+
+Access Control
+
+- 80 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.3-14
+1.
+
+Click Open and conduct remote control to open the door through the software.
+
+2.
+
+Click Keep-open and set to keep the door open normally.
+
+3.
+
+Click Keep-Close and set to keep the door closed normally. It is
+in-effective to open by card stamping but effective when restoring to
+Automatic Mode.
+
+4.
+
+When the door is in a fixed state, click Automatic Control to restore the
+open status. Set the state of the door to Automatic Control Mode.
+
+5.
+
+Click Cancel Alarm to cancel the current alarm and restore the open
+status of automatic control mode.
+
+6.
+2)
+
+Click Show Status to see the controlling mode of the current door.
+
+The Settings of the Access Control Device
+
+- 81 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.3-15
+1.
+
+Click Get to obtain current property settings of the access control.
+
+2.
+
+Set the door keep open for 0-255 second(s). If it excesses this time, the door
+automatically restore close status.
+
+3.
+
+Set the door keeping alarming for 0-3600 second(s). If it excesses the this time,
+there will be alarm. If we set the alarm time as 0, there won’t be alarm even if it
+excesses Open Door Time.
+
+4.
+
+Set the door keep alarming for 0-255 second(s) when the door is regaled to
+Open. If the door is forced to open, there will be alarm. If the alarm time is set as
+0 and the door is forced to open, there won’t be alarm.
+
+5.
+
+The Signal input alarm, Threat Alarm, Threat Alarm Action can also be set
+according to actual situations.
+3)
+
+Pass-time Setting
+
+- 82 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.3-16
+1.
+
+Every access control device can be set 32 pass-times that can be added and
+deleted according to actual requirements.
+
+2.
+
+Click Get from the Device to obtain information of pass-time to the current
+device
+
+3.
+
+Click Upload to Device to upload the current time settings to access control
+device.
+
+4)
+
+Goup Time Settings
+
+4.3-17
+1.
+
+Every access control device can be set 32 group time, each of which contains
+10 pass-times. The time group can be added, edited and deleted according to
+- 83 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+actual situations.
+2.
+
+Click Get from device to obtain information of time group to the current device.
+
+3.
+
+Click Upload to device to upload current new-added time group to the access
+control device.
+
+5)
+
+Pass-set settings
+1.
+
+The pass-set setting contains seven days a week. Each can select
+time groups to collocate and combine according to users’
+requirements.
+
+4.3-18
+2.
+
+Click Get from Device to obtain pass-set information of current
+device.
+
+3.
+
+Click Upload to Device to upload the new-added pass-set to the
+access control device.
+
+6)
+
+Unlock-group
+
+It can be set that the door can be opened only when both of the different persons get
+through the authentication. The setting is as the following:
+First, click Access Control – Settings – Enabled the unlock-group. (As the pic_4.3-18)
+
+- 84 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.3-19
+Then click Access Control - User Access Control, then set the user access control.
+
+4.3-20
+Attentions: the Apply pass set is defaulted as “Allow”. Set the persons to 1-9 group
+according to the requirements. It is defaulted to group 0 without setting, and the
+persons in group 0 cannot be set to the unlock-group. Let’s say, we can set Peter to
+group 1, Miko to group 2 and Edmond to group 3.
+Third, click Access Control – Unlock-group, and define the unlock-groups.
+- 85 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.3-21
+Here are the instructions of the four unlock-groups above:
+Unlock-group 0: it means that only when both of the two persons: one of the people
+from group1 and one of the people from group2 authenticate from the Access Control
+Terminal, can the door be opened.
+Unlock-group 1: it means that only when both of the two persons: one of the people
+from group1 and one of the people from group3 authenticate from the Access Control
+Terminal, can the door be opened.
+Unlock-group 2: it means that only when both of the two persons: one of the people
+from group2 and one of the people from group3 authenticate from the Access Control
+Terminal, can the door be opened.
+Unlock-group 3: it means that only when two persons from group2 authenticate from
+the Access Control Terminal can the door be opened.
+If there’s a unlock-group4: 123, then it means only when both of these three persons:
+one of the people from group1, one from group2 and one from group3 authenticate
+from the Access Control Terminal, can the door be opened.
+7)
+
+User Access Control
+
+This can be set various pass-sets and valid date for different users
+
+- 86 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.3-22
+Click Upload to device to set valid time for different users. All the valid time of the
+registered users are available without setting. But with the user’s access-control
+settings, it is only available to the users whose information has been set during the
+regulated time.
+8)
+
+Anti-Passback
+
+Anti-passback is a function for Access Control Terminal that prevents the tailgating. In
+some conditions, the security system demands the personnel authenticate legally
+from the outside door to come inside, and authenticate legally from the inside door to
+go outside. The authentication record must be one inside record and one outside
+record. When anti-passback is used, people must first authenticate from the
+designated “In” reader, then from a designated “Out” reader, and tried to read out of
+an area, an anti-passback violation would occur.
+
+- 87 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.3-23
+Instructions:
+1)
+
+Disabled: the anti-passback is ineffective.
+
+2)
+
+Enable (OUT): it makes the ZD2F20 Access Control Reader as the
+“In” Reader, and the record in the ZD2F20 is the “IN” one. The
+authentication record in the Sensor is the “OUT” one.
+
+3)
+
+Enable (IN): it makes the ZD2F20 Access Control Reader as the
+“OUT” Reader, and the record in the ZD2F20 is the “OUT” one. The
+authentication record in the Sensor is the “IN” one.
+
+4.3.2
+
+Device and Data Download
+
+Click Download→Device#1 to popup next menu, as followings:
+
+4.3-24
+- 88 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+Please refer to the : Get Newly Log, Get All Log, Get All Enroll for more details of the
+submenue.
+1)
+
+Get Newly Log
+
+Obtain the newly report on the fingerprint attendance machine.
+2)
+
+Get all Log
+
+Obtain all attendance data on the fingerprint attendance machine, including the
+downloaded and un-collected data.
+3)
+
+Get All Enroll
+
+Get all fingerprints and password data on the fingerprint attendance machine and
+preserve them into the data base.
+
+4.3.2.1 U-Disk / SD Card Data Import
+Download the attendance data with the U-disk. First, download the data from the
+fingerprint attendance Terminal to the U-Disk, connect the U-Disk to the USB port of
+the computer, then steps following:
+Click Download → U-Disk/SD Card to popup the dialogue box Download data from
+U-disk/SD card,
+
+4.3-25
+It allows importing data, immediate photo and Enroll photo from the u-disk / SD card.
+- 89 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+The Immediate photo data importing is optional according to different models. Select
+the path (stay blank if unnecessary), and then click the icon
+
+.
+
+4.4 System Maintenance
+The data maintenance arms to maintain the data base of the system routinely, which
+includes backup DB, restore DB.
+On the main menu, move mouse to the icon Maintenance, popup three sub-menus
+that are Backup DB and Restore DB.
+
+4.4-1
+
+4.4.1 Backup DB
+Backup DB means the backup the database of the RIMS, including the personnel
+information and attendance records.
+A.
+
+Backup database (Access version)
+
+Click the submenu of Maintenance-Backup DB, select the save path of data, and
+click Save to popup the dialog box of Successful Save. Click OK, then there will
+be formation of backup file in the corresponding path. For example the file likes
+‘RIMS_20100824.rdb’.
+B.
+
+Backup database (SQL Server version)
+
+It makes difference between the connection to the local server and the remote
+- 90 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+server.
+Backup to the Local Server: the same operating steps with the Access version
+backup.
+Backup to a Remote Server:
+
+4.4-2
+a. It prompts that whether backup to a remote server or not. It requires the read and
+write permissions to the shared folder on the Remote PC or it would be fail to
+backup the database. (It is suggested that using the SQL Manager to backup the
+database on the remote server while backup to the Remote Server.)
+It pop ups the following window when it’s the first time to backup the database. It
+requires inputting the backup path (required to read and write permissions) on the
+remote PC.
+
+4.4-3
+Click “Apply” to backup the database. When there’s no read and write
+permissions to the input path, it fails to backup.
+Attentions:
+
+
+When it’s the first time to input the data and operate other settings, it is
+recommended to backup the database at once. It is recommended to
+backup the database before modifying the data to avoid data loss.
+
+
+
+Once the administrator makes some mistake or wrong operating steps, it
+- 91 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+allows restoring to the relevant database.
+
+
+The defaulted name to the file is “RIMS_+current date.rdb”. The
+administrator can decide his own backup path and file name.
+
+4.4.2 Restore DB
+The Restore DB subjects to restore the database, including all the personnel
+information and attendance reports.
+A. Restore database (Access Version)
+Click the Restore DB on the sub-menu of Maintenance, open the path of the
+database preservation, and select the restore DB that needs revert, and click Open to
+popup the dialog box of Successful Restore Database, then click OK. It needs restart
+the RIMS software to make the restored valid.
+
+4.4-4
+B. Restore database (SQL Server Version)
+It would popup the following window when clicking “Restore DB” if the current
+database of your RIMS software is the SQL Server version.
+
+4.4-5
+- 92 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+It allows restoring by backup log or other database file. (It only supports the backup
+log when backup to the Remoter Server.)
+
+4.4.3 Detailed settings for Maintenance
+Click Maintenance icon to enter the system maintenance window.
+
+Click this icon
+
+4.4-6
+The main setting options: Normal, Company Info., Administrator, Data Maintenance,
+Image Management, Data Migration.
+
+4.4.3.1 Normal:
+User Management: Set the appearance form of user management and user
+information, including Show User Cards and Show User List. The User Cards is
+designed to show & hide the attendance records and the shift, as well as a page to
+show the quantity of the card.
+Image Management: it fixs the size of the user picture. The size is recommended not
+bigger than 10kb for the fast displaying. It allows selecting filling or replacing the image
+when importing. “Filling images when importing”, let’s take an example : 001 Amaris
+Song’s information in the user information of the RIMS is without any picture, but
+there’s a picture for the num 001 in the importing data, then the RIMS will fill the
+picture from the importing data to Amaris Song in the RIMS database automatically.
+Or there’s a picture for Amaris Song 001 in the RIMS, but there’s no picture for the
+num 001 in the SD Card, then it will copy one to the SD Card for the num 001
+- 93 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+automatically.
+Data Maintenance: It allows setting to delete the data before a few months, it’s
+defaulted to 3 months. Let’s take an example, if I set the “Allow to remove the data –
+3 month”, and it is 2010-08-25 now, then it allows removing the data before
+2010-05-25.
+
+4.4-7
+Default Setting: default the setting of the RIMS software. When click the “Default setting”
+button, the setting ot the RIMS will restore to the default status including the following
+prompt window.
+
+4.4-8
+4.4.3.2 Company’s Information
+You can change the LOGO and name of the company.
+
+- 94 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.4-9
+4.4.3.3 Administrator
+Set the administrator’s password. If there is previous password, you can conduct the
+re-setting after input the original password and the new one then re-enter the new
+one.
+If there is no previous one, you just need to input and confirm the new one then click
+Apply, which make administrator settings a success.
+
+4.4-10
+- 95 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+“User Authority Settings”, set the privilege for using the RIMS.
+
+4.4-11
+Different people, different privileges to operate the RIMS software. For example: Amaris
+Song is from the E-commerce Dept, we are going to set her a privilege to query the
+attendance report of the E-commerce dept from the RIMS software.
+
+4.4-12
+
+- 96 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.4-13
+So, when we are in the name of Amaris to enter the RIMS software, we can only check the
+data of Amaris’s, even entering the User Management window, we can find that there’s
+Amaris’s information only.
+SQL Server version: it allows different people, those have privilege to enter the SQL,
+connect the SQL Server on their own Computer. And different people, different privilege to
+operate the RIMS.
+4.4.3.4 Data Maintenance
+
+4.4-14
+A. Compact Database:
+1.
+
+Backup the database; please refer to (4.4.1. Backup DB for details).
+- 97 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+2.
+
+Restore DB, please refer to （4.4.2. Restore DB for details）.
+
+3.
+
+Maintenance subjects to conduct regular maintenance for the data base for
+assuring the integrity of the data.
+
+4.
+
+Initialize the data base. Be cautious to this operation because the initialization
+will empty all the current data.
+
+5.
+
+Remove historical data. Remove a period of time's historical data.
+
+6.
+
+It defaults that it can only remove the data 3months ago. If you want to change
+this time, please return to “Normal” to set it.
+
+4.4-15
+B. Data Migration:
+
+4.4-16
+ Data Migration with brand integration
+Data Migration: Migrate data from another RIMS software to the current RIMS software. It
+supports data migration between two Access databases, two SQL Server databases, and it also
+supports data migration between the Access database and the SQL Server. The Access database
+file is postfixed by “.mdb” or “.rdb”. If it’s the SQL database, it must be on the Server, and it
+cannot be the backup file even though the backup file is on the Server. For the backup file on the
+- 98 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+Server, you could first add the backup file data to the Microsoft SQL Server on the Local or
+Remote Server. Then migrate it to the RIMS software.
+Integrate uncrossing user info. : it allows integrate user data from different branches to one
+RIMS software database. For example: there are three attendance system databases, Guangzhou
+HQ, Shanghai Branch and Beijng Branch. We could integrate all the data into the Attendance
+System of Guangzhou. But all the people should be with different Enroll ID. The subordinate
+relationship of the people remains the same.
+Integrate crossing user info. : it allows integrating one person’s info from different
+attendance system to the RIMS software database. (Attentions: the Enroll ID of this person
+should be the same in different attendance system.) For example: Peter’s Enroll ID in
+Guangzhou’s attendance system is 005, so his enroll id in Shanghai’s attendance system must be
+005 too. Let’s say Peter works in the Guangzhou office in the first half of the month, and the
+second half of the month in Shanghai. We can integrate all of Peter’s atendance record to
+Guangzhou’s atteandance system.
+
+4.4-17
+Migration Options:
+
+4.4-18
+We can set the default setting here to dealing with the data collision.
+Update Collision Date: when coming accross the data collision during migration, it will
+- 99 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+update the data in the system. For example: Amaris (Enroll ID is 001) in the current
+system(System A), there’s Peter (Enroll ID is also 001) in the Souce database(System B). When
+migrating data from System B to System A, Peter’s infoformation will cover Amaris’s in the
+System A directly. But the attendance records of Amairs still exist in the System A. But the old
+attendance records of Amaris’s will belongs to Peter.
+Ignore Collision Date: when coming accross the data collision during migration, it will
+ignore the collision data. As the example above, if select the “Ignore Collision Date”, it will not
+migrate Peter’s information to the current system(System A).
+ Compatible Data Migration
+It supports migrating the Access database from other kind of attendance software to the
+RIMS software, including the following information: department, user information, attendance
+records, and leave records.
+
+4.4-19
+a. It allows migrating the data including the demission staff, leave records and attendance
+log.
+b. It allows migrating the leave and attendance record in the last 3(1,2,3,or...)months.
+
+4.4-20
+c. After migrating the data, please set the atteance rule according to the record, then it
+allows processing data in the RIMS software.
+d. It takes time for the data migration. It allows doing other process at the same time.
+Please re-run the RIMS software when finishing the migration to enable the new
+database.
+- 100 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+C. Data Source Administrator:
+
+4.4-21
+Set the database of the RIMS to the Access database or the SQL Server one.
+It’s defaulted to the Access datase here. If you need to affect the SQL Server database,
+please set the Data Source Administrator to the SQL Server first.
+Step 1: Select “SQL Server”, then click “OK” on the popup window.
+
+4.4-22
+Step 2: then enter the Sql Server configuration window, as the following:
+
+- 101 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.4-23
+
+4.4-24
+Guider Mode: it is available for almost all users. Click “Next” to check whethere there’s any
+SQL Server on the current computer. It connects the attendance dabase on the local server by the
+Windows Authentication method. If there’s no SQL server on the current computer, it will create a
+RIMS_Attendance database automatically. After finishing the Guider Mode operation, click
+“Apply” to affect it. Then It allows configure the SQL database now.
+Normal Mode:
+
+- 102 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.4-25
+a. It allows clicking the pull-down menu to select the Server name or you could input the
+name of the Server directly. (it’s recommended to select the Server on the pull-down menu.)
+Select the SQL Server you.(if you select the Server name from the pull-down menu, it
+shows the Server names from the whole LAN. It takes about 15 seconds to search all the
+server names.)
+
+4.4-26
+b. Select the database name from the pull-down menu or input the database name directly. As
+the following:
+
+- 103 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.4-27
+If it’s the first use of the SQL Server database, please create a database, as the following:
+
+4.4-28
+You could create the database in the following two ways:
+
+Create a new attendance database. Please input the database name and then click
+“Create” to create the database.
+Attentions: the dabase name cannot start with the Arabic numerals. The name cannot
+contains any of the special characters except the underline “_”. It is recommended to start with
+“RIMS”.
+
+Create the database through the MDF database file in the system. Browser to get the
+MDF file path, as the following, then click “Create” to create a database.
+- 104 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+
+
+Create the storage path of the database
+
+If it’s connecting to the local server, the database is in the “database” folder under the RIMS
+installation directory.
+If it’s connecting to the remote server, the database is in the Microsoft SQL
+Server\MSSQL.1\MSSQL\Data folder under the SQL server installation directory.
+
+4.4-29
+After creating the new databse, you could select the database you just created in the pull-down
+menu. Click “ok” to configure the new databse. As the following:
+
+4.4-30
+
+4.4-31
+After confugring the new database, the RIMS software will restart to affect the database to the
+RIMS software.
+Attentions: the SQL version supports the version above SQL2005 only.
+
+- 105 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.4.3.5 Image Management (Optional)
+
+4.4-32
+Image Management: it allows removing the attendance image in the spanning time
+optionally. And it also allows removing the attendance image corresponding to the
+enroll id.
+
+- 106 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+Chapter Five Operation of the SQL version
+1. Installation and configuration of SQL database.
+Open the SQL2005express under the SQLexpress directory in the CD. (it allows
+downloading other version but above 2005.)
+You could use the SQL Server database after the installation. Please refer to the
+database source administrator for the details of the SQL Server connection.
+
+- 107 -
+
+Chapter Five Operation of the SQL version
+
+RIMS
+
+Chapter Six QA
+1. It cannot connect the device to the computer, what can I do?
+A. Check if the serial port cable is damage or not. If it’s damage,
+please change another serial port cable.
+B. Check whether the COM port of the computer has normal
+communication or not. If the communication is abnormal, please
+change to another PC communication way.
+C. Check the Device ID and Port no. of the RIMS software are the
+same with the ones in the device.
+D. If the communication way is USB communication, please check if
+the USB driver has been installed.
+E. If it’s the connection exception:
+
+There’s a conflict between the RIMS software and one another
+software. Close the RIMS software first, then click and run the
+Check.exe under the RIMS installation directory, and rerun the RIMS
+again.
+F. If it’s none of the problems above, please check the communication
+chip of the device. If there’s any exception, please change another
+communication chip.
+2. When running the RIMS, it prompts the dialog box “The
+application cannot start”.
+It’s because you haven’t installed the .NET Framework completely,
+which leads to the initialization failure.
+3. How to set the working shift and affect it to the staff in the
+RIMS software?
+let’s suppose Company A has three working shift, and people take one of them
+every day. RIMS set the shift to the staff automatically according to their attendance
+record.
+- 108 -
+
+Chapter Six QA
+
+RIMS
+
+Step1: go to the
+
+window, click to add three working shift, as the
+
+following:
+Morning time: 01:00-09:00 Afternoon time: 09:00 – 16:00 Evening time: 16:00 – 23:59
+
+Step 2: turn to the
+
+window, click to add three working shift, as the following:
+
+Step 3: turn to
+
+window, click to add a working group:
+
+- 109 -
+
+Chapter Six QA
+
+RIMS
+
+Step 4:
+
+User Management window, click to add the new user info. Suppose
+
+there is user info in the software already. Then click
+
+to the popup window.
+
+Right click to choose the persons on the left column, then click “Default Att” to select
+“S-Group” and working group, then click “Apply” to affect the setting.
+
+4. What is the data downloaded by the USB flash driver?
+A. GLG_001.TXT: is the new attendance record.
+B. AGL_001.TXT: is all the attendance record.
+C. SLG_001.TXT: is the super administrator operation record.
+D. AFP_001.TXT and AFP_001.DAT: are the files when you download
+all the enroll info.
+5. How to reset the administrator password of the RIMS software.
+Enter the “Maintenance” window, click
+, then input the
+“original password”, “New password” and “Re-enter password”.
+If there’s no any password before, then leave the “original password”
+as blank.
+6. How to empty all the data on the RIMS software?
+Enter the “Maintenance” window, click
+, then click
+, click “OK” in the prompt window.
+Attention: all the data (including the attendance record and the
+user info) in the RIMS will be empty.
+7. Why can’t I install the Framework?
+
+- 110 -
+
+Chapter Six QA
+
+RIMS
+You’re not the system administrator of the windows;
+②The installation has been estimated threatening and been stopped（you should
+close the anti-virus software first, restart the computer when the installation is
+finished）.
+
+8. Why the Device fails to connect with PC?
+①Check if the data cable of the machine is correct;
+②Check if the power line is working and start up the machine;
+③Check if the communication mode and parameter are correct;
+④If using the USB communication, check out whether the USB driver is set up or not;
+⑤If none of the above reasons, please open and run the Check.exe under the Rims
+installation directory.
+
+9. How to install the driver for the USB communication device?
+(The installation is no need for serial interface, TCP/IP devices)
+The prompt box will display Successful Connect after the connection, insert CD and
+click Next step.
+
+10. The time of the machine is not correct, what should I do?
+Device Management  Normal  Synchronous Time Device (Synchronize device
+time and the current computer time.)
+
+11. How to display the username on the screen of the machine?
+(Follow this method to copy fingerprint data when there’re 2 or
+more machines.)
+Get the Device connected; User Management  choose the Device ID (Device);
+right-click the chosen user  Get all Enroll  Upload Enroll  Upload Username.
+
+12. Why there’s no data in the report?
+①Check if the data has been acquired;
+②Check if the personnel information is written;
+③Check whether the Enroll ID is in accordance with the number of the attendance
+machine or not;
+④Check if the personnel’s date of entry is correct;
+- 111 -
+
+Chapter Six QA
+
+RIMS
+⑤Check whether the default shift is correct or not;
+⑥Check if the machine time, report query time is correct;
+⑦Check if the data statistics has been done.
+
+13. There are too many columns in the report, what should I do to
+delete some of them?
+Right-click the column of the report  display/hidden columns  select the
+wanted/unwanted ones  save.
+
+14. What can I set in the Attendance Rule Setting?
+Attendance management  Attendance Rule: Late/Early/Absence rules, Duty time,
+Shift, Weekend, Holiday, Overtime Rules.
+
+15. What can I do with the data after reinstalling operating
+system?
+System Maintenance  Restore DB; re-input the personnel name, enroll ID (which
+will display in the screen of the machine when punching the card) and other
+information, acquire all the data again, then process the data.
+
+16. The device cannot be entered when the administrator is
+changed, what should I do?
+Device management  Normal  Cancel Administrative Authority; Re-enroll the
+administrator.
+
+17. Is there any electronic document for help?
+Right-click the blank area of the software  Help  Online User Manual
+
+18. What operations should
+administrator’s resigning?
+
+be
+
+handed
+
+over
+
+when
+
+the
+
+Fingerprint enroll, backup enroll, administrator enroll, cancel administrative
+enrollment.
+
+- 112 -
+
+Chapter Six QA
+
+

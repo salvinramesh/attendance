@@ -1,0 +1,233 @@
+RIMS
+
+
+
+Create the storage path of the database
+
+If it’s connecting to the local server, the database is in the “database” folder under the RIMS
+installation directory.
+If it’s connecting to the remote server, the database is in the Microsoft SQL
+Server\MSSQL.1\MSSQL\Data folder under the SQL server installation directory.
+
+4.4-29
+After creating the new databse, you could select the database you just created in the pull-down
+menu. Click “ok” to configure the new databse. As the following:
+
+4.4-30
+
+4.4-31
+After confugring the new database, the RIMS software will restart to affect the database to the
+RIMS software.
+Attentions: the SQL version supports the version above SQL2005 only.
+
+- 105 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+4.4.3.5 Image Management (Optional)
+
+4.4-32
+Image Management: it allows removing the attendance image in the spanning time
+optionally. And it also allows removing the attendance image corresponding to the
+enroll id.
+
+- 106 -
+
+Chapter Four Instruction of the Software Performance
+
+RIMS
+
+Chapter Five Operation of the SQL version
+1. Installation and configuration of SQL database.
+Open the SQL2005express under the SQLexpress directory in the CD. (it allows
+downloading other version but above 2005.)
+You could use the SQL Server database after the installation. Please refer to the
+database source administrator for the details of the SQL Server connection.
+
+- 107 -
+
+Chapter Five Operation of the SQL version
+
+RIMS
+
+Chapter Six QA
+1. It cannot connect the device to the computer, what can I do?
+A. Check if the serial port cable is damage or not. If it’s damage,
+please change another serial port cable.
+B. Check whether the COM port of the computer has normal
+communication or not. If the communication is abnormal, please
+change to another PC communication way.
+C. Check the Device ID and Port no. of the RIMS software are the
+same with the ones in the device.
+D. If the communication way is USB communication, please check if
+the USB driver has been installed.
+E. If it’s the connection exception:
+
+There’s a conflict between the RIMS software and one another
+software. Close the RIMS software first, then click and run the
+Check.exe under the RIMS installation directory, and rerun the RIMS
+again.
+F. If it’s none of the problems above, please check the communication
+chip of the device. If there’s any exception, please change another
+communication chip.
+2. When running the RIMS, it prompts the dialog box “The
+application cannot start”.
+It’s because you haven’t installed the .NET Framework completely,
+which leads to the initialization failure.
+3. How to set the working shift and affect it to the staff in the
+RIMS software?
+let’s suppose Company A has three working shift, and people take one of them
+every day. RIMS set the shift to the staff automatically according to their attendance
+record.
+- 108 -
+
+Chapter Six QA
+
+RIMS
+
+Step1: go to the
+
+window, click to add three working shift, as the
+
+following:
+Morning time: 01:00-09:00 Afternoon time: 09:00 – 16:00 Evening time: 16:00 – 23:59
+
+Step 2: turn to the
+
+window, click to add three working shift, as the following:
+
+Step 3: turn to
+
+window, click to add a working group:
+
+- 109 -
+
+Chapter Six QA
+
+RIMS
+
+Step 4:
+
+User Management window, click to add the new user info. Suppose
+
+there is user info in the software already. Then click
+
+to the popup window.
+
+Right click to choose the persons on the left column, then click “Default Att” to select
+“S-Group” and working group, then click “Apply” to affect the setting.
+
+4. What is the data downloaded by the USB flash driver?
+A. GLG_001.TXT: is the new attendance record.
+B. AGL_001.TXT: is all the attendance record.
+C. SLG_001.TXT: is the super administrator operation record.
+D. AFP_001.TXT and AFP_001.DAT: are the files when you download
+all the enroll info.
+5. How to reset the administrator password of the RIMS software.
+Enter the “Maintenance” window, click
+, then input the
+“original password”, “New password” and “Re-enter password”.
+If there’s no any password before, then leave the “original password”
+as blank.
+6. How to empty all the data on the RIMS software?
+Enter the “Maintenance” window, click
+, then click
+, click “OK” in the prompt window.
+Attention: all the data (including the attendance record and the
+user info) in the RIMS will be empty.
+7. Why can’t I install the Framework?
+
+- 110 -
+
+Chapter Six QA
+
+RIMS
+You’re not the system administrator of the windows;
+②The installation has been estimated threatening and been stopped（you should
+close the anti-virus software first, restart the computer when the installation is
+finished）.
+
+8. Why the Device fails to connect with PC?
+①Check if the data cable of the machine is correct;
+②Check if the power line is working and start up the machine;
+③Check if the communication mode and parameter are correct;
+④If using the USB communication, check out whether the USB driver is set up or not;
+⑤If none of the above reasons, please open and run the Check.exe under the Rims
+installation directory.
+
+9. How to install the driver for the USB communication device?
+(The installation is no need for serial interface, TCP/IP devices)
+The prompt box will display Successful Connect after the connection, insert CD and
+click Next step.
+
+10. The time of the machine is not correct, what should I do?
+Device Management  Normal  Synchronous Time Device (Synchronize device
+time and the current computer time.)
+
+11. How to display the username on the screen of the machine?
+(Follow this method to copy fingerprint data when there’re 2 or
+more machines.)
+Get the Device connected; User Management  choose the Device ID (Device);
+right-click the chosen user  Get all Enroll  Upload Enroll  Upload Username.
+
+12. Why there’s no data in the report?
+①Check if the data has been acquired;
+②Check if the personnel information is written;
+③Check whether the Enroll ID is in accordance with the number of the attendance
+machine or not;
+④Check if the personnel’s date of entry is correct;
+- 111 -
+
+Chapter Six QA
+
+RIMS
+⑤Check whether the default shift is correct or not;
+⑥Check if the machine time, report query time is correct;
+⑦Check if the data statistics has been done.
+
+13. There are too many columns in the report, what should I do to
+delete some of them?
+Right-click the column of the report  display/hidden columns  select the
+wanted/unwanted ones  save.
+
+14. What can I set in the Attendance Rule Setting?
+Attendance management  Attendance Rule: Late/Early/Absence rules, Duty time,
+Shift, Weekend, Holiday, Overtime Rules.
+
+15. What can I do with the data after reinstalling operating
+system?
+System Maintenance  Restore DB; re-input the personnel name, enroll ID (which
+will display in the screen of the machine when punching the card) and other
+information, acquire all the data again, then process the data.
+
+16. The device cannot be entered when the administrator is
+changed, what should I do?
+Device management  Normal  Cancel Administrative Authority; Re-enroll the
+administrator.
+
+17. Is there any electronic document for help?
+Right-click the blank area of the software  Help  Online User Manual
+
+18. What operations should
+administrator’s resigning?
+
+be
+
+handed
+
+over
+
+when
+
+the
+
+Fingerprint enroll, backup enroll, administrator enroll, cancel administrative
+enrollment.
+
+- 112 -
+
+Chapter Six QA
+
+

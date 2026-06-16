@@ -41,19 +41,28 @@ export default function EmployeeDashboardClient({ allDays, user, holidays = [], 
     return Array.from(months).sort().reverse();
   }, [allDays]);
 
-  const [filterType, setFilterType] = useState<'month' | 'date'>('month');
+  const [filterType, setFilterType] = useState<'month' | 'date' | 'range'>('month');
   const [selectedMonth, setSelectedMonth] = useState(availableMonths[0] || '');
   const [selectedDate, setSelectedDate] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
 
   const filteredDays = useMemo(() => {
     if (filterType === 'month') {
       if (!selectedMonth) return allDays;
       return allDays.filter(([date]) => date.startsWith(selectedMonth));
+    } else if (filterType === 'range') {
+      if (!startDate && !endDate) return allDays;
+      return allDays.filter(([date]) => {
+        if (startDate && date < startDate) return false;
+        if (endDate && date > endDate) return false;
+        return true;
+      });
     } else {
       if (!selectedDate) return allDays;
       return allDays.filter(([date]) => date === selectedDate);
     }
-  }, [allDays, filterType, selectedMonth, selectedDate]);
+  }, [allDays, filterType, selectedMonth, selectedDate, startDate, endDate]);
 
   const totalHours = useMemo(() => {
     return filteredDays.reduce((acc, [_, data]) => acc + data.hours, 0);
@@ -71,12 +80,28 @@ export default function EmployeeDashboardClient({ allDays, user, holidays = [], 
          if (!isWeekend(date) && !holidays.includes(dateStr)) workingDays++;
       }
       return workingDays;
+    } else if (filterType === 'range') {
+      if (!startDate || !endDate) return 0;
+      const start = parseISO(startDate);
+      const end = parseISO(endDate);
+      if (start > end) return 0;
+      
+      let workingDays = 0;
+      const current = new Date(start);
+      while (current <= end) {
+        const dateStr = format(current, 'yyyy-MM-dd');
+        if (!isWeekend(current) && !holidays.includes(dateStr)) {
+          workingDays++;
+        }
+        current.setDate(current.getDate() + 1);
+      }
+      return workingDays;
     } else {
       if (!selectedDate) return 0;
       const date = parseISO(selectedDate);
       return (isWeekend(date) || holidays.includes(selectedDate)) ? 0 : 1;
     }
-  }, [filterType, selectedMonth, selectedDate, holidays]);
+  }, [filterType, selectedMonth, selectedDate, startDate, endDate, holidays]);
 
   const expectedHours = workingDaysInPeriod * 9.5;
   const extraHours = totalHours - expectedHours;
@@ -122,33 +147,52 @@ export default function EmployeeDashboardClient({ allDays, user, holidays = [], 
          </div>
 
          <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', background: 'rgba(15, 23, 42, 0.4)', padding: '0.75rem 1rem', borderRadius: '0.75rem' }}>
-          <label className="label" style={{ marginBottom: 0 }}>Filter:</label>
-          <select className="input-field" style={{ minWidth: '120px', padding: '0.5rem' }} value={filterType} onChange={e => setFilterType(e.target.value as any)}>
-            <option value="month">By Month</option>
-            <option value="date">By Date</option>
-          </select>
+           <label className="label" style={{ marginBottom: 0 }}>Filter:</label>
+           <select className="input-field" style={{ minWidth: '120px', padding: '0.5rem' }} value={filterType} onChange={e => setFilterType(e.target.value as any)}>
+             <option value="month">By Month</option>
+             <option value="date">By Date</option>
+             <option value="range">By Range</option>
+           </select>
 
-          {filterType === 'month' ? (
-            <select 
-              className="input-field" 
-              style={{ padding: '0.5rem' }}
-              value={selectedMonth} 
-              onChange={e => setSelectedMonth(e.target.value)}
-            >
-              {availableMonths.map(m => (
-                <option key={m} value={m}>{format(parseISO(`${m}-01`), 'MMMM yyyy')}</option>
-              ))}
-              {!availableMonths.length && <option value="">No Data</option>}
-            </select>
-          ) : (
-            <input 
-              type="date" 
-              className="input-field" 
-              style={{ padding: '0.5rem' }}
-              value={selectedDate} 
-              onChange={e => setSelectedDate(e.target.value)} 
-            />
-          )}
+           {filterType === 'month' ? (
+             <select 
+               className="input-field" 
+               style={{ padding: '0.5rem' }}
+               value={selectedMonth} 
+               onChange={e => setSelectedMonth(e.target.value)}
+             >
+               {availableMonths.map(m => (
+                 <option key={m} value={m}>{format(parseISO(`${m}-01`), 'MMMM yyyy')}</option>
+               ))}
+               {!availableMonths.length && <option value="">No Data</option>}
+             </select>
+           ) : filterType === 'range' ? (
+             <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+               <input 
+                 type="date" 
+                 className="input-field" 
+                 style={{ padding: '0.5rem' }}
+                 value={startDate} 
+                 onChange={e => setStartDate(e.target.value)} 
+               />
+               <span style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>to</span>
+               <input 
+                 type="date" 
+                 className="input-field" 
+                 style={{ padding: '0.5rem' }}
+                 value={endDate} 
+                 onChange={e => setEndDate(e.target.value)} 
+               />
+             </div>
+           ) : (
+             <input 
+               type="date" 
+               className="input-field" 
+               style={{ padding: '0.5rem' }}
+               value={selectedDate} 
+               onChange={e => setSelectedDate(e.target.value)} 
+             />
+           )}
         </div>
       </div>
 
