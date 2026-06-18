@@ -36,6 +36,19 @@ function Write-Log($message, $level = "INFO") {
 Write-Log "=========================================="
 Write-Log "Starting dual-database biometric sync process..."
 
+# Trigger RIMS polling for Office 2 before starting database sync
+if (Test-Path "D:\RIMS\poll-rims.ps1") {
+    Write-Log "Triggering RIMS headless scanner poll..."
+    $oldDir = Get-Location
+    try {
+        & "D:\RIMS\poll-rims.ps1"
+    } catch {
+        Write-Log "Error running RIMS poll script: $_" "WARN"
+    } finally {
+        Set-Location $oldDir
+    }
+}
+
 foreach ($dbConfig in $databases) {
     $dbName = $dbConfig.Name
     $dbPath = $dbConfig.DbPath
