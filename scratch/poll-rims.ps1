@@ -78,27 +78,24 @@ try {
     #     Write-Log "Could not get status: $_" "WARN"
     # }
 
-    # 5. Download ALL records using string-based method
-    Write-Log "Downloading records from scanner (string method)..."
-    [string]$strData = ''
-    $totalRecords = $device.GetRecords([ref]$strData, $false, $true)  # all records, device already opened
-    Write-Log "GetRecords returned count=$totalRecords strLen=$($strData.Length)"
-
+    # 5. Download ALL records using list-based method (avoids the minute corruption bug in GetRecords string method)
+    Write-Log "Downloading records from scanner (list method)..."
+    $records = $device.GetAttRecords($false, $true)  # all records, device already opened
+    
     # Close device connection immediately
     $device.CloseDevice()
     Write-Log "Device connection closed."
 
-    if ($totalRecords -le 0 -or $strData.Length -eq 0) {
+    if ($records -eq $null -or $records.Count -eq 0) {
         Write-Log "No records retrieved from scanner."
         $conn.Close()
         Write-Log "=========================================="
         exit 0
     }
 
-    # 6. Parse CSV data - format: DIN, Action, VerifyMode, Year, Month, Day, Hour, Minute, Second
-    $vals = $strData.TrimEnd(',').Split(',')
-    $parsedCount = [Math]::Floor($vals.Count / $fieldsPerRec)
-    Write-Log "Parsed $parsedCount records from CSV data."
+    Write-Log "Retrieved $($records.Count) records. Sorting chronologically..."
+    $sortedRecords = $records | Sort-Object Clock
+    $parsedCount = $sortedRecords.Count
 
     # 7. Filter and insert only NEW records (after lastClock)
     $insertCount = 0
@@ -107,23 +104,11 @@ try {
     $nextId = $currentMaxId + 1
 
     for ($i = 0; $i -lt $parsedCount; $i++) {
-        $offset = $i * $fieldsPerRec
-        $din   = [int]$vals[$offset]
-        $action = [int]$vals[$offset + 1]
-        $verifyMode = [int]$vals[$offset + 2]
-        $year  = [int]$vals[$offset + 3]
-        $month = [int]$vals[$offset + 4]
-        $day   = [int]$vals[$offset + 5]
-        $hour  = [int]$vals[$offset + 6]
-        $min   = [int]$vals[$offset + 7]
-        $sec   = [int]$vals[$offset + 8]
-
-        try {
-            $clock = New-Object DateTime($year, $month, $day, $hour, $min, $sec)
-        } catch {
-            $skipCount++
-            continue
-        }
+        $rec = $sortedRecords[$i]
+        $din   = $rec.DIN
+        $action = $rec.Action
+        $verifyMode = $rec.Verify
+        $clock = $rec.Clock
 
         # Skip records that are older than or equal to lastClock
         if ($clock -le $lastClock) {
