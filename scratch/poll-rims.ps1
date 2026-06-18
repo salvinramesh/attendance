@@ -110,6 +110,12 @@ try {
         $verifyMode = $rec.Verify
         $clock = $rec.Clock
 
+        # Skip system admin / device menu punches (DIN 0)
+        if ($din -eq 0 -or $din -eq "0") {
+            continue
+        }
+
+
         # Skip records that are older than or equal to lastClock
         if ($clock -le $lastClock) {
             $skipCount++

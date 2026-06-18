@@ -139,8 +139,12 @@ foreach ($dbConfig in $databases) {
                 $maxId = $id
             }
 
-            $din = $reader["DIN"].ToString()
+            $din = $reader["DIN"].ToString().Trim()
+            if ($din -eq "0") {
+                continue
+            }
             $clockVal = $reader["Clock"]
+
             
             if ($clockVal -eq [System.DBNull]::Value) {
                 continue
