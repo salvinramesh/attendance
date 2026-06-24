@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
-import { getSession } from '@/lib/auth';
+import { requireAdmin } from '@/lib/auth';
 
 export async function POST(req: Request) {
-  const session = await getSession();
-  if (!session || session.role !== 'ADMIN') return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+  const admin = await requireAdmin();
+  if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const data = await req.json();
   try {
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
         password: hashedPassword,
         name: data.name,
         dept: data.dept || null,
-        enrollId: data.enrollId,
+        enrollId: data.enrollId || null,
         role: 'EMPLOYEE'
       }
     });
@@ -24,13 +24,13 @@ export async function POST(req: Request) {
     const { password: _, ...empWithoutPassword } = newEmp;
     return NextResponse.json(empWithoutPassword);
   } catch (error) {
-    return NextResponse.json({ error: 'Registration Failed. Username or Enroll ID might already exist.' }, { status: 500 });
+    return NextResponse.json({ error: 'Registration Failed. Username might already exist.' }, { status: 500 });
   }
 }
 
 export async function DELETE(req: Request) {
-  const session = await getSession();
-  if (!session || session.role !== 'ADMIN') return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+  const admin = await requireAdmin();
+  if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const { searchParams } = new URL(req.url);
   const id = searchParams.get('id');
@@ -55,8 +55,8 @@ export async function DELETE(req: Request) {
 }
 
 export async function PUT(req: Request) {
-  const session = await getSession();
-  if (!session || session.role !== 'ADMIN') return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+  const admin = await requireAdmin();
+  if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   const data = await req.json();
   const { id, username, name, dept, enrollId, password } = data;
@@ -64,7 +64,7 @@ export async function PUT(req: Request) {
   if (!id) return NextResponse.json({ error: 'Missing ID' }, { status: 400 });
 
   try {
-    const updateData: any = { username, name, dept, enrollId };
+    const updateData: any = { username, name, dept, enrollId: enrollId || null };
     if (password) {
       updateData.password = await bcrypt.hash(password, 10);
     }
@@ -74,8 +74,18 @@ export async function PUT(req: Request) {
     });
     const { password: _, ...empWithoutPassword } = updated;
     return NextResponse.json(empWithoutPassword);
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ error: 'Update failed. Username or Enroll ID may already be in use.' }, { status: 500 });
+  } catch (error: any) {
+    console.error('Employee update error:', error.message, { id, username, enrollId });
+    if (error.code === 'P2002') {
+      const target = error.meta?.target;
+      if (Array.isArray(target) && target.includes('username')) {
+        return NextResponse.json({ error: `Username "${username}" is already in use by another employee.` }, { status: 409 });
+      }
+      if (Array.isArray(target) && target.includes('enrollId')) {
+        return NextResponse.json({ error: `Enroll ID "${enrollId}" is already in use by another employee.` }, { status: 409 });
+      }
+      return NextResponse.json({ error: 'A unique field value is already in use by another employee.' }, { status: 409 });
+    }
+    return NextResponse.json({ error: 'Update failed. Please try again.' }, { status: 500 });
   }
 }

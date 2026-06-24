@@ -1,0 +1,29 @@
+commit 3031b9c0e516d323ed2d0598d495ee61ccf5a8bb
+Author: Salvin Ramesh <salvinramesh@gmail.com>
+Date:   Thu Jun 18 09:17:27 2026 +0530
+
+    Filter out system/admin punches (DIN = 0) from sync
+
+commit 84daf2bc16426222f4e4b8e6df09f3b3c0fcb937
+Author: Salvin Ramesh <salvinramesh@gmail.com>
+Date:   Thu Jun 18 09:11:55 2026 +0530
+
+    Switch poll-rims.ps1 to GetAttRecords to fix minute corruption bug
+
+commit 779a7a8deb71c358c204b13eda743b617d33a696
+Author: Salvin Ramesh <salvinramesh@gmail.com>
+Date:   Thu Jun 18 08:54:09 2026 +0530
+
+    Save working versions of poll-rims.ps1 and sync.ps1
+
+commit fcab56a7399ee6374cfcfeae94df4d31c23483e3
+Author: Salvin Ramesh <salvinramesh@gmail.com>
+Date:   Wed Jun 17 00:02:53 2026 +0530
+
+    feat: implement real-time attendance polling, metric cards with hover states, and admin activity management tools
+
+commit b6c3c75fc17740ab4974ce762a0d7075f5abed9b
+Author: Salvin Ramesh <salvinramesh@gmail.com>
+Date:   Tue Jun 16 16:31:34 2026 +0530
+
+    feat: implement attendance synchronization system and integrate logs into admin dashboard

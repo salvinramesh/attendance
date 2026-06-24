@@ -1,0 +1,632 @@
+[
+  {
+    "empId": 6,
+    "empName": "120",
+    "enrollId": "120",
+    "scannerName": "120",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 34,
+    "empName": "306",
+    "enrollId": "306",
+    "scannerName": "306",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 41,
+    "empName": "Saneesh",
+    "enrollId": "41",
+    "scannerName": "Saneesh",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 45,
+    "empName": "471",
+    "enrollId": "471",
+    "scannerName": "471",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 52,
+    "empName": "511",
+    "enrollId": "511",
+    "scannerName": "511",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 55,
+    "empName": "Sudheesh",
+    "enrollId": "59",
+    "scannerName": "Sudheesh",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 72,
+    "empName": "642",
+    "enrollId": "642",
+    "scannerName": "642",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 73,
+    "empName": "644",
+    "enrollId": "644",
+    "scannerName": "644",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 81,
+    "empName": "676",
+    "enrollId": "676",
+    "scannerName": "676",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 88,
+    "empName": "800",
+    "enrollId": "800",
+    "scannerName": "800",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 90,
+    "empName": "Kishan",
+    "enrollId": "82",
+    "scannerName": "Kishan",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 93,
+    "empName": "97",
+    "enrollId": "97",
+    "scannerName": "97",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 96,
+    "empName": "136",
+    "enrollId": "136",
+    "scannerName": "136",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 97,
+    "empName": "133",
+    "enrollId": "133",
+    "scannerName": "133",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 98,
+    "empName": "134",
+    "enrollId": "134",
+    "scannerName": "134",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 99,
+    "empName": "135",
+    "enrollId": "135",
+    "scannerName": "135",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 101,
+    "empName": "Rajeesh maninchery",
+    "enrollId": "1",
+    "scannerName": "Rajeesh",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 102,
+    "empName": "Nithin U",
+    "enrollId": "54",
+    "scannerName": "Nithin U",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 103,
+    "empName": "Shahid K I",
+    "enrollId": "103",
+    "scannerName": "Shahid",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 104,
+    "empName": "Shilpa Santhosh T",
+    "enrollId": "35",
+    "scannerName": "Shilpa K",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 115,
+    "empName": "Aswini sankar",
+    "enrollId": "86",
+    "scannerName": "Aswini",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 116,
+    "empName": "Sisira K",
+    "enrollId": "17",
+    "scannerName": "Sisira",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 118,
+    "empName": "Sanath Mannadath",
+    "enrollId": "16",
+    "scannerName": "Sanath",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 120,
+    "empName": "Shibina Rosely c",
+    "enrollId": "26",
+    "scannerName": "Shibina",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 125,
+    "empName": "Sarath M joy",
+    "enrollId": "87",
+    "scannerName": "SarathM",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 130,
+    "empName": "Vineeth T T",
+    "enrollId": "15",
+    "scannerName": "Vineeth",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 140,
+    "empName": "Shilpa K U",
+    "enrollId": "20",
+    "scannerName": "Shilpa T",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 153,
+    "empName": "PRINSHA PRAKASH",
+    "enrollId": "18",
+    "scannerName": "Prinsha",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 155,
+    "empName": "ANJITHA V",
+    "enrollId": "109",
+    "scannerName": "Anjitha",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 156,
+    "empName": "SANOOP V",
+    "enrollId": "3",
+    "scannerName": "Sanoop",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 160,
+    "empName": "Prashobh P",
+    "enrollId": "4",
+    "scannerName": "Prashobh",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 161,
+    "empName": "Mredula P K",
+    "enrollId": "36",
+    "scannerName": "Mredula",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 164,
+    "empName": "SRUTHI MOL   V",
+    "enrollId": "24",
+    "scannerName": "Sruthi",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 171,
+    "empName": "Binoy Mohan",
+    "enrollId": "2",
+    "scannerName": "Binoy",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 176,
+    "empName": "Ann Dona James",
+    "enrollId": "61",
+    "scannerName": "Ann James",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 179,
+    "empName": "NIDHEESH KUMAR T K",
+    "enrollId": "39",
+    "scannerName": "Nidheesh",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 181,
+    "empName": "Neethul R",
+    "enrollId": "12",
+    "scannerName": "Neethul",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 191,
+    "empName": "Neeraj Jayaprakash",
+    "enrollId": "5",
+    "scannerName": "Neeraj",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 195,
+    "empName": "Hemanth Kumar A.P",
+    "enrollId": "99",
+    "scannerName": "Hemanth",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 198,
+    "empName": "Jithin M",
+    "enrollId": "45",
+    "scannerName": "Jithin",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 200,
+    "empName": "SACHIN VM",
+    "enrollId": "6",
+    "scannerName": "Sachin",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 201,
+    "empName": "SALVIN RAMESH",
+    "enrollId": "27",
+    "scannerName": "Salvin",
+    "method": "Manual"
+  },
+  {
+    "empId": 204,
+    "empName": "Suneeth Sudhakar",
+    "enrollId": "14",
+    "scannerName": "Suneeth",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 208,
+    "empName": "Kiran C",
+    "enrollId": "64",
+    "scannerName": "Kiran",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 216,
+    "empName": "MANEESHA T",
+    "enrollId": "75",
+    "scannerName": "Maneesha",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 217,
+    "empName": "ARJUN M",
+    "enrollId": "42",
+    "scannerName": "Arjun",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 218,
+    "empName": "ARJUN N",
+    "enrollId": "73",
+    "scannerName": "Arjun M",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 219,
+    "empName": "DILNAVAS C.P",
+    "enrollId": "76",
+    "scannerName": "Dilnavas",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 221,
+    "empName": "Paulson mathew",
+    "enrollId": "78",
+    "scannerName": "Paulson",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 224,
+    "empName": "Shahana Shirin A",
+    "enrollId": "81",
+    "scannerName": "Shahana",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 227,
+    "empName": "ATHIRA K.T",
+    "enrollId": "95",
+    "scannerName": "Athira",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 232,
+    "empName": "Jibin E U",
+    "enrollId": "92",
+    "scannerName": "Jibin",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 237,
+    "empName": "VINEETH M V",
+    "enrollId": "130",
+    "scannerName": "Vineeth V",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 246,
+    "empName": "Indu Venugopal",
+    "enrollId": "255",
+    "scannerName": "Indu",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 249,
+    "empName": "Amaya Raju",
+    "enrollId": "264",
+    "scannerName": "Amaya",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 255,
+    "empName": "Ayana",
+    "enrollId": "172",
+    "scannerName": "Ayana",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 258,
+    "empName": "Bony Tom",
+    "enrollId": "266",
+    "scannerName": "Bony Tom",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 266,
+    "empName": "Anuj John",
+    "enrollId": "272",
+    "scannerName": "Anuj",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 267,
+    "empName": "Nidhinlal c v",
+    "enrollId": "173",
+    "scannerName": "Nidhinlal",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 270,
+    "empName": "Hari D",
+    "enrollId": "182",
+    "scannerName": "Hari Dinesh",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 271,
+    "empName": "Rahul K P",
+    "enrollId": "183",
+    "scannerName": "Rahul Kaladi",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 274,
+    "empName": "Anju N R",
+    "enrollId": "185",
+    "scannerName": "Anju R",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 275,
+    "empName": "Jinto Jose",
+    "enrollId": "184",
+    "scannerName": "Jinto Jose",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 276,
+    "empName": "Ranjith P",
+    "enrollId": "186",
+    "scannerName": "Ranjith P",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 278,
+    "empName": "Gourishankar",
+    "enrollId": "212",
+    "scannerName": "Gourishankar",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 282,
+    "empName": "Nidhindas",
+    "enrollId": "500",
+    "scannerName": "Nidhindas",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 287,
+    "empName": "Liya KV",
+    "enrollId": "308",
+    "scannerName": "Liya",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 288,
+    "empName": "Haritha C M",
+    "enrollId": "502",
+    "scannerName": "Haritha",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 290,
+    "empName": "Vishnu Ashok",
+    "enrollId": "510",
+    "scannerName": "Vishnu Ashok",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 292,
+    "empName": "Anagha T",
+    "enrollId": "520",
+    "scannerName": "Anagha",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 294,
+    "empName": "THAHA SHAJU MON",
+    "enrollId": "603",
+    "scannerName": "Thaha",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 296,
+    "empName": "Adeeshma Murali K P",
+    "enrollId": "604",
+    "scannerName": "Adeeshma",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 297,
+    "empName": "ABHINAV KRISHNA M S",
+    "enrollId": "602",
+    "scannerName": "Abhinav",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 300,
+    "empName": "Sachu N",
+    "enrollId": "601",
+    "scannerName": "Sachu",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 301,
+    "empName": "Sidharth Sengupta",
+    "enrollId": "606",
+    "scannerName": "Sidharth",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 302,
+    "empName": "Shamil Roshan T",
+    "enrollId": "115",
+    "scannerName": "Shamil",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 304,
+    "empName": "Sandra Jayadeep",
+    "enrollId": "610",
+    "scannerName": "Sandra",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 305,
+    "empName": "Harikrishnan",
+    "enrollId": "624",
+    "scannerName": "HariKrishnan",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 306,
+    "empName": "Aishwarya Mohod",
+    "enrollId": "612",
+    "scannerName": "Aishwarya M",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 311,
+    "empName": "Vamika TP",
+    "enrollId": "615",
+    "scannerName": "Vamika",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 318,
+    "empName": "Sooryadev MS",
+    "enrollId": "622",
+    "scannerName": "Sooryadev",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 319,
+    "empName": "Sarga Jugal",
+    "enrollId": "402",
+    "scannerName": "Sarga",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 321,
+    "empName": "Rethulya R",
+    "enrollId": "632",
+    "scannerName": "Rethulya",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 322,
+    "empName": "Vishnu R",
+    "enrollId": "633",
+    "scannerName": "Vishnu R",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 323,
+    "empName": "Dhyan V",
+    "enrollId": "634",
+    "scannerName": "Dhyan",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 325,
+    "empName": "Visakh P K",
+    "enrollId": "621",
+    "scannerName": "Visakh",
+    "method": "Exact Name"
+  },
+  {
+    "empId": 327,
+    "empName": "Andriya Mariya Desilva",
+    "enrollId": "643",
+    "scannerName": "Andriya",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 328,
+    "empName": "Aiswarya Baburaj",
+    "enrollId": "131",
+    "scannerName": "Aiswarya",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 341,
+    "empName": "Akhil B Krishna",
+    "enrollId": "258",
+    "scannerName": "Akhil Raj",
+    "method": "Fuzzy First Word"
+  },
+  {
+    "empId": 348,
+    "empName": "Vishnu Gopinath",
+    "enrollId": "44",
+    "scannerName": "Vishnu",
+    "method": "Fuzzy First Word"
+  }
+]

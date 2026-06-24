@@ -1,0 +1,139 @@
+
+>>>> In-memory PM2 is out-of-date, do:
+>>>> $ pm2 update
+In memory PM2 version: 6.0.13
+Local PM2 version: 6.0.14
+
+[TAILING] Tailing last 100 lines for [attendance] process (change the value with --lines option)
+/root/.pm2/logs/attendance-out.log last 100 lines:
+    command: 'TCP CONNECT'
+  },
+  ip: '103.66.78.43',
+  command: 'TCP CONNECT'
+}
+No templates in DB for User 201. Fetching from Office 1 device...
+Device 1 is offline: m {
+  err: m {
+    err: Error: CONNECT_TIMEOUT
+        at Timeout.<anonymous> (.next/server/chunks/[root-of-the-server]__0c2g2ze._.js:2:20650),
+    ip: '103.66.78.43',
+    command: 'TCP CONNECT'
+  },
+  ip: '103.66.78.43',
+  command: 'TCP CONNECT'
+}
+No templates in DB for User 201. Fetching from Office 1 device...
+reply undefined
+reply undefined
+Device 2 is offline: m {
+  err: m {
+    err: TypeError: Cannot read properties of undefined (reading 'readUInt16LE')
+        at Q.connect (.next/server/chunks/[root-of-the-server]__0c2g2ze._.js:2:21125)
+        at async t.exports.createSocket (.next/server/chunks/[root-of-the-server]__0c2g2ze._.js:2:39865)
+        at async (.next/server/chunks/[root-of-the-server]__1300lcz._.js:1:2091)
+        at async A (.next/server/chunks/[root-of-the-server]__1300lcz._.js:1:1979)
+        at async l (.next/server/chunks/[root-of-the-server]__1300lcz._.js:1:6204),
+    ip: '103.66.78.43',
+    command: 'TCP CONNECT'
+  },
+  ip: '103.66.78.43',
+  command: 'TCP CONNECT'
+}
+No templates in DB for User 201. Fetching from Office 1 device...
+Device 1 is offline: m {
+  err: m {
+    err: Error: CONNECT_TIMEOUT
+        at Timeout.<anonymous> (.next/server/chunks/[root-of-the-server]__0c2g2ze._.js:2:20650),
+    ip: '103.66.78.43',
+    command: 'TCP CONNECT'
+  },
+  ip: '103.66.78.43',
+  command: 'TCP CONNECT'
+}
+
+> temp_app@0.1.0 start
+> next start -p 3050
+
+▲ Next.js 16.2.1
+- Local:         http://localhost:3050
+- Network:       http://172.31.44.244:3050
+✓ Ready in 208ms
+No templates in DB for User 201. Fetching from Office 1 device...
+
+> temp_app@0.1.0 start
+> next start -p 3050
+
+▲ Next.js 16.2.1
+- Local:         http://localhost:3050
+- Network:       http://172.31.44.244:3050
+✓ Ready in 216ms
+No templates in DB for User 201. Fetching from Office 1 device...
+No templates in DB for User 201. Fetching from Office 1 device...
+
+> temp_app@0.1.0 start
+> next start -p 3050
+
+▲ Next.js 16.2.1
+- Local:         http://localhost:3050
+- Network:       http://172.31.44.244:3050
+✓ Ready in 208ms
+No templates in DB for User 201. Fetching from Office 1 device...
+reply undefined
+reply undefined
+Device 2 is offline: m {
+  err: m {
+    err: TypeError: Cannot read properties of undefined (reading 'readUInt16LE')
+        at Q.connect (.next/server/chunks/[root-of-the-server]__0c2g2ze._.js:2:21217)
+        at async t.exports.createSocket (.next/server/chunks/[root-of-the-server]__0c2g2ze._.js:2:40016)
+        at async (.next/server/chunks/[root-of-the-server]__1300lcz._.js:1:2091)
+        at async A (.next/server/chunks/[root-of-the-server]__1300lcz._.js:1:1979)
+        at async l (.next/server/chunks/[root-of-the-server]__1300lcz._.js:1:6204),
+    ip: '103.66.78.43',
+    command: 'TCP CONNECT'
+  },
+  ip: '103.66.78.43',
+  command: 'TCP CONNECT'
+}
+Device 1 is offline: m {
+  err: m {
+    err: Error: CONNECT_TIMEOUT
+        at Timeout.<anonymous> (.next/server/chunks/[root-of-the-server]__0c2g2ze._.js:2:20742),
+    ip: '103.66.78.43',
+    command: 'TCP CONNECT'
+  },
+  ip: '103.66.78.43',
+  command: 'TCP CONNECT'
+}
+No templates in DB for User 201. Fetching from Office 1 device...
+No templates in DB for User 201. Fetching from Office 1 device...
+
+/root/.pm2/logs/attendance-error.log last 100 lines:
+
+No templates in DB for User 201. Fetching from Office 1 device...
+reply undefined
+reply undefined
+Device 2 is offline: m {
+  err: m {
+    err: TypeError: Cannot read properties of undefined (reading 'readUInt16LE')
+        at Q.connect (.next/server/chunks/[root-of-the-server]__0c2g2ze._.js:2:21217)
+        at async t.exports.createSocket (.next/server/chunks/[root-of-the-server]__0c2g2ze._.js:2:40016)
+        at async (.next/server/chunks/[root-of-the-server]__1300lcz._.js:1:2091)
+        at async A (.next/server/chunks/[root-of-the-server]__1300lcz._.js:1:1979)
+        at async l (.next/server/chunks/[root-of-the-server]__1300lcz._.js:1:6204),
+    ip: '103.66.78.43',
+    command: 'TCP CONNECT'
+  },
+  ip: '103.66.78.43',
+  command: 'TCP CONNECT'
+}
+Device 1 is offline: m {
+  err: m {
+    err: Error: CONNECT_TIMEOUT
+        at Timeout.<anonymous> (.next/server/chunks/[root-of-the-server]__0c2g2ze._.js:2:20742),
+    ip: '103.66.78.43',
+    command: 'TCP CONNECT'
+  },
+  ip: '103.66.78.43',
+  command: 'TCP CONNECT'
+}
+No templates in DB for User 201. Fetching from Office 1 device...

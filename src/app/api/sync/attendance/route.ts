@@ -1,6 +1,76 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import bcrypt from 'bcryptjs';
+import fs from 'fs';
+import path from 'path';
+
+async function findUserForEnrollment(deviceId: string, rawEnrollId: string) {
+  const suffix = deviceId === '1' ? '(3F)' : '(2F)';
+
+  // 1. Check if there is an existing DeviceEnrollment mapping for this device and enrollId
+  const existingMapping = await prisma.deviceEnrollment.findUnique({
+    where: {
+      deviceId_enrollId: {
+        deviceId,
+        enrollId: rawEnrollId
+      }
+    },
+    include: { user: true }
+  });
+
+  if (existingMapping?.user) {
+    // Update the lastSyncedAt timestamp on the enrollment
+    await prisma.deviceEnrollment.update({
+      where: { id: existingMapping.id },
+      data: {
+        syncStatus: 'SYNCED',
+        lastSyncedAt: new Date()
+      }
+    });
+
+    return existingMapping.user;
+  }
+
+  // 2. Check if a User exists with enrollId matching "${rawEnrollId} (3F)" or "${rawEnrollId} (2F)" or exact rawEnrollId
+  const possibleUsers = await prisma.user.findMany({
+    where: {
+      OR: [
+        { enrollId: `${rawEnrollId} ${suffix}` },
+        { enrollId: rawEnrollId }
+      ]
+    }
+  });
+
+  if (possibleUsers.length > 0) {
+    const user = possibleUsers[0];
+    
+    // Create the DeviceEnrollment for them
+    await prisma.deviceEnrollment.upsert({
+      where: {
+        deviceId_enrollId: {
+          deviceId,
+          enrollId: rawEnrollId
+        }
+      },
+      create: {
+        deviceId,
+        enrollId: rawEnrollId,
+        userId: user.id,
+        syncStatus: 'SYNCED',
+        lastSyncedAt: new Date()
+      },
+      update: {
+        userId: user.id,
+        syncStatus: 'SYNCED',
+        lastSyncedAt: new Date()
+      }
+    });
+
+    return user;
+  }
+
+  // 3. No matching user found — do NOT auto-create. Return null for unknown scans.
+  return null;
+}
 
 export async function POST(req: Request) {
   // 1. Authenticate using API Key
@@ -17,6 +87,13 @@ export async function POST(req: Request) {
   }
 
   try {
+    // Record heartbeat
+    try {
+      fs.writeFileSync('/var/www/attendance/scratch/last_biometrics_sync_heartbeat.txt', new Date().toISOString(), 'utf-8');
+    } catch (err) {
+      console.error('Failed to write heartbeat file:', err);
+    }
+
     const body = await req.json();
     const { logs } = body;
 
@@ -25,7 +102,19 @@ export async function POST(req: Request) {
     }
 
     // 2. Validate and map input logs
-    const mappedLogs: any[] = [];
+    const mappedLogs: {
+      dept: string | null;
+      scannerUserId: string;
+      name: string;
+      enrollId: string;
+      deviceId: string;
+      place: string;
+      date: string;
+      time: string;
+      attType: string;
+      verifyMoc: string;
+      remark: string;
+    }[] = [];
     const dateRegex = /^\d{4}-\d{2}-\d{2}$/;
     const timeRegex = /^\d{2}:\d{2}(:\d{2})?$/;
 
@@ -34,8 +123,8 @@ export async function POST(req: Request) {
       const date = log.date?.toString().trim();
       const time = log.time?.toString().trim();
 
-      if (!enrollId || !date || !time) continue; // Skip invalid records
-      if (!dateRegex.test(date) || !timeRegex.test(time)) continue; // Skip incorrect formats
+      if (!enrollId || !date || !time) continue;
+      if (!dateRegex.test(date) || !timeRegex.test(time)) continue;
 
       mappedLogs.push({
         dept: log.dept?.toString() || null,
@@ -56,82 +145,75 @@ export async function POST(req: Request) {
       return NextResponse.json({ success: true, count: 0, message: 'No valid logs to import' });
     }
 
-    // 3. Extract unique employees to auto-provision if they don't exist
-    const uniqueEmployees = new Map();
-    mappedLogs.forEach((log) => {
-      if (!uniqueEmployees.has(log.enrollId)) {
-        uniqueEmployees.set(log.enrollId, {
-          enrollId: log.enrollId,
-          name: log.name,
-          username: log.scannerUserId || `user_${log.enrollId}`,
-          dept: log.dept
+    // 3. Process each log — find matching user or mark as unknown
+    const finalLogsToInsert: any[] = [];
+    for (const log of mappedLogs) {
+      const userObj = await findUserForEnrollment(log.deviceId, log.enrollId);
+      
+      if (userObj) {
+        finalLogsToInsert.push({
+          ...log,
+          name: userObj.name,
+          dept: userObj.dept,
+          userId: userObj.id
         });
-      }
-    });
-
-    const defaultPassword = await bcrypt.hash('password123', 10);
-
-    for (const emp of uniqueEmployees.values()) {
-      const existing = await prisma.user.findUnique({ where: { enrollId: emp.enrollId } });
-      if (!existing) {
-        let finalUsername = emp.username;
-        // Resolve username conflicts
-        const existingUsername = await prisma.user.findUnique({ where: { username: finalUsername } });
-        if (existingUsername) {
-          finalUsername = `${emp.username}_${emp.enrollId}`;
-        }
-
-        await prisma.user.create({
-          data: {
-            username: finalUsername,
-            password: defaultPassword,
-            name: emp.name,
-            enrollId: emp.enrollId,
-            dept: emp.dept,
-            role: 'EMPLOYEE'
-          }
+      } else {
+        // Unknown scan — store without userId
+        finalLogsToInsert.push({
+          ...log,
+          userId: null
         });
       }
     }
 
     // 4. Fetch existing database entries to filter duplicates
-    const dates = Array.from(new Set(mappedLogs.map((l) => l.date)));
-    const enrollIds = Array.from(new Set(mappedLogs.map((l) => l.enrollId)));
+    const dates = Array.from(new Set(finalLogsToInsert.map((l) => l.date)));
+    const knownUserIds = Array.from(new Set(finalLogsToInsert.filter((l) => l.userId != null).map((l) => l.userId)));
+    const unknownEnrollIds = Array.from(new Set(finalLogsToInsert.filter((l) => l.userId == null).map((l) => l.enrollId)));
 
-    const existingLogs = await prisma.attendanceLog.findMany({
+    // Fetch existing logs for known users
+    const existingKnownLogs = knownUserIds.length > 0 ? await prisma.attendanceLog.findMany({
       where: {
         date: { in: dates },
-        enrollId: { in: enrollIds }
+        userId: { in: knownUserIds },
       },
-      select: {
-        enrollId: true,
-        date: true,
-        time: true
-      }
-    });
+      select: { userId: true, deviceId: true, date: true, time: true },
+    }) : [];
 
-    const existingKeys = new Set(
-      existingLogs.map((l) => `${l.enrollId}_${l.date}_${l.time}`)
-    );
+    // Fetch existing logs for unknown scans (userId is null, match by enrollId)
+    const existingUnknownLogs = unknownEnrollIds.length > 0 ? await prisma.attendanceLog.findMany({
+      where: {
+        date: { in: dates },
+        userId: null,
+        enrollId: { in: unknownEnrollIds },
+      },
+      select: { enrollId: true, deviceId: true, date: true, time: true },
+    }) : [];
 
-    // Filter out duplicates that exist in the database or are duplicated within the request itself
-    const uniqueLogsMap = new Map();
-    mappedLogs.forEach((l) => {
-      const key = `${l.enrollId}_${l.date}_${l.time}`;
+    const existingKeys = new Set([
+      ...existingKnownLogs.map((l) => `${l.deviceId ?? ''}__${l.userId}__${l.date}__${l.time}`),
+      ...existingUnknownLogs.map((l) => `${l.deviceId ?? ''}__null__${l.enrollId}__${l.date}__${l.time}`)
+    ]);
+
+    const uniqueLogsMap = new Map<string, typeof finalLogsToInsert[0]>();
+    finalLogsToInsert.forEach((l) => {
+      const key = l.userId != null
+        ? `${l.deviceId}__${l.userId}__${l.date}__${l.time}`
+        : `${l.deviceId}__null__${l.enrollId}__${l.date}__${l.time}`;
       if (!existingKeys.has(key) && !uniqueLogsMap.has(key)) {
         uniqueLogsMap.set(key, l);
       }
     });
 
-    const finalLogsToInsert = Array.from(uniqueLogsMap.values());
+    const logsToInsert = Array.from(uniqueLogsMap.values());
 
-    if (finalLogsToInsert.length === 0) {
+    if (logsToInsert.length === 0) {
       return NextResponse.json({ success: true, count: 0, message: 'All logs are already synchronized' });
     }
 
     // 5. Insert new records
     const inserted = await prisma.attendanceLog.createMany({
-      data: finalLogsToInsert
+      data: logsToInsert,
     });
 
     return NextResponse.json({ success: true, count: inserted.count });

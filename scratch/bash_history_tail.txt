@@ -1,0 +1,200 @@
+cd actionshell-server/
+htop
+ls
+curl ifconfig.me
+htop
+pm2 list
+curl ifconfig.me
+htop
+ls
+cd /var/www/
+ls
+cd it_infrabot/
+pwd
+cd /var/www/
+ll
+htop
+df -h
+exit
+ls
+curl ifconfig.me
+cat ~/.ssh/authorized_keys
+nano ~/.ssh/authorized_keys
+htop
+cd /var/www/
+ls
+cd axl-ec.axldrone.com/
+ls
+pwd
+htop
+cd /var/www/
+ls
+cd its
+ls
+cd ..
+ls
+cd its
+ls
+cd public/
+ls
+cd .
+ls
+cd ..
+ls
+pwd
+htop
+curl ifconfig.me
+cd /var/www/demo.axldrone.com/
+ls
+pwd
+exit
+cd /var/www/demo.axldrone.com/
+ls
+rsync -avz -e "ssh -p 5678" --exclude='node_modules' --exclude='.git' --exclude='.next/cache' .next public package.json package-lock.json next.config.mjs root@actionfi-v2.actionfi.com:/var/www/actionfi_website/website/actionfi/
+ls
+ls
+cd ~/.ssh/
+ls
+ssh-keygen
+ls
+cat id_ed25519.pub
+ssh root@nginx-gw.axldrone.com
+ls -la ~/.ssh/
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "echo 'Connection to jump server successful'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.2.210 'echo success'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'echo success'"
+ssh -o StrictHostKeyChecking=no -J root@nginx-gw.axldrone.com root@192.168.1.210 "uname -a"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'docker --version; docker-compose --version; python3 --version'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'python3 -m pip --version; python3 -c \"import venv; print(\\\"venv exists\\\")\"'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cat /etc/os-release'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'ls -la /var/www'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ls -la /etc/nginx/sites-enabled/ && ls -la /etc/nginx/conf.d/"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ls -la /etc/nginx/sites-available/"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "grep -rn 'demo.axldrone.com' /etc/nginx/"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "cat /etc/nginx/sites-available/arv"
+ping -c 1 demo.axldrone.com && ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ip a"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "curl -s ifconfig.me"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "curl -4 -s ifconfig.me"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ls -la /etc/letsencrypt/live/"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'ss -tulpn'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'ls -la /etc/nginx/sites-enabled/'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cat /etc/nginx/sites-available/tz'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'python3 -m venv /tmp/test_venv && /tmp/test_venv/bin/pip --version'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'apt-get update'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'ps aux | grep 5792'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'kill -9 5792; dpkg --configure -a; apt-get update'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "grep -rn 'email' /etc/letsencrypt/renewal/"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ls -la /etc/letsencrypt/renewal/"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "cat /etc/letsencrypt/renewal/arv.axldrone.com.conf"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "which certbot"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'ls -la /etc/systemd/system/demo.service'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'apt-get install -y python3-pip python3-venv'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'kill -9 42152; dpkg --configure -a; apt-get install -y python3-pip python3-venv'"
+tar --exclude='./venv' --exclude='./.git' --exclude='*/__pycache__' --exclude='*.pyc' -czf demo_project.tar.gz .
+tar --exclude='./venv' --exclude='./.git' --exclude='*/__pycache__' --exclude='*.pyc' --exclude='demo_project.tar.gz' -czf demo_project.tar.gz .
+scp -o StrictHostKeyChecking=no demo_project.tar.gz root@nginx-gw.axldrone.com:/tmp/
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "scp -o StrictHostKeyChecking=no /tmp/demo_project.tar.gz root@192.168.1.210:/tmp/"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'mkdir -p /var/www/demo.axldrone.com && tar -xzf /tmp/demo_project.tar.gz -C /var/www/demo.axldrone.com && rm /tmp/demo_project.tar.gz' && rm /tmp/demo_project.tar.gz" && rm demo_project.tar.gz
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'python3 -m venv /var/www/demo.axldrone.com/venv'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 '/var/www/demo.axldrone.com/venv/bin/pip install -r /var/www/demo.axldrone.com/requirements.txt gunicorn'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py migrate && ./venv/bin/python manage.py collectstatic --noinput'"
+scp -o StrictHostKeyChecking=no demo_service_temp root@nginx-gw.axldrone.com:/tmp/ && ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "scp -o StrictHostKeyChecking=no /tmp/demo_service_temp root@192.168.1.210:/etc/systemd/system/demo.service && rm /tmp/demo_service_temp" && rm demo_service_temp
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'systemctl daemon-reload && systemctl enable demo && systemctl start demo && systemctl status demo'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "curl -I http://192.168.1.210:8004"
+scp -o StrictHostKeyChecking=no nginx_config_temp root@nginx-gw.axldrone.com:/etc/nginx/sites-available/demo.axldrone.com && ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ln -sf /etc/nginx/sites-available/demo.axldrone.com /etc/nginx/sites-enabled/ && nginx -t && systemctl reload nginx" && rm nginx_config_temp
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "certbot --nginx -d demo.axldrone.com --non-interactive --agree-tos --register-unsafely-without-email"
+curl -I https://demo.axldrone.com
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "cat /etc/nginx/sites-available/webinar.axldrone.com /etc/nginx/sites-available/aakash_dev_dashboard"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cat /etc/nginx/sites-available/default'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "cat /etc/nginx/sites-available/demo.axldrone.com"
+scp -o StrictHostKeyChecking=no demo_target_nginx_temp root@nginx-gw.axldrone.com:/tmp/ && ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "scp -o StrictHostKeyChecking=no /tmp/demo_target_nginx_temp root@192.168.1.210:/etc/nginx/sites-available/demo.axldrone.com && rm /tmp/demo_target_nginx_temp" && ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'ln -sf /etc/nginx/sites-available/demo.axldrone.com /etc/nginx/sites-enabled/ && nginx -t && systemctl reload nginx'" && rm demo_target_nginx_temp
+scp -o StrictHostKeyChecking=no demo_gateway_nginx_temp root@nginx-gw.axldrone.com:/etc/nginx/sites-available/demo.axldrone.com && ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "nginx -t && systemctl reload nginx" && rm demo_gateway_nginx_temp
+curl -I https://demo.axldrone.com/static/css/styles.css?v=1.3
+curl -I https://demo.axldrone.com/media/thumbnails/unnamed.jpg
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'find /var/www/demo.axldrone.com/media'"
+curl -I https://demo.axldrone.com/media/thumbnails/test1.jpg
+curl -I "https://demo.axldrone.com/static/geojson/india-complete.geojson?v=2.0"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'ls -lh /var/www/demo.axldrone.com/db.sqlite3'"
+tar -tf demo.tar
+tar -xf demo.tar -C /tmp/ demo/demo/.env && cat /tmp/demo/demo/.env && rm -rf /tmp/demo
+scp -o StrictHostKeyChecking=no demo.tar root@nginx-gw.axldrone.com:/tmp/
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "scp -o StrictHostKeyChecking=no /tmp/demo.tar root@192.168.1.210:/tmp/"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'mkdir -p /var/www/demo.axldrone.com/backup && cp /var/www/demo.axldrone.com/.env /var/www/demo.axldrone.com/backup/.env && cp /var/www/demo.axldrone.com/db.sqlite3 /var/www/demo.axldrone.com/backup/db.sqlite3'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'tar -xf /tmp/demo.tar --strip-components=2 -C /var/www/demo.axldrone.com/'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cp /var/www/demo.axldrone.com/backup/.env /var/www/demo.axldrone.com/.env'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'rm /tmp/demo.tar' && rm /tmp/demo.tar"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py migrate'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py collectstatic --no-input'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'systemctl restart demo && systemctl status demo'"
+curl -I https://demo.axldrone.com && curl -I https://demo.axldrone.com/static/images/logo.png
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cp /var/www/demo.axldrone.com/backup/db.sqlite3 /var/www/demo.axldrone.com/db.sqlite3'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'systemctl restart demo && systemctl status demo'"
+curl -I https://demo.axldrone.com
+rm /root/.gemini/antigravity-ide/brain/37013a83-a345-4c6e-b963-26b134c700c6/scratch/inspect.py
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py migrate'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'systemctl restart demo && systemctl status demo'"
+curl -I https://demo.axldrone.com
+unzip -l demo2.zip | head -n 30
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'which rsync'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'which unzip'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'apt-get install -y unzip'"
+scp -o StrictHostKeyChecking=no demo2.zip root@nginx-gw.axldrone.com:/tmp/
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "scp -o StrictHostKeyChecking=no /tmp/demo2.zip root@192.168.1.210:/tmp/"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'rm -rf /tmp/demo2_extracted && mkdir -p /tmp/demo2_extracted && unzip -q /tmp/demo2.zip -d /tmp/demo2_extracted'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'rsync -av --exclude=\"db.sqlite3\" --exclude=\".env\" --exclude=\"venv\" /tmp/demo2_extracted/demo/demo/ /var/www/demo.axldrone.com/'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'rm -rf /tmp/demo2.zip /tmp/demo2_extracted' && rm -f /tmp/demo2.zip"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py migrate'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py makemigrations && ./venv/bin/python manage.py migrate'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py collectstatic --noinput'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'systemctl restart demo && systemctl status demo'"
+curl -I https://demo.axldrone.com
+tar -tf demo3.tar | head -n 30
+scp -o StrictHostKeyChecking=no demo3.tar root@nginx-gw.axldrone.com:/tmp/
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "scp -o StrictHostKeyChecking=no /tmp/demo3.tar root@192.168.1.210:/tmp/"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'rm -rf /tmp/demo3_extracted && mkdir -p /tmp/demo3_extracted && tar -xf /tmp/demo3.tar -C /tmp/demo3_extracted'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'rsync -av --exclude=\"db.sqlite3\" --exclude=\".env\" --exclude=\"venv\" /tmp/demo3_extracted/demo/ /var/www/demo.axldrone.com/'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'rm -rf /tmp/demo3.tar /tmp/demo3_extracted' && rm -f /tmp/demo3.tar"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py migrate'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py makemigrations && ./venv/bin/python manage.py migrate'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'systemctl restart demo && systemctl status demo'"
+curl -I https://demo.axldrone.com
+tar -tf /var/www/demo.axldrone.com/demo4.tar | head -n 30
+tar -tf /var/www/demo.axldrone.com/demo4.tar | grep "demos/migrations/"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py showmigrations'"
+mkdir -p /var/www/demo.axldrone.com/tmp_demo4 && tar -xf /var/www/demo.axldrone.com/demo4.tar -C /var/www/demo.axldrone.com/tmp_demo4
+tar -tf /var/www/demo.axldrone.com/demo3.tar | grep "demos/migrations/"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cat /var/www/demo.axldrone.com/demos/models.py'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'ls -la /var/www/demo.axldrone.com/demos/migrations/'"
+scp -o StrictHostKeyChecking=no /var/www/demo.axldrone.com/demo4.tar root@nginx-gw.axldrone.com:/tmp/
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "scp -o StrictHostKeyChecking=no /tmp/demo4.tar root@192.168.1.210:/tmp/"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'rm -rf /tmp/demo4_extracted && mkdir -p /tmp/demo4_extracted && tar -xf /tmp/demo4.tar -C /tmp/demo4_extracted'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'rsync -av --exclude=\"db.sqlite3\" --exclude=\".env\" --exclude=\"venv\" /tmp/demo4_extracted/demo/ /var/www/demo.axldrone.com/'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'ls -la /var/www/demo.axldrone.com/demos/migrations/'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'rm -rf /tmp/demo4.tar /tmp/demo4_extracted' && rm -f /tmp/demo4.tar" && rm -rf /var/www/demo.axldrone.com/tmp_demo4
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py migrate'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py collectstatic --no-input'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'systemctl restart demo'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'systemctl status demo'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'curl -I http://127.0.0.1:8004'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'curl -I -H \"Host: demo.axldrone.com\" http://127.0.0.1:80'"
+curl -I https://demo.axldrone.com
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cat /var/www/demo.axldrone.com/.env'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py shell -c \"from django.conf import settings; print(\\\"DEBUG_VALUE:\\\", settings.DEBUG); print(\\\"SECRET_KEY_VALUE:\\\", settings.SECRET_KEY)\"'"
+tar -xOf /var/www/demo.axldrone.com/demo4.tar demo/.env
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cat /var/www/demo.axldrone.com/.env'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cat /var/www/demo.axldrone.com/demo_project/settings.py'"
+curl -s https://demo.axldrone.com/non-existent-page-url | head -n 40
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'systemctl status demo'"
+ssh -o StrictHostKeyChecking=no root@nginx-gw.axldrone.com "ssh -o StrictHostKeyChecking=no root@192.168.1.210 'cd /var/www/demo.axldrone.com && ./venv/bin/python manage.py shell -c \"from django.conf import settings; print(\\\"DEBUG_VALUE:\\\", settings.DEBUG); print(\\\"CSRF:\\\", settings.CSRF_TRUSTED_ORIGINS)\"'"
+curl ifconfig.me
+htop
+certbot
+0;54;21M0;54;21m
+65;59;25M65;59;25M65;59;25M65;59;25M65;59;25M65;59;25M65;59;25Mclear
+clear
+htop
+curl ifconfig.me
+ls
+htop
+timdatectl
+timedatectl

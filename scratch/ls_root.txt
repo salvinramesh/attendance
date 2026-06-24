@@ -1,0 +1,18 @@
+total 100
+drwx------ 14 root root  4096 Jun  8 10:06 .
+drwxr-xr-x 22 root root  4096 Oct 25  2025 ..
+drwxr-xr-x  5 root root  4096 Jun  8 10:06 .antigravity-ide-server
+-rw-------  1 root root 32695 Jun 18 05:52 .bash_history
+-rw-r--r--  1 root root  3106 Apr 22  2024 .bashrc
+drwx------ 12 root root  4096 Jun  8 10:06 .cache
+drwx------  5 root root  4096 Jun  1 11:45 .config
+drwxr-xr-x  3 root root  4096 Mar 14 03:42 .electron-gyp
+drwxr-xr-x  4 root root  4096 Jun  8 10:06 .gemini
+drwxr-xr-x  3 root root  4096 Oct 25  2025 .local
+drwxr-xr-x  6 root root  4096 Jun  8 10:06 .npm
+drwxr-xr-x  5 root root  4096 Oct 29  2025 .pm2
+-rw-r--r--  1 root root   161 Apr 22  2024 .profile
+drwxr-xr-x  2 root root  4096 Jun  9 08:16 .securecoder
+drwx------  2 root root  4096 Jun 19 16:27 .ssh
+drwxr-xr-x  4 root root  4096 Mar 14 05:05 .wine
+drwx------  3 root root  4096 Oct 25  2025 snap

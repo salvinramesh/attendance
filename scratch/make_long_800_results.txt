@@ -1,0 +1,6 @@
+=== STARTING MAKE LONG 800 TEST ===
+Output:
+  Original short bytes length: 500
+  Padded bytes length: 800
+  MakeLongeFingerprint string length: 0
+=== TEST COMPLETE ===

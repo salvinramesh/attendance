@@ -1,13 +1,13 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { getSession } from '@/lib/auth';
+import { requireAdmin } from '@/lib/auth';
 import * as XLSX from 'xlsx';
 import { format, parse } from 'date-fns';
 
 export async function POST(req: Request) {
-  const session = await getSession();
-  if (!session || session.role !== 'ADMIN') {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+  const admin = await requireAdmin();
+  if (!admin) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {
@@ -129,24 +129,47 @@ export async function POST(req: Request) {
              }
           });
 
-          // Allow 0ing out a balance if they originally had some records that were deleted/moved
-          let planned = 0, emergency = 0, lop = 0, pending = 0, total = 0;
+          // 1. Calculate yearly summary (month = 0)
+          let plannedY = 0, emergencyY = 0, lopY = 0, pendingY = 0, totalY = 0;
           for (const rec of userLeaves) {
-             if (rec.type === 'PL') planned++;
-             else if (rec.type === 'EL') emergency++;
-             else if (rec.type === 'LOP') lop++;
-             else pending++;
-             total++;
+             if (rec.type === 'PL') plannedY++;
+             else if (rec.type === 'EL') emergencyY++;
+             else if (rec.type === 'LOP') lopY++;
+             else pendingY++;
+             totalY++;
           }
 
-          if (userLeaves.length > 0 || (await prisma.leaveBalance.findUnique({ where: { userId_year: { userId: user.id, year } } }))) {
-              await prisma.leaveBalance.upsert({
-                 where: {
-                   userId_year: { userId: user.id, year }
-                 },
-                 update: { planned, emergency, lop, pending, total },
-                 create: { userId: user.id, year, planned, emergency, lop, pending, total }
-              });
+          await prisma.leaveBalance.upsert({
+             where: {
+               userId_year_month: { userId: user.id, year, month: 0 }
+             },
+             update: { planned: plannedY, emergency: emergencyY, lop: lopY, pending: pendingY, total: totalY },
+             create: { userId: user.id, year, month: 0, planned: plannedY, emergency: emergencyY, lop: lopY, pending: pendingY, total: totalY }
+          });
+
+          // 2. Calculate month-wise balances (month = 1..12)
+          for (let m = 1; m <= 12; m++) {
+             const monthStr = String(m).padStart(2, '0');
+             const monthLeaves = userLeaves.filter(rec => rec.date.startsWith(`${year}-${monthStr}`));
+
+             let plannedM = 0, emergencyM = 0, lopM = 0, pendingM = 0, totalM = 0;
+             for (const rec of monthLeaves) {
+                if (rec.type === 'PL') plannedM++;
+                else if (rec.type === 'EL') emergencyM++;
+                else if (rec.type === 'LOP') lopM++;
+                else pendingM++;
+                totalM++;
+             }
+
+             if (monthLeaves.length > 0 || (await prisma.leaveBalance.findUnique({ where: { userId_year_month: { userId: user.id, year, month: m } } }))) {
+                 await prisma.leaveBalance.upsert({
+                    where: {
+                      userId_year_month: { userId: user.id, year, month: m }
+                    },
+                    update: { planned: plannedM, emergency: emergencyM, lop: lopM, pending: pendingM, total: totalM },
+                    create: { userId: user.id, year, month: m, planned: plannedM, emergency: emergencyM, lop: lopM, pending: pendingM, total: totalM }
+                 });
+             }
           }
        }
     }

@@ -1,0 +1,18 @@
+=== STARTING PROPERTIES CHECK ===
+Output:
+  True
+  GetEnroll Success!
+  DN: 1
+  DIN: 12
+  BackupNumber: 0
+  Privilege: 0
+  Password: 0
+  UserName: 
+  Enable: False
+  ValidDate: 0001-01-01 00:00:00
+  InvalidDate: 0001-01-01 00:00:00
+  TimeAccessZone: 0
+  UnlockGroup: 0
+  UserExtInfo: 
+  Fingerprint Length: 3185
+=== TEST COMPLETE ===

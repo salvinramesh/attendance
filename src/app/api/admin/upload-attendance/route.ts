@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import bcrypt from 'bcryptjs';
-import { getSession } from '@/lib/auth';
+import { requireAdmin } from '@/lib/auth';
 
 export async function POST(req: Request) {
-  const session = await getSession();
-  if (!session || session.role !== 'ADMIN') return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+  const admin = await requireAdmin();
+  if (!admin) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
   try {
     const { data } = await req.json();
@@ -73,7 +73,7 @@ export async function POST(req: Request) {
     const defaultPassword = await bcrypt.hash('password123', 10);
 
     for (const emp of uniqueEmployees.values()) {
-      const existing = await prisma.user.findUnique({ where: { enrollId: emp.enrollId } });
+      const existing = await prisma.user.findFirst({ where: { enrollId: emp.enrollId } });
       if (!existing) {
          let finalUsername = emp.username;
          // Handle username collision

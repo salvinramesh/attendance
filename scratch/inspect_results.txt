@@ -1,0 +1,140 @@
+=== RIMS DLL Types: D:\RIMS\RealandAPI.dll ===
+Total types: 17
+  - RealandAPI.AccessControlSettings
+  - RealandAPI.Enroll
+  - RealandAPI.Device
+  - RealandAPI.ZDFinger
+  - RealandAPI.ZDFinger+DeviceZD100Status
+  - RealandAPI.ZDFinger+DeviceZD3000Status
+  - RealandAPI.SuperRecord
+  - RealandAPI.Record
+  - RealandAPI.Status
+  - RealandAPI.Card
+  - RealandAPI.Card+Result
+  - RealandAPI.Card+CardParameter
+  - RealandAPI.Finger
+  - RealandAPI.Finger+UserInfo
+  - RealandAPI.Finger+DeviceInfo
+  - <PrivateImplementationDetails>{7B587A4F-EFC7-48E6-B74A-567A2158289C}
+  - <PrivateImplementationDetails>{7B587A4F-EFC7-48E6-B74A-567A2158289C}+__StaticArrayInitTypeSize=48
+--- Methods for Class: ZDFinger ---
+Boolean OpenDevice()
+Boolean CloseDevice()
+List`1 GetNewlyRecords()
+Boolean GetGeneralLogDataO(Record record)
+Boolean GetAllGLogDataO(Record record)
+List`1 GetAttRecords(Boolean isNew, Boolean isOpened)
+List`1 GetAllRecords()
+Int32 GetRecords(String& strData, Boolean newlyOnly, Boolean isOpened)
+Boolean ReadGeneralLogData()
+Boolean ReadAllGLogData()
+Boolean ReadSuperLogData()
+Boolean ReadAllSLogData()
+DateTime GetDateTime()
+Boolean SetDateTime(Boolean isOpened)
+Status GetStatus()
+Status GetStatusO()
+Boolean Shutdown()
+List`1 GetNewlySuperRecords()
+List`1 GetAllSuperRecords()
+Boolean EmptyAllRecords()
+Boolean EmptyAllSuperRecords()
+Boolean GetEnroll(Enroll enroll)
+String MakeLongeFingerprint(Byte[] shortData)
+Boolean GetEnrollO(Enroll enroll)
+Boolean SetEnroll(Enroll enroll)
+Boolean SetEnrollO(Enroll enroll)
+Boolean DelEnroll(Enroll enroll, Boolean isOpened)
+Boolean GetUserName(Enroll enroll, Boolean isOpened)
+Boolean SetUserName(Enroll enroll)
+Boolean SetUserNameO(Enroll enroll)
+List`1 GetAllEnroll()
+List`1 GetAllEnrollO()
+Boolean EmptyAllEnroll()
+Boolean ClearKeeperData()
+Boolean ModifyPrivilege(Enroll enroll)
+Boolean ModifyPrivilegeO(Enroll enroll)
+Void Dispose()
+Boolean GetPassTime(List`1 times)
+Boolean SetPassTime(List`1 times)
+Boolean GetGroupTime(Byte[]& groups)
+Boolean SetGroupTime(Byte[] groups)
+Boolean GetTimeZone(Byte[]& zones)
+Boolean SetTimeZone(Byte[] zones)
+Boolean GetBellTime(Byte[]& bellBytes, Int32& bellRepeatTimes, Boolean isOpened)
+Boolean SetBellTime(Byte[] bellBytes, Int32 bellRepeatTimes, Boolean isOpened)
+Byte[] GetAccessSettings(AccessControlSettings settings)
+Void SetByteToAcSetting(AccessControlSettings& settings, Byte[] byDoorKey, Boolean zd2910)
+Boolean GetDoorKey(AccessControlSettings settings)
+Boolean SetDoorKey(AccessControlSettings settings)
+Boolean GetUserCtrl(Enroll enroll)
+Boolean SetUserCtrl(Enroll enroll, Boolean isOpened)
+Boolean GetMonitoringRecord(Record record)
+Boolean OpenCommunication()
+Boolean GetDoorStatus(Int32& value)
+Boolean SetDoorStatus(Int32 value, Boolean isOpened)
+Boolean GetProductCode(String& code, Boolean isOpened)
+Boolean GetDeviceText(String& name, Boolean isOpened)
+Boolean SetDeviceText(String name, Boolean isOpened)
+Boolean SetDeviceDisplay(Int32 GBK, Boolean isOpened)
+Void CloseCommunication()
+Boolean SetUserBirthday(Enroll enroll, DateTime birthday, Int32 flag, Boolean isOpened)
+Boolean GetUserLongName(Enroll enroll, Boolean isOpened)
+Boolean SetUserLongName(Enroll enroll, Boolean isOpened)
+Boolean GetLockGroup(Int32[]& data)
+Boolean SetLockGroup(Int32[] data)
+Byte[] ConvertToShortMessage(Byte[] src)
+Byte[] ConvertToLongMessage(Byte[] src)
+Boolean GetDeviceInfo(Int32 info, Byte[]& data, Boolean isOpened)
+Boolean SetDeviceInfo(Int32 info, Byte[] data, Boolean isOpened)
+Int32 GetAttImageCount()
+List`1 GetAttImageList(Int32 counts)
+Byte[] GetAttImage(String photoName)
+Void SetOperateModel()
+Int32 get_Communication()
+Void set_Communication(Int32 value)
+String get_Model()
+Void set_Model(String value)
+Int32 get_Baudrate()
+Void set_Baudrate(Int32 value)
+Int32 get_ComPort()
+Void set_ComPort(Int32 value)
+Int32 get_Password()
+Void set_Password(Int32 value)
+Int32 get_IpPort()
+Void set_IpPort(Int32 value)
+String get_IpAddress()
+Void set_IpAddress(String value)
+Int32 get_DN()
+Void set_DN(Int32 value)
+Boolean get_IsBusy()
+Void set_IsBusy(Boolean value)
+Boolean Equals(Object obj)
+Int32 GetHashCode()
+Type GetType()
+String ToString()
+--- Properties for Class: ZDFinger ---
+Int32 Communication
+String Model
+Int32 Baudrate
+Int32 ComPort
+Int32 Password
+Int32 IpPort
+String IpAddress
+Int32 DN
+Boolean IsBusy
+--- Properties for Class: Enroll ---
+System.Int32 DN
+System.Int32 DIN
+System.Int32 BackupNumber
+System.Int32 Privilege
+System.Int32 Password
+System.Object Fingerprint
+System.String UserName
+System.Boolean Enable
+System.DateTime ValidDate
+System.DateTime InvalidDate
+System.Int32 TimeAccessZone
+System.Int32 UnlockGroup
+System.String UserExtInfo
+--- Fields for Class: Enroll ---

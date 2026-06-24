@@ -1,0 +1,3 @@
+=== STARTING END-TO-END CONVERSION TEST ===
+Failed: Generated long fingerprint string is empty!
+=== TEST COMPLETE ===

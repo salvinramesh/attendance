@@ -14,6 +14,10 @@ export async function POST(req: Request) {
        return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
     }
 
+    if (!user.enabled) {
+       return NextResponse.json({ error: 'Account is disabled' }, { status: 403 });
+    }
+
     if (loginType && user.role !== loginType) {
        return NextResponse.json({ error: `Not authorized for ${loginType.toLowerCase()} portal` }, { status: 403 });
     }

@@ -17,8 +17,17 @@ export default async function EmployeeDashboard() {
   const user = await prisma.user.findUnique({ where: { id: session.id } });
   if (!user) return null;
 
+  const invisibleEnrollments = await prisma.deviceEnrollment.findMany({
+    where: { userId: user.id, isLogVisible: false },
+    select: { deviceId: true }
+  });
+  const invisibleDeviceIds = invisibleEnrollments.map(e => e.deviceId);
+
   const logs = await prisma.attendanceLog.findMany({ 
-    where: { enrollId: user.enrollId || 'n/a' },
+    where: { 
+      userId: user.id,
+      deviceId: invisibleDeviceIds.length > 0 ? { notIn: invisibleDeviceIds } : undefined
+    },
     orderBy: [{ date: 'desc' }, { time: 'asc' }]
   });
 
@@ -27,36 +36,49 @@ export default async function EmployeeDashboard() {
     orderBy: { date: 'desc' }
   });
 
-  const daysMap = new Map<string, { in: string, out: string, hours: number }>();
-  logs.forEach(log => {
-     if (!daysMap.has(log.date)) {
-       daysMap.set(log.date, { in: log.time, out: log.time, hours: 0 });
-     } else {
-       const day = daysMap.get(log.date)!;
-       if (log.time < day.in) day.in = log.time;
-       if (log.time > day.out) day.out = log.time;
-       day.hours = calculateHours(day.in, day.out);
-     }
+  const datePunches = new Map<string, string[]>();
+  logs.forEach((log: any) => {
+    if (!datePunches.has(log.date)) {
+      datePunches.set(log.date, []);
+    }
+    datePunches.get(log.date)!.push(log.time);
   });
 
-  wfhLogs.forEach(wfh => {
+  const daysMap = new Map<string, { in: string, out: string, hours: number }>();
+  datePunches.forEach((times, date) => {
+    const sorted = [...times].sort();
+    const first = sorted[0];
+    const last = sorted[sorted.length - 1];
+    const hasCheckedOut = sorted.length > 1;
+    const hours = hasCheckedOut ? calculateHours(first, last) : 0;
+    daysMap.set(date, { in: first, out: hasCheckedOut ? last : '-', hours });
+  });
+
+  wfhLogs.forEach((wfh: any) => {
      if (!daysMap.has(wfh.date)) {
         daysMap.set(wfh.date, { in: wfh.startTime || 'WFH IN', out: wfh.endTime || 'WFH OUT', hours: wfh.hours });
      } else {
         const day = daysMap.get(wfh.date)!;
         day.hours += wfh.hours;
-        if (wfh.startTime && (day.in === 'WFH IN' || wfh.startTime < day.in)) day.in = wfh.startTime;
-        if (wfh.endTime && (day.out === 'WFH OUT' || wfh.endTime > day.out)) day.out = wfh.endTime;
+        if (wfh.startTime && (day.in === 'WFH IN' || day.in === '-' || wfh.startTime < day.in)) day.in = wfh.startTime;
+        if (wfh.endTime && (day.out === 'WFH OUT' || day.out === '-' || wfh.endTime > day.out)) day.out = wfh.endTime;
      }
   });
 
   const allDays = Array.from(daysMap.entries()).sort((a, b) => b[0].localeCompare(a[0]));
   const holidays = await prisma.holiday.findMany();
   const leaveBalances = await prisma.leaveBalance.findMany({ where: { userId: user.id } });
+  const leaveRecords = await prisma.leaveRecord.findMany({ where: { userId: user.id } });
 
   return (
     <div className="grid">
-      <EmployeeDashboardClient allDays={allDays} user={user} holidays={holidays.map(h => h.date)} leaveBalances={leaveBalances} />
+      <EmployeeDashboardClient 
+        allDays={allDays} 
+        user={user} 
+        holidays={holidays.map((h: any) => h.date)} 
+        leaveBalances={leaveBalances} 
+        leaveRecords={leaveRecords}
+      />
     </div>
   );
 }

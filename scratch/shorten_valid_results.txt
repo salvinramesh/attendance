@@ -1,0 +1,14 @@
+=== STARTING VALID SHORTEN TEST ===
+Output:
+  Initial ValidDate: 0001-01-01 00:00:00
+  Initial InvalidDate: 0001-01-01 00:00:00
+  Saving updated enrollment to device...
+  SetEnroll result: True
+  True
+  Successfully retrieved updated enrollment!
+  Updated ValidDate: 0001-01-01 00:00:00
+  Updated InvalidDate: 0001-01-01 00:00:00
+  Long bytes length: 1416
+  ConvertToShortMessage threw exception: Exception calling "ConvertToShortMessage" with "1" argument(s): "Years value must be between +/-10000.
+Parameter name: years"
+=== TEST COMPLETE ===

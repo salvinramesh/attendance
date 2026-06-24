@@ -1,18 +1,18 @@
 import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
-import { getSession } from '@/lib/auth';
+import { requireAdmin } from '@/lib/auth';
 
 export async function POST(req: Request) {
-  const session = await getSession();
-  if (!session || session.role !== 'ADMIN') {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 403 });
+  const admin = await requireAdmin();
+  if (!admin) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
   try {
     const body = await req.json();
     const { type, enrollId, date, reason, time } = body;
 
-    if (!enrollId || !date) {
+    if (!date || (!enrollId && type !== 'edit-day-timings')) {
       return NextResponse.json({ error: 'Missing enrollId or date' }, { status: 400 });
     }
 
@@ -46,7 +46,7 @@ export async function POST(req: Request) {
       }
 
       // Retrieve employee information
-      const employee = await prisma.user.findUnique({
+      const employee = await prisma.user.findFirst({
         where: { enrollId }
       });
 
@@ -69,6 +69,75 @@ export async function POST(req: Request) {
       });
 
       return NextResponse.json({ success: true, punch: manualPunch });
+    }
+
+    if (type === 'edit-day-timings') {
+      const { userId, firstIn, lastOut } = body;
+
+      if (!userId || !date) {
+        return NextResponse.json({ error: 'Missing userId or date' }, { status: 400 });
+      }
+
+      // Restrict access to exactly the main System Admin console user ('admin')
+      if (admin.username !== 'admin') {
+        return NextResponse.json({ error: 'Only the main System Admin (admin) is authorized to edit timings.' }, { status: 403 });
+      }
+
+      // Retrieve employee
+      const employee = await prisma.user.findUnique({
+        where: { id: Number(userId) }
+      });
+
+      if (!employee) {
+        return NextResponse.json({ error: 'Employee not found' }, { status: 404 });
+      }
+
+      // 1. Delete all existing attendance logs for this employee on this date
+      await prisma.attendanceLog.deleteMany({
+        where: {
+          userId: employee.id,
+          date: date
+        }
+      });
+
+      // 2. Create the new manual logs
+      const logsToCreate = [];
+
+      if (firstIn && firstIn.trim() && firstIn.trim() !== '-') {
+        logsToCreate.push({
+          userId: employee.id,
+          enrollId: employee.enrollId || null,
+          name: employee.name,
+          dept: employee.dept || null,
+          date,
+          time: firstIn.trim(),
+          place: 'Admin Adjustment',
+          remark: 'Manual adjustment check-in',
+          attType: 'Check-in'
+        });
+      }
+
+      if (lastOut && lastOut.trim() && lastOut.trim() !== '-') {
+        logsToCreate.push({
+          userId: employee.id,
+          enrollId: employee.enrollId || null,
+          name: employee.name,
+          dept: employee.dept || null,
+          date,
+          time: lastOut.trim(),
+          place: 'Admin Adjustment',
+          remark: 'Manual adjustment check-out',
+          attType: 'Check-out'
+        });
+      }
+
+      if (logsToCreate.length > 0) {
+        await prisma.attendanceLog.createMany({
+          data: logsToCreate
+        });
+      }
+
+      return NextResponse.json({ success: true, count: logsToCreate.length });
     }
 
     return NextResponse.json({ error: 'Invalid adjustment type' }, { status: 400 });

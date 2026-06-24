@@ -1,0 +1,14 @@
+=== STARTING CONVERSION SIZES TEST ===
+Output:
+  Original short bytes length: 500
+  Size 500 Failed: Exception calling "ConvertToLongMessage" with "1" argument(s): "Source array was not long enough. Check srcIndex and length, and the array's lower bounds."
+  Size 504 Failed: Exception calling "ConvertToLongMessage" with "1" argument(s): "Source array was not long enough. Check srcIndex and length, and the array's lower bounds."
+  Size 512 Failed: Exception calling "ConvertToLongMessage" with "1" argument(s): "Source array was not long enough. Check srcIndex and length, and the array's lower bounds."
+  Size 600 Failed: Exception calling "ConvertToLongMessage" with "1" argument(s): "Source array was not long enough. Check srcIndex and length, and the array's lower bounds."
+  Size 700 Failed: Exception calling "ConvertToLongMessage" with "1" argument(s): "Source array was not long enough. Check srcIndex and length, and the array's lower bounds."
+  Size 800 Success! Returned byte array of length: 1000
+  Size 900 Success! Returned byte array of length: 1000
+  Size 1000 Success! Returned byte array of length: 1000
+  Size 1412 Success! Returned byte array of length: 1000
+  Size 1416 Success! Returned byte array of length: 1000
+=== TEST COMPLETE ===

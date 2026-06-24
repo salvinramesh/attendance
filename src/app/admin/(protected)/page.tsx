@@ -1,7 +1,19 @@
 import { prisma } from '@/lib/prisma';
 import AdminDashboardClient from '@/components/AdminDashboardClient';
+import { requireAdmin } from '@/lib/auth';
 
 export default async function AdminDashboard() {
+  const admin = await requireAdmin();
+  if (!admin) return null;
+
+  const currentUser = {
+    id: admin.id,
+    username: admin.username,
+    name: admin.name,
+    email: admin.email,
+    role: admin.role
+  };
+
   const employees = await prisma.user.findMany({ 
     where: { role: 'EMPLOYEE' },
     orderBy: { createdAt: 'desc' }
@@ -12,7 +24,10 @@ export default async function AdminDashboard() {
   });
 
   const attendanceLogs = await prisma.attendanceLog.findMany({
-    orderBy: { date: 'desc' }
+    orderBy: [
+      { date: 'desc' },
+      { time: 'desc' }
+    ]
   });
 
   const wfhLogs = await prisma.wFHLog.findMany({
@@ -39,6 +54,21 @@ export default async function AdminDashboard() {
     }
   });
 
+  const deviceEnrollments = await prisma.deviceEnrollment.findMany({
+    include: {
+      user: {
+        select: { id: true, name: true, username: true, enrollId: true, dept: true }
+      }
+    },
+    orderBy: [{ deviceId: 'asc' }, { enrollId: 'asc' }]
+  });
+
+  // All employees for the enrollment mapping user-picker
+  const allEmployees = await prisma.user.findMany({
+    select: { id: true, name: true, username: true, enrollId: true, dept: true },
+    orderBy: { name: 'asc' }
+  });
+
   return (
     <div style={{ padding: '2rem 0' }}>
       <AdminDashboardClient 
@@ -47,6 +77,9 @@ export default async function AdminDashboard() {
         attendanceLogs={attendanceLogs}
         wfhLogs={wfhLogs}
         leaveRecords={leaveRecords}
+        initialDeviceEnrollments={deviceEnrollments}
+        allEmployees={allEmployees}
+        currentUser={currentUser}
       />
     </div>
   );

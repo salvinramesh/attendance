@@ -17,17 +17,51 @@ model User {
   username String  @unique
   password String
   name     String
+  email    String? @unique
+  enabled  Boolean @default(true)
   role     Role    @default(EMPLOYEE)
-  enrollId String? @unique
+  enrollId String? // Removed unique constraint so multiple devices can map to same or different enrollIds
   dept     String?
 
-  attendanceLogs AttendanceLog[]
-  wfhLogs        WFHLog[]
-  leaveBalances  LeaveBalance[]
-  leaveRecords   LeaveRecord[]
+  attendanceLogs       AttendanceLog[]
+  wfhLogs              WFHLog[]
+  leaveBalances        LeaveBalance[]
+  leaveRecords         LeaveRecord[]
+  deviceEnrollments    DeviceEnrollment[]
+  fingerprintTemplates FingerprintTemplate[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model DeviceEnrollment {
+  id           Int       @id @default(autoincrement())
+  deviceId     String    // "1" = Office 1 (RAMS), "2" = Office 2 (RIMS)
+  enrollId     String    // raw biometric enroll ID from scanner
+  userId       Int
+  user         User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  note         String?   // optional admin note
+  syncStatus   String    @default("PENDING") // "PENDING", "SYNCED", "FAILED"
+  syncError    String?
+  lastSyncedAt DateTime?
+  isLogVisible Boolean   @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([deviceId, enrollId])
+}
+
+model FingerprintTemplate {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fingerId  Int      // 0-9
+  template  String   // base64 template string
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([userId, fingerId])
 }
 
 model AttendanceLog {
@@ -44,7 +78,8 @@ model AttendanceLog {
   verifyMoc     String?
   remark        String?
 
-  user User? @relation(fields: [enrollId], references: [enrollId])
+  userId Int?
+  user   User? @relation(fields: [userId], references: [id], onDelete: SetNull)
 
   createdAt DateTime @default(now())
 }
@@ -74,13 +109,14 @@ model LeaveBalance {
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
   year      Int
+  month     Int      @default(0) // 0 represents the yearly/historical record or yearly total, 1-12 represents a specific month
   planned   Float    @default(0)
   emergency Float    @default(0)
   lop       Float    @default(0)
   pending   Float    @default(0)
   total     Float    @default(0)
 
-  @@unique([userId, year])
+  @@unique([userId, year, month])
 }
 
 model LeaveRecord {
@@ -92,4 +128,16 @@ model LeaveRecord {
   createdAt DateTime @default(now())
 
   @@unique([userId, date])
+}
+
+model SyncJob {
+  id        String   @id
+  status    String   @default("PENDING") // "PENDING", "PROCESSING", "COMPLETED", "FAILED"
+  rangeType String
+  startDate String?
+  endDate   String?
+  result    String?  // JSON string or summary message
+  error     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

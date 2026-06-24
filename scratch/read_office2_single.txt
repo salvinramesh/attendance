@@ -1,0 +1,4 @@
+Connecting to Office 2 scanner...
+Connected successfully!
+GetEnroll Success for DIN 12, finger 0! Type: System.String | Length: 3185
+GetEnroll Success for DIN 86, finger 0! Type: System.String | Length: 3185

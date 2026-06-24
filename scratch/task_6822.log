@@ -1,0 +1,26 @@
+sending incremental file list
+scratch/
+scratch/bash_history_grep.txt
+scratch/bash_history_tail.txt
+scratch/compare_fps.txt
+scratch/dir_error.txt
+scratch/dir_jump.txt
+scratch/dir_rams.txt
+scratch/git_log.txt
+scratch/inspect_results.txt
+scratch/jump_test.txt
+scratch/ls_root.txt
+scratch/pm2_logs.txt
+scratch/rams_inspect_results.txt
+scratch/read_office2_single.txt
+scratch/ssh_list.txt
+scratch/sync_byte_results.txt
+scratch/sync_long_fp_results.txt
+scratch/sync_long_le_results.txt
+scratch/sync_one_results.txt
+scratch/test_conversion.ps1
+scratch/test_type_out.txt
+
+sent 13,555 bytes  received 696 bytes  9,500.67 bytes/sec
+total size is 8,695,918  speedup is 610.20
+Results written to C:\RAMS\conversion_results.txt

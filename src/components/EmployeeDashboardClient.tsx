@@ -12,7 +12,7 @@ function formatHours(decimalHours: number | string) {
   return `${h}h ${m}m`;
 }
 
-export default function EmployeeDashboardClient({ allDays, user, holidays = [], leaveBalances = [] }: { allDays: any[], user: any, holidays?: string[], leaveBalances?: any[] }) {
+export default function EmployeeDashboardClient({ allDays, user, holidays = [], leaveBalances = [], leaveRecords = [] }: { allDays: any[], user: any, holidays?: string[], leaveBalances?: any[], leaveRecords?: any[] }) {
   const router = useRouter();
   
   // Shift configurations
@@ -53,14 +53,64 @@ export default function EmployeeDashboardClient({ allDays, user, holidays = [], 
     return diff > 0 ? diff : 0;
   };
 
-  const availableYears = useMemo(() => {
-    const years = Array.from(new Set(leaveBalances.map(l => l.year))).sort((a, b) => b - a);
-    if (years.length === 0) return [new Date().getFullYear()];
-    return years;
-  }, [leaveBalances]);
-  
-  const [selectedYear, setSelectedYear] = useState(availableYears[0]);
-  const currentLeave = leaveBalances.find(l => l.year === selectedYear) || { planned: 0, emergency: 0, lop: 0, pending: 0, total: 0 };
+  const [filterType, setFilterType] = useState<'month' | 'date' | 'range'>('month');
+
+  const availableMonths = useMemo(() => {
+    const months = new Set<string>();
+    allDays.forEach(([date]) => {
+      months.add(date.substring(0, 7)); 
+    });
+    return Array.from(months).sort().reverse();
+  }, [allDays]);
+
+  const [selectedMonth, setSelectedMonth] = useState(availableMonths[0] || '');
+  const [selectedDate, setSelectedDate] = useState('');
+  const [startDate, setStartDate] = useState('');
+  const [endDate, setEndDate] = useState('');
+
+  const { currentYear, currentMonth } = useMemo(() => {
+    let year = new Date().getFullYear();
+    let month = new Date().getMonth() + 1; // 1-12
+    if (filterType === 'month' && selectedMonth) {
+      const parts = selectedMonth.split('-');
+      year = parseInt(parts[0]) || year;
+      month = parseInt(parts[1]) || month;
+    } else if (filterType === 'range' && startDate) {
+      const parts = startDate.split('-');
+      year = parseInt(parts[0]) || year;
+      month = parseInt(parts[1]) || month;
+    } else if (filterType === 'date' && selectedDate) {
+      const parts = selectedDate.split('-');
+      year = parseInt(parts[0]) || year;
+      month = parseInt(parts[1]) || month;
+    }
+    return { currentYear: year, currentMonth: month };
+  }, [filterType, selectedMonth, selectedDate, startDate]);
+
+  const currentLeave = useMemo(() => {
+    return leaveBalances.find(l => l.year === currentYear && l.month === currentMonth) || { planned: 0, emergency: 0, lop: 0, pending: 0, total: 0 };
+  }, [leaveBalances, currentYear, currentMonth]);
+
+  const yearlyTotalLeaves = useMemo(() => {
+    const yearBalances = leaveBalances.filter(l => l.year === currentYear);
+    const monthlyRecords = yearBalances.filter(l => l.month >= 1 && l.month <= 12);
+    if (monthlyRecords.length > 0) {
+      return monthlyRecords.reduce((acc, curr) => acc + (curr.total || 0), 0);
+    }
+    const yearlyRecord = yearBalances.find(l => l.month === 0);
+    return yearlyRecord ? yearlyRecord.total : 0;
+  }, [leaveBalances, currentYear]);
+
+  const selectedMonthName = useMemo(() => {
+    try {
+      if (filterType === 'month' && selectedMonth) {
+        return format(parseISO(`${selectedMonth}-01`), 'MMMM yyyy');
+      }
+      return format(new Date(currentYear, currentMonth - 1, 1), 'MMMM yyyy');
+    } catch {
+      return `${currentYear}`;
+    }
+  }, [filterType, selectedMonth, currentYear, currentMonth]);
 
   const todayStr = format(new Date(), 'yyyy-MM-dd');
   const yesterdayStr = format(subDays(new Date(), 1), 'yyyy-MM-dd');
@@ -70,20 +120,6 @@ export default function EmployeeDashboardClient({ allDays, user, holidays = [], 
   const [endTime, setEndTime] = useState('');
   const [remarks, setRemarks] = useState('');
   const [error, setError] = useState('');
-  
-  const availableMonths = useMemo(() => {
-    const months = new Set<string>();
-    allDays.forEach(([date]) => {
-      months.add(date.substring(0, 7)); 
-    });
-    return Array.from(months).sort().reverse();
-  }, [allDays]);
-
-  const [filterType, setFilterType] = useState<'month' | 'date' | 'range'>('month');
-  const [selectedMonth, setSelectedMonth] = useState(availableMonths[0] || '');
-  const [selectedDate, setSelectedDate] = useState('');
-  const [startDate, setStartDate] = useState('');
-  const [endDate, setEndDate] = useState('');
 
   const filteredDays = useMemo(() => {
     if (filterType === 'month') {
@@ -106,40 +142,124 @@ export default function EmployeeDashboardClient({ allDays, user, holidays = [], 
     return filteredDays.reduce((acc, [_, data]) => acc + data.hours, 0);
   }, [filteredDays]);
 
-  const workingDaysInPeriod = useMemo(() => {
+  const { totalWorkingDays, approvedLeavesCount } = useMemo(() => {
+    let totalWD = 0;
     if (filterType === 'month') {
-      if (!selectedMonth) return 0;
-      const [year, month] = selectedMonth.split('-').map(Number);
-      const days = getDaysInMonth(new Date(year, month - 1));
-      let workingDays = 0;
-      for (let i = 1; i <= days; i++) {
-         const date = new Date(year, month - 1, i);
-         const dateStr = format(date, 'yyyy-MM-dd');
-         if (!isWeekend(date) && !holidays.includes(dateStr)) workingDays++;
-      }
-      return workingDays;
-    } else if (filterType === 'range') {
-      if (!startDate || !endDate) return 0;
-      const start = parseISO(startDate);
-      const end = parseISO(endDate);
-      if (start > end) return 0;
-      
-      let workingDays = 0;
-      const current = new Date(start);
-      while (current <= end) {
-        const dateStr = format(current, 'yyyy-MM-dd');
-        if (!isWeekend(current) && !holidays.includes(dateStr)) {
-          workingDays++;
+      if (selectedMonth) {
+        const [year, month] = selectedMonth.split('-').map(Number);
+        const days = getDaysInMonth(new Date(year, month - 1));
+        for (let i = 1; i <= days; i++) {
+           const d = new Date(year, month - 1, i);
+           const dateStr = format(d, 'yyyy-MM-dd');
+           if (!isWeekend(d) && !holidays.includes(dateStr)) totalWD++;
         }
-        current.setDate(current.getDate() + 1);
       }
-      return workingDays;
+    } else if (filterType === 'range') {
+      if (startDate && endDate) {
+        const start = parseISO(startDate);
+        const end = parseISO(endDate);
+        if (start <= end) {
+          const current = new Date(start);
+          while (current <= end) {
+            const dateStr = format(current, 'yyyy-MM-dd');
+            if (!isWeekend(current) && !holidays.includes(dateStr)) {
+              totalWD++;
+            }
+            current.setDate(current.getDate() + 1);
+          }
+        }
+      }
     } else {
-      if (!selectedDate) return 0;
-      const date = parseISO(selectedDate);
-      return (isWeekend(date) || holidays.includes(selectedDate)) ? 0 : 1;
+      if (selectedDate) {
+        const d = parseISO(selectedDate);
+        totalWD = (isWeekend(d) || holidays.includes(selectedDate)) ? 0 : 1;
+      }
     }
-  }, [filterType, selectedMonth, selectedDate, startDate, endDate, holidays]);
+
+    // Count approved leaves ('PL' or 'EL') in the filtered period
+    let leavesCount = 0;
+    leaveRecords.forEach(rec => {
+      const isApproved = rec.type === 'PL' || rec.type === 'EL' || rec.type === 'PL_HALF' || rec.type === 'EL_HALF';
+      if (!isApproved) return;
+
+      let inside = false;
+      if (filterType === 'month') {
+        inside = rec.date.startsWith(selectedMonth);
+      } else if (filterType === 'range') {
+        inside = rec.date >= startDate && rec.date <= endDate;
+      } else {
+        inside = rec.date === selectedDate;
+      }
+
+      if (inside) {
+        const d = parseISO(rec.date);
+        if (!isWeekend(d) && !holidays.includes(rec.date)) {
+          if (rec.type.endsWith('_HALF')) {
+            leavesCount += 0.5;
+          } else {
+            leavesCount++;
+          }
+        }
+      }
+    });
+
+    let finalLeavesCount = leavesCount;
+    // Fallback: if there are no date-specific LeaveRecord entries at all, use LeaveBalance
+    if (leaveRecords.length === 0) {
+      if (filterType === 'month' && selectedMonth) {
+        const [y, m] = selectedMonth.split('-').map(Number);
+        const balance = leaveBalances.find(b => b.year === y && b.month === m);
+        if (balance) {
+          const approved = (balance.planned || 0) + (balance.emergency || 0);
+          finalLeavesCount = Math.min(totalWD, approved);
+        } else {
+          finalLeavesCount = 0;
+        }
+      } else if (filterType === 'range' && startDate && endDate) {
+        let totalLeavesInRange = 0;
+        const start = parseISO(startDate);
+        const end = parseISO(endDate);
+        if (start <= end) {
+          const monthWorkingDaysMap: Record<string, number> = {};
+          const current = new Date(start);
+          while (current <= end) {
+            const dateStr = format(current, 'yyyy-MM-dd');
+            if (!isWeekend(current) && !holidays.includes(dateStr)) {
+              const mKey = dateStr.substring(0, 7);
+              monthWorkingDaysMap[mKey] = (monthWorkingDaysMap[mKey] || 0) + 1;
+            }
+            current.setDate(current.getDate() + 1);
+          }
+
+          for (const mKey of Object.keys(monthWorkingDaysMap)) {
+            const [y, m] = mKey.split('-').map(Number);
+            const wd = monthWorkingDaysMap[mKey];
+            const balance = leaveBalances.find(b => b.year === y && b.month === m);
+            if (balance) {
+              const approved = (balance.planned || 0) + (balance.emergency || 0);
+              totalLeavesInRange += Math.min(wd, approved);
+            }
+          }
+        }
+        finalLeavesCount = totalLeavesInRange;
+      } else if (filterType === 'date' && selectedDate) {
+        const [y, m] = selectedDate.split('-').map(Number);
+        const balance = leaveBalances.find(b => b.year === y && b.month === m);
+        if (balance) {
+          const approved = (balance.planned || 0) + (balance.emergency || 0);
+          finalLeavesCount = Math.min(totalWD, approved);
+        } else {
+          finalLeavesCount = 0;
+        }
+      }
+    } else {
+      finalLeavesCount = Math.min(totalWD, leavesCount);
+    }
+
+    return { totalWorkingDays: totalWD, approvedLeavesCount: finalLeavesCount };
+  }, [filterType, selectedMonth, selectedDate, startDate, endDate, holidays, leaveRecords, leaveBalances]);
+
+  const workingDaysInPeriod = Math.max(0, totalWorkingDays - approvedLeavesCount);
 
   const expectedHours = workingDaysInPeriod * 9.5;
   const extraHours = totalHours - expectedHours;
@@ -261,7 +381,12 @@ export default function EmployeeDashboardClient({ allDays, user, holidays = [], 
             <p style={{ fontSize: '2rem', fontWeight: 700, color: 'var(--text-main)' }}>
               {formatHours(expectedHours)}
             </p>
-            <small style={{ color: 'var(--text-muted)' }}>{workingDaysInPeriod} working days</small>
+            <small style={{ color: 'var(--text-muted)' }}>
+              {approvedLeavesCount > 0
+                ? `${workingDaysInPeriod} working day${workingDaysInPeriod !== 1 ? 's' : ''} (${totalWorkingDays} total, ${approvedLeavesCount} leave${approvedLeavesCount !== 1 ? 's' : ''})`
+                : `${workingDaysInPeriod} working day${workingDaysInPeriod !== 1 ? 's' : ''}`
+              }
+            </small>
          </div>
          <div className="glass-panel animate-fade-in-up" style={{ textAlign: 'center', padding: '1.5rem', animationDelay: '0.1s' }}>
             <h3 className="label">{extraHours >= 0 ? 'Extra Hours' : 'Shortage'}</h3>
@@ -285,12 +410,9 @@ export default function EmployeeDashboardClient({ allDays, user, holidays = [], 
 
       <div className="glass-panel" style={{ padding: '1.5rem', marginBottom: '1.5rem', background: 'rgba(30, 41, 59, 0.6)' }}>
          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
-            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, margin: 0 }}>Leave Balances</h3>
-            <select className="input-field" style={{ padding: '0.2rem 0.5rem', width: 'auto' }} value={selectedYear} onChange={e => setSelectedYear(Number(e.target.value))}>
-              {availableYears.map(y => <option key={y} value={y}>{y}</option>)}
-            </select>
+            <h3 style={{ fontSize: '1.25rem', fontWeight: 600, margin: 0 }}>Leave Balances for {selectedMonthName}</h3>
          </div>
-         <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '1rem' }}>
+         <div className="grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', gap: '1rem' }}>
             <div style={{ background: 'rgba(0,0,0,0.2)', padding: '1rem', borderRadius: '0.5rem', textAlign: 'center' }}>
                <h4 style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Planned</h4>
                <p style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--primary)' }}>{currentLeave.planned}</p>
@@ -308,8 +430,12 @@ export default function EmployeeDashboardClient({ allDays, user, holidays = [], 
                <p style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text)' }}>{currentLeave.pending}</p>
             </div>
             <div style={{ background: 'rgba(16, 185, 129, 0.1)', padding: '1rem', borderRadius: '0.5rem', textAlign: 'center', border: '1px solid rgba(16, 185, 129, 0.2)' }}>
-               <h4 style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Total Taken</h4>
+               <h4 style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Monthly Total</h4>
                <p style={{ fontSize: '1.5rem', fontWeight: 700, color: '#10b981' }}>{currentLeave.total}</p>
+            </div>
+            <div style={{ background: 'rgba(16, 185, 129, 0.15)', padding: '1rem', borderRadius: '0.5rem', textAlign: 'center', border: '1px solid rgba(16, 185, 129, 0.3)' }}>
+               <h4 style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '0.5rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Yearly Total</h4>
+               <p style={{ fontSize: '1.5rem', fontWeight: 700, color: '#10b981' }}>{yearlyTotalLeaves}</p>
             </div>
          </div>
       </div>

@@ -1,0 +1,36 @@
+User: {
+  id: 10212,
+  username: '78-3f',
+  password: '$2b$10$9psJ6UIqf4sA9C4gkzjzku7WPE4A84OcMG3yl/ox9.nL8VbSlQGAm',
+  name: 'Paulson (3F)',
+  role: 'EMPLOYEE',
+  enrollId: '78 (3F)',
+  dept: 'afi3',
+  createdAt: 2026-06-20T07:18:04.768Z,
+  updatedAt: 2026-06-20T07:23:47.149Z
+}
+DeviceEnrollments: [
+  {
+    id: 532,
+    deviceId: '1',
+    enrollId: '78',
+    userId: 10212,
+    note: null,
+    syncStatus: 'SYNCED',
+    syncError: null,
+    lastSyncedAt: 2026-06-21T11:30:07.679Z,
+    isLogVisible: true,
+    createdAt: 2026-06-20T07:18:04.771Z,
+    updatedAt: 2026-06-21T11:30:07.680Z
+  }
+]
+Logs count: 767
+Distinct months: [
+  '2025-06',
+  '2025-07',
+  '2025-08',
+  '2025-09',
+  '2025-10',
+  '2025-11',
+  '2026-06'
+]

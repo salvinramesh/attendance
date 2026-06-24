@@ -99,69 +99,83 @@ async function runSync() {
       };
     }).filter((log: any) => log.enrollId && log.date && log.time);
 
-    // 5. Extract unique employees to auto-provision if they don't exist in DB
-    const uniqueEmployees = new Map();
-    mappedLogs.forEach((log: any) => {
-      if (!uniqueEmployees.has(log.enrollId)) {
-        uniqueEmployees.set(log.enrollId, {
-          enrollId: log.enrollId,
-          name: log.name,
-          username: `user_${log.enrollId}`,
-          dept: null
-        });
-      }
+    // 5. Filter logs based on valid employees
+    const enrollments = await prisma.deviceEnrollment.findMany({
+      select: { deviceId: true, enrollId: true, userId: true }
     });
-
-    const defaultPassword = await bcrypt.hash('password123', 10);
-
-    for (const emp of uniqueEmployees.values()) {
-      const existing = await prisma.user.findUnique({ where: { enrollId: emp.enrollId } });
-      if (!existing) {
-        let finalUsername = emp.username;
-        // Resolve username conflicts
-        const existingUsername = await prisma.user.findUnique({ where: { username: finalUsername } });
-        if (existingUsername) {
-          finalUsername = `${emp.username}_${emp.enrollId}`;
-        }
-
-        await prisma.user.create({
-          data: {
-            username: finalUsername,
-            password: defaultPassword,
-            name: emp.name,
-            enrollId: emp.enrollId,
-            dept: emp.dept,
-            role: 'EMPLOYEE'
-          }
-        });
-        console.log(`Auto-created missing user account: ${finalUsername} (Enroll ID: ${emp.enrollId})`);
+    const dev1Map = new Map<string, number>();
+    const dev2Map = new Map<string, number>();
+    for (const e of enrollments) {
+      if (e.deviceId === '1') {
+        dev1Map.set(e.enrollId, e.userId);
+      } else if (e.deviceId === '2') {
+        dev2Map.set(e.enrollId, e.userId);
       }
     }
 
+    const users = await prisma.user.findMany({
+      where: { role: 'EMPLOYEE', id: { lt: 10000 } },
+      select: { id: true, name: true, dept: true }
+    });
+    const dbUserMap = new Map(users.map(u => [u.id, u]));
+
+    const filteredLogs: any[] = [];
+    for (const log of mappedLogs) {
+      let targetUserId: number | undefined;
+      const logDeviceId = log.deviceId || (SCANNER_PORT === 5500 ? '1' : '2');
+      log.deviceId = logDeviceId;
+      
+      if (logDeviceId === '1') {
+        targetUserId = dev1Map.get(log.enrollId);
+        if (!targetUserId) {
+          const empId = Number(log.enrollId);
+          if (!isNaN(empId) && dbUserMap.has(empId)) {
+            targetUserId = empId;
+          }
+        }
+      } else if (logDeviceId === '2') {
+        targetUserId = dev2Map.get(log.enrollId);
+      }
+
+      if (targetUserId && dbUserMap.has(targetUserId)) {
+        const userObj = dbUserMap.get(targetUserId)!;
+        log.name = userObj.name;
+        log.dept = userObj.dept;
+        log.userId = targetUserId;
+        filteredLogs.push(log);
+      }
+    }
+
+    if (filteredLogs.length === 0) {
+      console.log('No valid employee logs found on the scanner.');
+      return;
+    }
+
     // 6. Fetch existing logs in the database to prevent duplicate entries
-    const dates = Array.from(new Set(mappedLogs.map((l: any) => l.date))) as string[];
-    const enrollIds = Array.from(new Set(mappedLogs.map((l: any) => l.enrollId))) as string[];
+    const dates = Array.from(new Set(filteredLogs.map((l: any) => l.date))) as string[];
+    const userIds = Array.from(new Set(filteredLogs.map((l: any) => l.userId))) as number[];
 
     const existingLogs = await prisma.attendanceLog.findMany({
       where: {
         date: { in: dates },
-        enrollId: { in: enrollIds }
+        userId: { in: userIds }
       },
       select: {
-        enrollId: true,
+        userId: true,
+        deviceId: true,
         date: true,
         time: true
       }
     });
 
     const existingKeys = new Set(
-      existingLogs.map((l: any) => `${l.enrollId}_${l.date}_${l.time}`)
+      existingLogs.map((l: any) => `${l.deviceId ?? ''}_${l.userId}_${l.date}_${l.time}`)
     );
 
     // Filter out duplicates that already exist in DB or in payload itself
     const uniqueLogsMap = new Map();
-    mappedLogs.forEach((l: any) => {
-      const key = `${l.enrollId}_${l.date}_${l.time}`;
+    filteredLogs.forEach((l: any) => {
+      const key = `${l.deviceId}_${l.userId}_${l.date}_${l.time}`;
       if (!existingKeys.has(key) && !uniqueLogsMap.has(key)) {
         uniqueLogsMap.set(key, l);
       }

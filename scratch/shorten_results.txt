@@ -1,0 +1,4 @@
+=== STARTING SHORTEN TEST ===
+Failed: Exception calling "ConvertToShortMessage" with "1" argument(s): "Years value must be between +/-10000.
+Parameter name: years"
+=== TEST COMPLETE ===
