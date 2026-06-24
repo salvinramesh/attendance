@@ -4,7 +4,7 @@ import { useState, useRef, useMemo, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import * as XLSX from 'xlsx';
 import { format, subDays, parseISO } from 'date-fns';
-import { Users, Calendar, MapPin, Briefcase, Clock, FileText, CheckCircle, XCircle, AlertCircle, Home, TrendingUp, Download, Filter, Search, RefreshCw, Plus, Cpu, Shield, Edit, Trash2, Key } from 'lucide-react';
+import { Users, Calendar, MapPin, Briefcase, Clock, FileText, CheckCircle, XCircle, AlertCircle, Home, TrendingUp, Download, Filter, Search, RefreshCw, Plus, Cpu, Shield, Edit, Trash2, Key, Eye, EyeOff } from 'lucide-react';
 
 function calculateHours(timeStr1: string, timeStr2: string) {
   const [h1, m1] = timeStr1.split(':').map(Number);
@@ -1715,7 +1715,7 @@ export default function AdminDashboardClient({
       'Date': item.date,
       'Time': item.time,
       'Type': item.attType || 'Normal Open',
-      'Verification': item.verifyMoc || 'Fingerprint',
+      'Verification': 'Fingerprint',
       'Device Place': item.place || `Device ${item.deviceId}`,
       'Remarks': item.remark || 'Success'
     }));
@@ -2861,8 +2861,6 @@ export default function AdminDashboardClient({
             </div>
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center', flexWrap: 'wrap' }}>
               <button className="btn btn-outline" onClick={() => setShowHolidayModal(true)}>Manage Holidays</button>
-              <button className="btn btn-outline" onClick={() => setShowMassEmpModal(true)}>Mass Upload Employees</button>
-              <button className="btn btn-outline" onClick={() => setShowMassLeavesModal(true)}>Mass Upload Leaves</button>
               <button className="btn btn-outline" onClick={() => setShowAddModal(true)}>Add Employee</button>
               
               <input 
@@ -2886,13 +2884,6 @@ export default function AdminDashboardClient({
                 ref={leavesFileInputRef}
                 onChange={handleLeavesUpload}
               />
-              <button 
-                className="btn btn-primary" 
-                onClick={() => fileInputRef.current?.click()}
-                disabled={uploading}
-              >
-                {uploading ? 'Uploading...' : 'Mass Upload Attendance'}
-              </button>
             </div>
           </div>
 
@@ -3092,9 +3083,9 @@ export default function AdminDashboardClient({
                                     onClick={(event) => { event.stopPropagation(); handleToggleVisibility(e.id, !e.isLogVisible); }}
                                   >
                                     {e.isLogVisible ? (
-                                      <span style={{ fontSize: '0.85rem' }}>👁️</span>
+                                      <Eye size={16} style={{ color: 'var(--primary)' }} />
                                     ) : (
-                                      <span style={{ fontSize: '0.85rem' }}>🙈</span>
+                                      <EyeOff size={16} style={{ color: 'var(--text-muted)' }} />
                                     )}
                                   </button>
                                   {userEnrollments.length > 1 && (
@@ -3634,24 +3625,26 @@ export default function AdminDashboardClient({
                           }
                         }}
                       >
-                        <td style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', border: 'none' }}>
-                          <div style={{
-                            width: '32px',
-                            height: '32px',
-                            borderRadius: '50%',
-                            background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
-                            color: 'var(--bg-dark)',
-                            display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            fontWeight: 700,
-                            fontSize: '0.85rem'
-                          }}>
-                            {log.name ? log.name.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase() : '?'}
-                          </div>
-                          <div>
-                            <div style={{ fontWeight: 600, color: 'var(--text-main)' }}>{log.name || 'Unknown'}</div>
-                            <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>scanner_user_{log.enrollId}</div>
+                        <td>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                            <div style={{
+                              width: '32px',
+                              height: '32px',
+                              borderRadius: '50%',
+                              background: 'linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%)',
+                              color: 'var(--bg-dark)',
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              fontWeight: 700,
+                              fontSize: '0.85rem'
+                            }}>
+                              {log.name ? log.name.split(' ').map((n: string) => n[0]).join('').substring(0, 2).toUpperCase() : '?'}
+                            </div>
+                            <div>
+                              <div style={{ fontWeight: 600, color: 'var(--text-main)' }}>{log.name || 'Unknown'}</div>
+                              <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>scanner_user_{log.enrollId}</div>
+                            </div>
                           </div>
                         </td>
                         <td>
@@ -3678,7 +3671,7 @@ export default function AdminDashboardClient({
                           </span>
                         </td>
                         <td>
-                          <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>{log.verifyMoc || 'Fingerprint'}</span>
+                          <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Fingerprint</span>
                         </td>
                         <td>
                           <span style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.85rem' }}>
@@ -4950,7 +4943,7 @@ export default function AdminDashboardClient({
                         )}
                       </td>
                       <td style={{ color: 'var(--text-muted)' }}>{log.name || '—'}</td>
-                      <td><span className="badge badge-warning">{log.verifyMoc || '—'}</span></td>
+                      <td><span className="badge badge-warning">Fingerprint</span></td>
                       <td style={{ textAlign: 'right' }}>
                         <button
                           className="btn"

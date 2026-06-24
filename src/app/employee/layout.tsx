@@ -18,7 +18,7 @@ export default async function EmployeeLayout({ children }: { children: React.Rea
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>{session.username}</span>
           <ChangePasswordButton />
-          <ThemeToggle />
+          <ThemeToggle username={session.username} />
           <LogoutButton />
         </div>
       </nav>

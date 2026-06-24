@@ -3,16 +3,21 @@
 import { useEffect, useState } from 'react';
 import { Sun, Moon } from 'lucide-react';
 
-export default function ThemeToggle() {
+interface ThemeToggleProps {
+  username?: string;
+}
+
+export default function ThemeToggle({ username = 'guest' }: ThemeToggleProps) {
   const [theme, setTheme] = useState<'dark' | 'light'>('dark');
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-    const savedTheme = localStorage.getItem('theme') as 'dark' | 'light' | null;
-    const systemPrefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+    const userThemeKey = `theme_${username}`;
+    const savedTheme = localStorage.getItem(userThemeKey) as 'dark' | 'light' | null;
     
-    const initialTheme = savedTheme || (systemPrefersLight ? 'light' : 'dark');
+    // Default to 'dark' mode as requested
+    const initialTheme = savedTheme || 'dark';
     setTheme(initialTheme);
     
     if (initialTheme === 'light') {
@@ -20,12 +25,12 @@ export default function ThemeToggle() {
     } else {
       document.body.classList.remove('light-mode');
     }
-  }, []);
+  }, [username]);
 
   const toggleTheme = () => {
     const nextTheme = theme === 'dark' ? 'light' : 'dark';
     setTheme(nextTheme);
-    localStorage.setItem('theme', nextTheme);
+    localStorage.setItem(`theme_${username}`, nextTheme);
     
     if (nextTheme === 'light') {
       document.body.classList.add('light-mode');
@@ -58,3 +63,4 @@ export default function ThemeToggle() {
     </button>
   );
 }
+

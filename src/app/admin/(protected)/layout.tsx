@@ -16,7 +16,7 @@ export default async function AdminLayout({ children }: { children: React.ReactN
         <h1 style={{ fontWeight: 800, fontSize: '1.25rem', color: 'var(--primary)' }}>Admin Console</h1>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>{admin.username}</span>
-          <ThemeToggle />
+          <ThemeToggle username={admin.username} />
           <LogoutButton />
         </div>
       </nav>
