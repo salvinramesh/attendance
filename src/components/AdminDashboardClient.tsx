@@ -23,7 +23,8 @@ export default function AdminDashboardClient({
   leaveRecords = [],
   initialDeviceEnrollments = [],
   allEmployees = [],
-  currentUser
+  currentUser,
+  initialTab = 'dashboard'
 }: { 
   initialEmployees: any[], 
   initialHolidays?: any[],
@@ -32,9 +33,38 @@ export default function AdminDashboardClient({
   leaveRecords?: any[],
   initialDeviceEnrollments?: any[],
   allEmployees?: any[],
-  currentUser?: { id: number; username: string; name: string; email?: string | null; role: string }
+  currentUser?: { id: number; username: string; name: string; email?: string | null; role: string },
+  initialTab?: string
 }) {
-  const [activeTab, setActiveTab] = useState<'dashboard' | 'employees' | 'punches' | 'enrollments' | 'consoleUsers' | 'unknownScans'>('dashboard');
+  const router = useRouter();
+  
+  const [activeTab, setActiveTabState] = useState<'dashboard' | 'employees' | 'punches' | 'enrollments' | 'consoleUsers' | 'unknownScans'>(
+    (initialTab && ['dashboard', 'employees', 'punches', 'enrollments', 'consoleUsers', 'unknownScans'].includes(initialTab) ? initialTab : 'dashboard') as any
+  );
+
+  const setActiveTab = useCallback((tab: 'dashboard' | 'employees' | 'punches' | 'enrollments' | 'consoleUsers' | 'unknownScans') => {
+    setActiveTabState(tab);
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      params.set('tab', tab);
+      const newUrl = `${window.location.pathname}?${params.toString()}`;
+      window.history.pushState(null, '', newUrl);
+    }
+  }, []);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const tab = params.get('tab') || 'dashboard';
+      if (['dashboard', 'employees', 'punches', 'enrollments', 'consoleUsers', 'unknownScans'].includes(tab)) {
+        setActiveTabState(tab as any);
+      }
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   // Unknown scans state
   const [unknownScanSearch, setUnknownScanSearch] = useState('');
@@ -276,7 +306,6 @@ export default function AdminDashboardClient({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const empFileInputRef = useRef<HTMLInputElement>(null);
   const leavesFileInputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
 
   // Add Employee Form State
   const [formData, setFormData] = useState({ username: '', password: '', name: '', dept: '', enrollId: '' });
@@ -2321,7 +2350,7 @@ export default function AdminDashboardClient({
                       <tr 
                         key={item.id} 
                         style={{ borderBottom: '1px solid rgba(255,255,255,0.03)', cursor: 'pointer' }}
-                        onClick={() => router.push(`/admin/employee/${item.id}`)}
+                        onClick={() => router.push(`/admin/employee/${item.id}?tab=${activeTab}`)}
                       >
                         <td style={{ padding: '0.75rem', fontWeight: 600 }}>{item.username}</td>
                         <td style={{ padding: '0.75rem' }}>{item.name}</td>
@@ -3040,7 +3069,7 @@ export default function AdminDashboardClient({
                         cursor: 'pointer',
                         background: hasConflict ? 'rgba(245,158,11,0.07)' : undefined 
                       }}
-                      onClick={() => router.push(`/admin/employee/${emp.id}`)}
+                      onClick={() => router.push(`/admin/employee/${emp.id}?tab=${activeTab}`)}
                     >
                       <td style={{ textAlign: 'center' }} onClick={(e) => e.stopPropagation()}>
                         <input
@@ -3621,7 +3650,7 @@ export default function AdminDashboardClient({
                         onClick={() => {
                           const userId = getUserIdForLog(log);
                           if (userId) {
-                            router.push(`/admin/employee/${userId}`);
+                            router.push(`/admin/employee/${userId}?tab=${activeTab}`);
                           }
                         }}
                       >

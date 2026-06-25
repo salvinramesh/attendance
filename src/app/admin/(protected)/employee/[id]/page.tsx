@@ -11,12 +11,18 @@ function calculateHours(timeStr1: string, timeStr2: string) {
   return Math.abs(min2 - min1) / 60;
 }
 
-export default async function EmployeeDetail(props: { params: Promise<{ id: string }> }) {
+export default async function EmployeeDetail(props: { 
+  params: Promise<{ id: string }>,
+  searchParams: Promise<{ tab?: string }> 
+}) {
   const admin = await requireAdmin();
   if (!admin) return null;
 
   const p = await props.params;
   const userId = parseInt(p.id);
+  
+  const searchParams = await props.searchParams;
+  const backTab = searchParams.tab || 'employees';
   
   if (isNaN(userId)) {
     return <div className="page-container" style={{ padding: '2rem', textAlign: 'center' }}>Invalid Employee ID parameter.</div>;
@@ -83,7 +89,7 @@ export default async function EmployeeDetail(props: { params: Promise<{ id: stri
   return (
     <div className="grid">
       <div style={{ marginBottom: '1rem' }}>
-        <Link href="/admin" className="btn btn-outline">&larr; Back to Dashboard</Link>
+        <Link href={`/admin?tab=${backTab}`} className="btn btn-outline">&larr; Back to Dashboard</Link>
       </div>
 
       <EmployeeDetailClient 

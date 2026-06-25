@@ -1,10 +1,14 @@
 import { prisma } from '@/lib/prisma';
 import AdminDashboardClient from '@/components/AdminDashboardClient';
 import { requireAdmin } from '@/lib/auth';
+import { Suspense } from 'react';
 
-export default async function AdminDashboard() {
+export default async function AdminDashboard(props: { searchParams: Promise<{ tab?: string }> }) {
   const admin = await requireAdmin();
   if (!admin) return null;
+
+  const resolvedSearchParams = await props.searchParams;
+  const initialTab = resolvedSearchParams.tab || 'dashboard';
 
   const currentUser = {
     id: admin.id,
@@ -72,16 +76,19 @@ export default async function AdminDashboard() {
 
   return (
     <div style={{ padding: '2rem 0' }}>
-      <AdminDashboardClient 
-        initialEmployees={employees} 
-        initialHolidays={holidays} 
-        attendanceLogs={attendanceLogs}
-        wfhLogs={wfhLogs}
-        leaveRecords={leaveRecords}
-        initialDeviceEnrollments={deviceEnrollments}
-        allEmployees={allEmployees}
-        currentUser={currentUser}
-      />
+      <Suspense fallback={<div className="page-container" style={{ padding: '2rem', textAlign: 'center', color: 'var(--text-muted)' }}>Loading Dashboard...</div>}>
+        <AdminDashboardClient 
+          initialEmployees={employees} 
+          initialHolidays={holidays} 
+          attendanceLogs={attendanceLogs}
+          wfhLogs={wfhLogs}
+          leaveRecords={leaveRecords}
+          initialDeviceEnrollments={deviceEnrollments}
+          allEmployees={allEmployees}
+          currentUser={currentUser}
+          initialTab={initialTab}
+        />
+      </Suspense>
     </div>
   );
 }
