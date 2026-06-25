@@ -27,7 +27,8 @@ export default async function AdminDashboard() {
     orderBy: [
       { date: 'desc' },
       { time: 'desc' }
-    ]
+    ],
+    take: 20000
   });
 
   const wfhLogs = await prisma.wFHLog.findMany({
