@@ -35,7 +35,8 @@ export default function AdminLogin() {
   return (
     <div className="page-container" style={{ display: 'flex', minHeight: '80vh', alignItems: 'center', justifyContent: 'center' }}>
       <div className="glass-panel animate-fade-in-up" style={{ maxWidth: '400px', width: '100%' }}>
-        <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+        <div style={{ textAlign: 'center', marginBottom: '2rem', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <img src="/logo.png" alt="ActionFi Logo" style={{ height: '50px', marginBottom: '1.25rem', objectFit: 'contain' }} />
           <h2 style={{ fontSize: '2rem', fontWeight: '700', color: 'var(--primary)' }}>Admin Console</h2>
           <p style={{ color: 'var(--text-muted)' }}>Sign in to manage employees</p>
         </div>

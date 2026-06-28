@@ -14,7 +14,10 @@ export default async function EmployeeLayout({ children }: { children: React.Rea
   return (
     <div>
       <nav className="glass-nav">
-        <h1 style={{ fontWeight: 800, fontSize: '1.25rem', color: 'var(--secondary)' }}>Employee Portal</h1>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+          <img src="/logo.png" alt="ActionFi Logo" style={{ height: '32px', objectFit: 'contain' }} />
+          <h1 style={{ fontWeight: 800, fontSize: '1.25rem', color: 'var(--secondary)', margin: 0 }}>Employee Portal</h1>
+        </div>
         <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
           <span style={{ fontWeight: 600, color: 'var(--text-main)' }}>{session.username}</span>
           <ChangePasswordButton />
